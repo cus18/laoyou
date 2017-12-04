@@ -1,0 +1,61 @@
+<div id="wrapper">
+    <survey-menu title="singleStatistic"></survey-menu>
+    <survey-loading></survey-loading>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>单因素分布比例</h2>
+                </div>
+            </div>
+
+            <!-- /. ROW  -->
+            <hr />
+           <div class="row" style="margin-left:0px;margin-bottom:30px;">
+               <p>请选择要查看的因素：</p>
+               <select class="form-control" style="width:90%"
+                       ng-model="question"
+                       ng-options="(item.questionId + '、' + item.questionName) for item in questionNames"
+                       ng-change="questionNameChange()"/>
+           </div>
+            <table ng-if="singleStatistic.response" class="table table-striped table-bordered table-hover text-center" ng-hide="tableHide">
+                <thead>
+                <tr>
+                    <th class="text-center" style="width:40%">{{question.questionName}}</th>
+                    <th class="text-center" style="width:15%">填写人次</th>
+                    <th class="text-center" style="width:45%">比例</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in singleStatistic.response">
+                    <td>{{item.singleStatisticName}}</td>
+                    <td>{{item.singleStatisticNum}}</td>
+                    <td>
+                        <div class="survey_td_percent_bj">
+                            <span class="survey_td_percent_val" ng-style="{width:item.singleStatisticNum/singleStatistic.totalNum*100 + '%'}"></span>
+                        </div>
+                        <span class="survey_td_percent_num">{{item.singleStatisticNum/singleStatistic.totalNum*100 | number:1}}%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>小计</td>
+                    <td>{{singleStatistic.totalNum}}</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <button class="btn btn-default" ng-click="tableLoad()">表格</button>
+                <button class="btn btn-default" ng-click="pieLoad()">饼图</button>
+                <button class="btn btn-default" ng-click="barLoad()">条形图</button>
+            </div>
+            <div ng-if="charts.hCharts_show">
+                <highchart style="height:550px;"
+                           title='charts.title'
+                           series="charts.series"
+                           options="charts.options">
+                </highchart>
+            </div>
+        </div>
+    </div>
+</div>

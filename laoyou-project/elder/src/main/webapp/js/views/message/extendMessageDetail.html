@@ -1,0 +1,21 @@
+<ion-view style="background:#f8f8f8;">
+    <ion-header-bar align-title="center" class="bar-energized">
+        <div class="buttons">
+            <button class="button" onclick="window.history.go(-1)"><</button>
+        </div>
+        <h1 class="title">通知详情</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list card" style="margin-top:1.2rem;">
+            <div class="item item-divider item-text-wrap">
+                <h2>{{extendMessageDetail.extendMessageName}}</h2>
+                <p>时间：{{extendMessageDetail.extendMessageDate|date:'yyyy/MM/dd HH:mm:ss'}}</p>
+            </div>
+            <div class="item item-body">
+                <p>
+                    {{extendMessageDetail.extendMessageContent}}
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

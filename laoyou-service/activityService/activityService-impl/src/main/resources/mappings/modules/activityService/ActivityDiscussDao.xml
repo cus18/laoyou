@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.myService.dao.ActivityDiscussDao">
+
+    <insert id="addActivityDiscuss">
+		INSERT INTO
+		`laoyou`.`activity_discuss`
+		(`activity_id`, `sys_elder_user_id`, `content`)
+	  	VALUES (#{activityID},#{sysUserElderID}, #{content})
+	</insert>
+
+
+    <select id="getActivityDiscussList" resultType="com.yhl.laoyou.common.dto.activity.ActivityDiscussDTO">
+		select ad.activity_id as activityId,su.photo as elderLogo,su.name as elderName,
+		ad.sys_elder_user_id as elderId,ad.create_date as discussDate,ad.content as discussContent
+		 from activity_discuss ad
+		inner join sys_elder_user seu on ad.sys_elder_user_id=seu.id
+		inner join sys_user su on seu.sys_user_id=su.id
+		where ad.activity_id=#{id}
+		ORDER BY discussDate DESC
+		limit #{page}
+	</select>
+
+</mapper>

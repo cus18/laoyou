@@ -1,0 +1,131 @@
+<ion-view style="background:#2b2b2b;">
+    <div page-loading></div>
+    <form name="bloodSugarObjectiveForm" ng-if="firstMenu == 'bloodSugar'" ng-submit="submitBloodSugarForm(bloodSugarObjectiveForm.$valid)" novalidate>
+        <!--headerTitle start-->
+        <header>
+            <a href="javascript:history.go(-1)">返回</a>
+            <h1>控制目标</h1>
+            <button>保存</button>
+        </header>
+        <div class="empty10"></div>
+        <!--headerTitle end-->
+        <!--content start-->
+        <section class="contItemTit">
+            空腹
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="limosis_min" min="1" max="33.3" ng-model="controlObjectiveData.limosis_min" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="limosis_max" min="{{controlObjectiveData.limosis_min}}" max="33.3" ng-model="controlObjectiveData.limosis_max" placeholder="请输入" required/>
+            </div>
+        </section>
+        <section class="contItemTit">
+            餐前
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="before_meal_min" min="1" max="33.3" ng-model="controlObjectiveData.before_meal_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="before_meal_max" min="{{controlObjectiveData.before_meal_min}}" max="33.3" ng-model="controlObjectiveData.before_meal_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <section class="contItemTit">
+            餐后
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="after_meal_min" min="1" max="33.3" ng-model="controlObjectiveData.after_meal_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="after_meal_max" min="{{controlObjectiveData.after_meal_min}}" max="33.3" ng-model="controlObjectiveData.after_meal_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <section class="contItemTit">
+            睡前
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="before_sleep_min" min="1" max="33.3" ng-model="controlObjectiveData.before_sleep_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="before_sleep_max" min="{{controlObjectiveData.before_sleep_min}}" max="33.3" ng-model="controlObjectiveData.before_sleep_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <section class="contItemTit">
+            凌晨
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="before_dawn_min" min="1" max="33.3" ng-model="controlObjectiveData.before_dawn_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="before_dawn_max" min="{{controlObjectiveData.before_dawn_min}}" max="33.3" ng-model="controlObjectiveData.before_dawn_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <!--content end-->
+    </form>
+    <form name="bloodPressureObjectiveForm" ng-if="firstMenu == 'bloodPressure'" ng-submit="submitBloodPressureForm(bloodPressureObjectiveForm.$valid)" novalidate>
+        <!--headerTitle start-->
+        <header>
+            <a href="javascript:history.go(-1)">返回</a>
+            <h1>控制目标</h1>
+            <button>保存</button>
+        </header>
+        <div class="empty10"></div>
+        <!--headerTitle end-->
+        <!--content start-->
+        <section class="contItemTit">
+            收缩压/高压
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="diastolic_min" min="1" max="200" ng-model="controlObjectiveData.diastolic_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="diastolic_max" min="{{controlObjectiveData.diastolic_min}}" max="200" ng-model="controlObjectiveData.diastolic_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <section class="contItemTit">
+            舒张压/低压
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="systolic_min" min="1" max="200" ng-model="controlObjectiveData.systolic_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="systolic_max" min="{{controlObjectiveData.systolic_min}}" max="200" ng-model="controlObjectiveData.systolic_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <section class="contItemTit">
+            心率
+        </section>
+        <section class="contItem">
+            <div>
+                <span>最低值</span>
+                <input type="number" name="heart_rate_min" min="40" max="160" ng-model="controlObjectiveData.heart_rate_min" value="" placeholder="请输入" required/>
+            </div>
+            <div>
+                <span>最高值</span>
+                <input type="number" name="heart_rate_max" min="{{controlObjectiveData.heart_rate_min}}" max="160" ng-model="controlObjectiveData.heart_rate_max" value="" placeholder="请输入" required/>
+            </div>
+        </section>
+        <!--content end-->
+    </form>
+</ion-view>

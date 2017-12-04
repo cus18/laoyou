@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <hospital-menu title="cmsPicture"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>资源位下架</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+            <a class="btn btn-default" ui-sref="cmsPicture" style="margin-bottom:10px;">返回</a>
+            <table class="table table-striped table-bordered table-hover text-center">
+                <thead>
+                <tr>
+                    <th class="text-center">活动名称</th>
+                    <th class="text-center">资源位</th>
+                    <th class="text-center">轮播位</th>
+                    <th class="text-center">上架时间</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in response">
+                    <td>{{item.name}}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.weights}}</td>
+                    <td>{{item.createDate}}</td>
+                    <td>
+                        <a ng-click="delete(item.id)">下架</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <del-tool info="确认要下架该资源吗？"></del-tool>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.sys.dao.SysPractitionerUserDao">
+
+	<insert id="insertSysPractitionerUser">
+		INSERT INTO sys_practitioner_user(
+		id,
+		sys_user_id,
+		easemobID,
+		easemobPassword,
+		create_date,
+		update_date
+		<if test="title != null and title !=''">
+			,title
+		</if>
+		<if test="department != null and department !=''">
+			,department
+		</if>
+		<if test="type != null and type !=''">
+			,type
+		</if>
+		<if test="sysHospitalID != null and sysHospitalID !=''">
+			,sys_hospital_id
+		</if>
+		) VALUES (
+		#{id},
+		#{sysUserID},
+		#{easemobID},
+		#{easemobPassword},
+		now(),
+		now()
+		<if test="title != null and title !=''">
+			,#{title}
+		</if>
+		<if test="department != null and department !=''">
+			,#{department}
+		</if>
+		<if test="type != null and type !=''">
+			,#{type}
+		</if>
+		<if test="sysHospitalID != null and sysHospitalID !=''">
+			,#{sysHospitalID}
+		</if>
+		)
+	</insert>
+
+
+	<update id="updateSysPractitionerUser">
+		UPDATE`sys_practitioner_user`
+		SET
+		`hospitalName`=#{hospitalName},
+		`department`=#{department},
+		`title`=#{title},
+		`update_date`=now()
+		WHERE
+		`id`=#{id}
+	</update>
+
+
+
+	<select id="getSysPractitioner" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysPractitionerUserDTO">
+		SELECT * FROM `sys_practitioner_user` where sys_user_id=#{sysUserID}
+	</select>
+
+
+	<update id="updateLoginToken">
+		UPDATE`sys_practitioner_user`
+		SET
+		`loginToken`=#{loginToken}
+		WHERE
+		`id`=#{id}
+	</update>
+
+	<select id="getSysPractitionerByEasemobID" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysPractitionerUserDTO">
+		SELECT * FROM `sys_practitioner_user` where easemobID=#{easemobID}
+	</select>
+
+
+	<select id="getSysPractitionerByID" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysPractitionerUserDTO">
+		SELECT * FROM `sys_practitioner_user` where id=#{id}
+	</select>
+
+	<select id="getDoctorListByHospitalID" resultType="com.yhl.laoyou.common.dto.hospital.DoctorDTO">
+		select spu.id,name,title,spu.department,spu.easemobID,phone from sys_user su
+		inner join sys_practitioner_user spu on su.id=spu.sys_user_id
+		where spu.sys_hospital_id=#{sysHospitalID}
+		and su.del_flag=0
+		<if test="type != null and type !='' and type!=0">
+			and type=#{type}
+		</if>
+		<if test="searchValue != null and searchValue !=''">
+		and name like  CONCAT('%',#{searchValue},'%')
+	</if>
+	</select>
+
+	<select id="getDoctorListCountByHospitalID" resultType="java.lang.Integer">
+		select count(*) from sys_user su
+		inner join sys_practitioner_user spu on su.id=spu.sys_user_id
+		where spu.sys_hospital_id=#{sysHospitalID}
+	</select>
+	<select id="doctorAndNurseStatistics" parameterType="java.lang.String" resultType="java.lang.String">
+		select title from sys_practitioner_user spu
+		where title like CONCAT('%', #{title}, '%')
+	</select>
+</mapper>

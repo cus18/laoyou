@@ -1,0 +1,83 @@
+<ion-view style="background:#f8f8f8;">
+    <ion-header-bar align-title="center" class="bar-energized">
+        <div class="buttons">
+            <button class="button" ng-click="returnRootNative()">&lt;返回</button>
+        </div>
+        <h1 class="title">服务</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list" style="margin-top:15px;">
+            <h1 style="font-size:16px;margin-left:15px;color:#ff8e01;">健康服务</h1>
+            <a class="item item-avatar item-text-wrap"
+               style="margin-top:10px;min-height:0px;"
+               ui-sref="healthService({'firstMenu':'healthServicePackage','secondMenu':''})">
+                <p style="margin-left:-40px;color:black;">服务套餐
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+            <a class="item item-avatar item-text-wrap"
+               style="min-height:0px;"
+               ui-sref="healthService({'firstMenu':'healthArchives','secondMenu':'basicInfo'})">
+                <p style="margin-left:-40px;color:black;">健康档案
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+            <a class="item item-avatar item-text-wrap"
+               style="min-height:0px;"
+               ui-sref="healthService({'firstMenu':'healthAssessment','secondMenu':''})">
+                <p style="margin-left:-40px;color:black;">健康评估
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+        </div>
+        <div class="list" style="margin-top:-10px">
+            <h1 style="font-size:16px;margin-left:15px;color:#ff8e01;">检测与诊疗</h1>
+            <a class="item item-avatar item-text-wrap"
+               style="margin-top:10px;min-height:0px;"
+               ui-sref="detectionDiagnose({'firstMenu':'detection','secondMenu':'bloodSugarTable'})">
+                <p style="margin-left:-40px;color:black;">远程检测
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+            <a class="item item-avatar item-text-wrap"
+               style="min-height:0px;"
+               ui-sref="detectionDiagnose({'firstMenu':'testReport','secondMenu':''})">
+                <p style="margin-left:-40px;color:black;">检验报告
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+            <a class="item item-avatar item-text-wrap"
+               style="min-height:0px;"
+               ui-sref="detectionDiagnose({'firstMenu':'diagnoseReport','secondMenu':''})">
+                <p style="margin-left:-40px;color:black;">诊疗记录
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+        </div>
+        <div class="list" style="margin-top:-10px">
+            <h1 style="font-size:16px;margin-left:15px;color:#ff8e01;">干预指导</h1>
+            <a class="item item-avatar item-text-wrap"
+               style="margin-top:10px;min-height:0px;"
+               ui-sref="interventionGuidance({'firstMenu':'medicineIntervention','secondMenu':'interventionPlan','recordDate':''})">
+                <p style="margin-left:-40px;color:black;">服药干预
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+            <a class="item item-avatar item-text-wrap"
+               style="min-height:0px;"
+               ui-sref="interventionGuidance({'firstMenu':'mealRecord','secondMenu':'','recordDate':''})">
+                <p style="margin-left:-40px;color:black;">饮食记录
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+            <a class="item item-avatar item-text-wrap"
+               style="min-height:0px;"
+               ui-sref="interventionGuidance({'firstMenu':'sportRecord','secondMenu':'week','recordDate':''})">
+                <p style="margin-left:-40px;color:black;">运动记录
+                    <span class="item-note" style="color:#ff8e01">></span>
+                </p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+

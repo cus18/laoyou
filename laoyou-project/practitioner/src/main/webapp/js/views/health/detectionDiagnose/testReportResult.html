@@ -1,0 +1,27 @@
+<!--headerTitle start-->
+<header>
+    <div ng-if="h5Page" style="float:left;margin-top:4%;margin-left:2%;font-size:0.34rem;"
+         ng-click="enterGroupTalk()">&lt; 群聊
+    </div>
+    <h1>{{elderName}}</h1>
+    <em></em>
+</header>
+<div page-loading></div>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<!--content start-->
+<div ng-if="testReportResult">
+    <div class="ordinaryTit">
+        <span>检验报告</span>
+    </div>
+    <div class="resultContDate">{{testReportResultData.testDate}}</div>
+    <section class="resultContainer bgf">
+        <div class="reportListTit">提交者：<span>{{testReportResultData.providerName}}</span>提交时间：<span>{{testReportResultData.testTime}}</span></div>
+        <img ng-src="{{item1}}"  ng-repeat="item1 in testReportResultData.testPicUrl.split(';')">
+    </section>
+    <section class="resultContText">
+        <div>文字备注</div>
+        <p>{{testReportResultData.description}}</p>
+    </section>
+</div>
+<!--content end-->

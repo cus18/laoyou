@@ -1,0 +1,47 @@
+<!--headerTitle start-->
+<header>
+    <a href="javascript:history.go(-1)">返回</a>
+    <h1>{{elderName}}</h1>
+    <div style="float:right;margin-top:4%;font-size:0.34rem;margin-right:2%;"
+         ng-click="submit()">
+        提交
+    </div>
+</header>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<section class="healthFileReport bgf mb10">
+        {{question.questionName}}
+    </section>
+<div ng-repeat="item in question.questions" >
+    <section class="contItemTit" ng-if="item.questionPartName!=''">
+        {{item.questionPartName}}
+    </section>
+    <section class="contItem">
+        <div ng-repeat = "item1 in item.questionItems">
+            <div ng-if="item1.questionType== 'select'">
+                <span>{{item1.questionName}}</span>
+                <select ng-model="item1.questionValue" style="float:right;margin-top:4%;width:16%;">
+                    <option ng-repeat="x in item1.questionValues" value="{{x}}">{{x}}</option>
+                </select>
+            </div>
+            <div ng-if="item1.questionType== 'radio'">
+                <span>
+                    {{item1.questionName}}
+                    <img ng-src="{{item1.questionImg}}" ng-if="item1.questionImg!=undefined"/>
+                </span>
+                <div style="float:right">
+                    <input type="radio" name="{{item1.questionNumber}}" ng-click="chooseRadioAnswer(item1.questionNumber,true)" ng-checked="answer.year">正确</input>
+                    <input type="radio" name="{{item1.questionNumber}}" ng-click="chooseRadioAnswer(item1.questionNumber,false)" >错误</input>
+                </div>
+            </div>
+            <div ng-if="item1.questionType== 'input'">
+                <span>
+                    {{item1.questionName}}
+                </span>
+                <div style="float:right;width:5%;margin-right:5%;">
+                    <input type="text" ng-model="item1.questionValue" placeholder="未填写"></input>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

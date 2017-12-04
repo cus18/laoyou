@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <base href="/elder/"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0">
+    <title>丰台区老年人情况调研</title>
+    <link rel="stylesheet" href="styles/lib/ionic.min.css"/>
+    <link rel="stylesheet" href="styles/lib/ionicons.min.css"/>
+    <link rel="stylesheet" href="styles/lib/animate.min.css"/>
+    <link rel="stylesheet" href="styles/elder/healthFile.css?ver=1.1.3" type="text/css"/>
+    <link rel="stylesheet" href="styles/elder/reset.css?ver=1.1.3" type="text/css"/>
+    <link rel="stylesheet" href="styles/elder/fullcalendar.css?ver=1.1.3" type="text/css"/>
+    <link rel="stylesheet" href="styles/elder/spinners.css?ver=1.1.3" type="text/css"/>
+</head>
+<body>
+<!--<div ui-view></div>-->
+<ion-nav-view></ion-nav-view>
+</body>
+<script src="js/libs/ionic/ionic.bundle.min.js"></script>
+<script src="js/libs/ionic/ionic.min.js"></script>
+<script src="js/libs/ionic/ionic-angular.min.js"></script>
+<script src="js/libs/ionic/ionic-datepicker.bundle.min.js"></script>
+<script>
+    "use strict";
+    var require = {
+        waitSeconds: 15,
+        urlArgs: "ver=1.0.10",  //防止读取缓存，调试用
+        deps : ['js/mainElder']
+    };
+    var elderVersion = "1.0.10";
+    var picVersion = "1.0.10";
+    var appName = 'mainElder';
+</script>
+<script type="text/javascript" src="js/libs/important/require.min.js"></script>
+<script type="text/javascript" src="js/libs/important/rem.js"></script>
+<script type="text/javascript" src="js/libs/important/WebViewJavascriptBridge.js"></script>
+<script type="text/javascript" src="js/libs/important/appInterface.js"></script>
+<script type="text/javascript" src="js/libs/tool/html5media.min.js"></script>
+</html>
+

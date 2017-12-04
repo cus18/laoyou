@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.sys.dao.SysBannerResourceDao">
+
+
+    <insert id="addSysBannerResource">
+		INSERT INTO`sys_banner_resource` (`app`,`name`,`url`,`size`, `nums`,`del_flage`)
+				VALUES (#{app},#{name},#{url}, #{size}, #{nums},#{del_flage})
+	</insert>
+
+
+    <select id="getBannerResourcePage" resultType="com.yhl.laoyou.common.dto.BannerResourceDTO">
+        SELECT * FROM `sys_banner_resource` where
+        del_flage!=1
+        <if test="searchValue != null and searchValue !='' ">
+            and (name like  CONCAT(CONCAT('%', #{searchValue}), '%'))
+        </if>
+        <if test="name != null and name !='' ">
+            and name=#{name}
+        </if>
+        <if test="app != null and app !='' ">
+            and app=#{app}
+        </if>
+        <if test="id != null and id !='' ">
+            and id=#{id}
+        </if>
+        <if test="type == 'a'.toString() ">
+            group by app
+        </if>
+        <if test="type == 'b'.toString() ">
+            group by name
+        </if>
+    </select>
+
+    <update id="updateSysBannerResource">
+        UPDATE `sys_banner_resourc`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="app!= ''and app!=null">
+                app=#{app},
+            </if>
+            <if test="name!= ''and name!=null">
+                name=#{name},
+            </if>
+            <if test="url!= ''and url!=null">
+                url=#{url},
+            </if>
+            <if test="size!= ''and size!=null">
+                size=#{size},
+            </if>
+            <if test="nums!= ''and nums!=null">
+                nums=#{nums},
+            </if>
+            <if test="del_flage!= ''and del_flage!=null">
+                del_flage=#{del_flage}
+            </if>
+        </trim>
+        WHERE `id`=#{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,23 @@
+<ion-view style="background:white;">
+    <!--headerTitle start-->
+    <div page-loading></div>
+    <header>
+        <a href="javascript:history.go(-1)">返回</a>
+        <h1>{{elderName}}</h1>
+    </header>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <!--content start-->
+    <div class="ordinaryTit">
+        <span>饮食记录</span>
+    </div>
+    <div class="resultContDate">{{mealRecordResultData.createDate}}</div>
+    <section class="resultContainer bgf">
+        <div class="reportListTit">记录时间：<span>{{mealRecordResultData.createTime}}</span></div>
+        <img ng-src="{{item}}"  ng-repeat="item in mealRecordResultData.imageURL.split(';')">
+    </section>
+    <section ng-if="mealRecordResultData.content" class="resultContText">
+        <div>文字备注</div>
+        <p>{{mealRecordResultData.content}}</p>
+    </section>
+</ion-view>

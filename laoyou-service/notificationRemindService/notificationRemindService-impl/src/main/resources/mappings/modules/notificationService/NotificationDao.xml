@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.notificationRemindService.dao.NotificationDao">
+
+	<insert id="addNotification">
+		INSERT INTO`notification`
+			(`message_temlate_id`, `title`, `content`, `uri`, `create_by`)
+		  VALUES (#{message_temlate_id}, #{title}, #{content}, #{uri}, #{create_by})
+	</insert>
+
+	<select id="getNotificationListBySysElderUserID" resultType="com.yhl.laoyou.common.dto.notification.ExtendMessageDTO">
+		select nu.id as extendMessageId,n.title as extendMessageName,
+				nu.create_date as extendMessageDate ,n.content as  extendMessageContent from notification n
+		inner join notification_user nu on n.id=nu.notification_id
+		where nu.sys_elder_user_id=#{sysElderUserID} limit #{limit}
+	</select>
+
+	<select id="getNotificationByID" resultType="com.yhl.laoyou.common.dto.notification.ExtendMessageDTO">
+		select nu.id as extendMessageId,n.title as extendMessageName,
+		nu.create_date as extendMessageDate ,n.content as  extendMessageContent from notification n
+		inner join notification_user nu on n.id=nu.notification_id
+		where nu.id=#{ID}
+	</select>
+
+</mapper>

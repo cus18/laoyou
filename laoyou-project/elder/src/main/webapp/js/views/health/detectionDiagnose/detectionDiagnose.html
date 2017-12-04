@@ -1,0 +1,297 @@
+<ion-view style="background:white">
+    <div page-loading></div>
+    <elder-head></elder-head>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <!--检测与诊疗tab-->
+    <ul class="primaryTab bgf mb10">
+        <a ng-click="goMenu('detection','bloodSugarTable')">
+            <li ng-class="{'on': firstMenu == 'detection'}" >远程监测</li>
+        </a>
+        <a ng-click="goMenu('testReport','')">
+            <li ng-class="{'on': firstMenu == 'testReport'}">检验报告</li>
+        </a>
+        <a ng-click="goMenu('diagnoseReport','')">
+            <li ng-class="{'on': firstMenu == 'diagnoseReport'}">诊疗记录</li>
+        </a>
+    </ul>
+
+    <!--远程监测tab-->
+    <div ng-if="firstMenu == 'detection'" style="margin-top:-20px;">
+        <ul class="secondary bgf secondaryBor">
+            <a ng-click="goMenu('detection','bloodSugarCurve')">
+                <li ng-class="{'on': secondMenu == 'bloodSugarCurve'||secondMenu == 'bloodSugarTable'}">
+                    <img ng-if="secondMenu == 'bloodPressureCurve'||secondMenu == 'bloodPressureTable'" src="/elder/images/icon_252.png"/>
+                    <img ng-if="secondMenu == 'bloodSugarCurve'||secondMenu == 'bloodSugarTable'" src="/elder/images/icon_251.png"/>
+                    血糖
+                </li>
+            </a>
+            <a ng-click="goMenu('detection','bloodPressureCurve')">
+                <li ng-class="{'on': secondMenu == 'bloodPressureCurve'||secondMenu == 'bloodPressureTable'}">
+                    <img ng-if="secondMenu == 'bloodSugarCurve'||secondMenu == 'bloodSugarTable'" src="/elder/images/icon_242.png"/>
+                    <img ng-if="secondMenu == 'bloodPressureCurve'||secondMenu == 'bloodPressureTable'" src="/elder/images/icon_241.png"/>
+                    血压心率
+                </li>
+            </a>
+        </ul>
+        <div class="secondaryMarB"></div>
+        <div ng-if="secondMenu == 'bloodSugarCurve'" style="overflow:auto;height:10rem;">
+            <!--血糖content-->
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    凌晨血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.dawnSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    空腹血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.beforeBreakFastSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    早餐后血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.afterBreakFastSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    午餐前血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.beforeLunchSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    午餐后血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.afterLunchSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    晚餐前血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.beforeDinnerSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    晚餐后血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.afterDinnerSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div ng-if="dataLoad">
+                <div class="contItemTit monitorTit">
+                    睡前血糖
+                </div>
+                <section class="monitorCurve bgf mb10">
+                    <highchart style="width:7rem;height:5.1rem"
+                               title='charts.bloodSugar.title'
+                               series="charts.bloodSugar.beforeSleepSeries"
+                               options="charts.bloodSugar.options">
+                    </highchart>
+                </section>
+            </div>
+            <div class="empty10"></div>
+            <section class="footOptionTab">
+                <a ng-click="goMenu('detection','bloodSugarTable')"><img src="/elder/images/Slice_1.png"/></a>
+                <ul>
+                    <li ng-class="{'on': timeType == 'week'}" ng-click="chooseHealthDataTime('week')">周</li>
+                    <li ng-class="{'on': timeType == 'month'}" ng-click="chooseHealthDataTime('month')">月</li>
+                    <li ng-class="{'on': timeType == 'threeMonth'}" ng-click="chooseHealthDataTime('threeMonth')">三个月</li>
+                    <li ng-class="{'on': timeType == 'halfYear'}" ng-click="chooseHealthDataTime('halfYear')">半年</li>
+                </ul>
+            </section>
+        </div>
+        <div ng-if="secondMenu == 'bloodSugarTable'"
+             style="overflow:scroll;height:9rem">
+            <table border="0" cellspacing="0" cellpadding="0"
+                   class="tableRecord tableSugar" ng-if="dataLoad"
+                   style="color:black;background:#f8f8f8;">
+                <tr>
+                    <th rowspan="2">日期</th>
+                    <th rowspan="2">凌晨</th>
+                    <th colspan="2">早餐</th>
+                    <th colspan="2">午餐</th>
+                    <th colspan="2">晚餐</th>
+                    <th rowspan="2">睡前</th>
+                </tr>
+                <tr>
+                    <th>空腹</th>
+                    <th>后</th>
+                    <th>前</th>
+                    <th>后</th>
+                    <th>前</th>
+                    <th>后</th>
+                </tr>
+                <tr ng-repeat="item in healthDatas">
+                    <td>{{item.date|date:'MM-dd'}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.dawn,'dawn',item.bloodSugar.dawnTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.dawn}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.beforeBreakFast,'beforeBreakFast',item.bloodSugar.beforeBreakFastTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.beforeBreakFast}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.afterBreakFast,'afterBreakFast',item.bloodSugar.afterBreakFastTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.afterBreakFast}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.beforeLunch,'beforeLunch',item.bloodSugar.beforeLunchTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.beforeLunch}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.afterLunch,'afterLunch',item.bloodSugar.afterLunchTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.afterLunch}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.beforeDinner,'beforeDinner',item.bloodSugar.beforeDinnerTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.beforeDinner}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.afterDinner,'afterDinner',item.bloodSugar.afterDinnerTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.afterDinner}}</td>
+                    <td ng-click="goBloodSugarRecord(item.bloodSugar.beforeSleep,'beforeSleep',item.bloodSugar.beforeSleepTime,'true',item.bloodSugar.remarks)">{{item.bloodSugar.beforeSleep}}</td>
+                </tr>
+            </table>
+            <div class="empty10"></div>
+            <section class="footOptionTab">
+                <a ng-click="goMenu('detection','bloodSugarCurve')"><img src="/elder/images/Slice_2.png"/></a>
+                <ul>
+                    <li ng-class="{'on': timeType == 'week'}" ng-click="chooseHealthDataTime('week')">周</li>
+                    <li ng-class="{'on': timeType == 'month'}" ng-click="chooseHealthDataTime('month')">月</li>
+                    <li ng-class="{'on': timeType == 'threeMonth'}" ng-click="chooseHealthDataTime('threeMonth')">三个月</li>
+                    <li ng-class="{'on': timeType == 'halfYear'}" ng-click="chooseHealthDataTime('halfYear')">半年</li>
+                </ul>
+            </section>
+        </div>
+
+        <div ng-if="secondMenu == 'bloodPressureCurve'&&dataLoad" style="overflow:scroll;height:9rem;">
+            <!--血糖content start-->
+            <div class="contItemTit monitorTit">
+                血压
+            </div>
+            <section class="monitorCurve bgf mb10">
+                <highchart style="width:7rem;height:5.1rem"
+                           title='charts.bloodPressure.title'
+                           series="charts.bloodPressure.pressureSeries"
+                           options="charts.bloodPressure.options">
+                </highchart>
+            </section>
+            <div class="contItemTit monitorTit">
+                心率
+            </div>
+            <section class="monitorCurve bgf mb10">
+                <highchart style="width:7rem;height:5.1rem"
+                           title='charts.bloodPressure.title'
+                           series="charts.bloodPressure.heartRateSeries"
+                           options="charts.bloodPressure.options">
+                </highchart>
+            </section>
+            <!--血糖content end-->
+            <!--底部固定菜单开始-->
+            <div class="empty10"></div>
+            <section class="footOptionTab">
+                <a ng-click="goMenu('detection','bloodPressureTable')"><img src="/elder/images/Slice_1.png"/></a>
+                <ul>
+                    <li ng-class="{'on': timeType == 'week'}" ng-click="chooseHealthDataTime('week')">周</li>
+                    <li ng-class="{'on': timeType == 'month'}" ng-click="chooseHealthDataTime('month')">月</li>
+                    <li ng-class="{'on': timeType == 'threeMonth'}" ng-click="chooseHealthDataTime('threeMonth')">三个月</li>
+                    <li ng-class="{'on': timeType == 'halfYear'}" ng-click="chooseHealthDataTime('halfYear')">半年</li>
+                </ul>
+            </section>
+            <!--底部固定菜单结束-->
+        </div>
+        <div ng-if="secondMenu == 'bloodPressureTable'" style="overflow:scroll;height:9rem;">
+            <table border="0" cellspacing="0" cellpadding="0" class="tableRecord tablePressure">
+                <tr>
+                    <th>日期</th>
+                    <th>收缩压/高压</th>
+                    <th>舒张压/低压</th>
+                    <th>心率</th>
+                </tr>
+                <tr ng-repeat="item in healthDatas" ng-click="goBloodPressureRecord(item.measureTime,item.diastolic,item.systolic,item.heartRate,true)">
+                    <td>{{item.measureTime|date:'MM-dd'}}</td>
+                    <td>{{item.diastolic}}</td>
+                    <td>{{item.systolic}}</td>
+                    <td>{{item.heartRate}}</td>
+                </tr>
+            </table>
+            <div class="empty10"></div>
+            <section class="footOptionTab">
+                <a ng-click="goMenu('detection','bloodPressureCurve')"><img src="/elder/images/Slice_2.png"/></a>
+                <ul>
+                    <li ng-class="{'on': timeType == 'week'}" ng-click="chooseHealthDataTime('week')">周</li>
+                    <li ng-class="{'on': timeType == 'month'}" ng-click="chooseHealthDataTime('month')">月</li>
+                    <li ng-class="{'on': timeType == 'threeMonth'}" ng-click="chooseHealthDataTime('threeMonth')">三个月</li>
+                    <li ng-class="{'on': timeType == 'halfYear'}" ng-click="chooseHealthDataTime('halfYear')">半年</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!--检验报告-->
+    <div ng-if="firstMenu == 'testReport'" style="overflow:auto;height:11rem;">
+        <!--检验报告content start-->
+        <section class="calendar" id="directives-calendar-testReport">
+            <div calendar="myCalendar1"
+                 ui-calendar="testReportUiConfig.calendar">
+            </div>
+        </section>
+        <div class="reportList bgf" ng-repeat="item in testReportDatas">
+            <a ui-sref="testReportResult({testDate:item.testDate,testTime:item.testTime})">
+                <p class="reportListTit">{{item.testDate}}</p>
+                <p class="reportListDate">提交者：<span>{{item.providerName}}</span>提交时间：<span>{{item.testTime}}</span></p>
+                <div class="reportImg clearfix">
+                    <div ng-repeat="item2 in item.testPicUrl.split(';')">
+                        <img ng-src="{{item2}}?x-oss-process=image/resize,m_fill,h_100,w_100" alt=""/>
+                    </div>
+                </div>
+                <p ng-if="item.description" class="reportCont">{{item.description}}</p>
+            </a>
+        </div>
+        <!--检验报告content end-->
+    </div>
+
+    <!--诊疗记录-->
+    <div ng-if="firstMenu == 'diagnoseReport'" style="overflow:auto;height:11rem;">
+        <!--诊疗记录content start-->
+        <section class="calendar" id="directives-calendar-diagnoseReport">
+            <div calendar="myCalendar2"
+                 ui-calendar="diagnoseReportUiConfig.calendar">
+            </div>
+        </section>
+        <div class="reportList bgf" ng-repeat="item in diagnoseReportDatas">
+            <a ui-sref="diagnoseReportResult({recordDate:item.recordDate})">
+                <p class="reportListTit">{{item.recordDate.substring(0,10)}}</p>
+                <p class="reportListDate">责任医生：<span>{{item.providerName}}</span>记录时间：<span>{{item.recordDate.substring(11,16)}}</span></p>
+                <img class="diagnoseAudioIcon" src="/elder/images/icon_audio.png" alt="">
+                <p ng-if="item.description" class="reportCont">{{item.description}}</p>
+            </a>
+        </div>
+        <!--诊疗记录content end-->
+    </div>
+</ion-view>

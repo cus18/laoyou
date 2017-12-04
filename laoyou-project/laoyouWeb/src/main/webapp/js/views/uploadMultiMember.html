@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <hospital-menu title="member"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner" style="min-height:10%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>会员管理：批量增加会员</h2>
+                    <h5>可以在此板块中通过导入excel批量增加会员 </h5>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label>点击输入栏，选择要批量上传的excel模版文件</label>
+                                    <input class="form-control"
+                                           ngf-select=""
+                                           ngf-pattern="'*/*'"
+                                           ngf-multiple="false"
+                                           ng-model="data.file"
+                                           placeholder="{{data.file.name}}"/>
+                                </div>
+                                {{hintText}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. PAGE INNER  -->
+        <button class="btn btn-primary" style="width:10%;" ng-click="submit()">确认上传</button>
+        <button class="btn btn-default" style="width:10%;" ng-click="uploadMultiMemberCancel()">取消上传</button>
+    </div>
+</div>

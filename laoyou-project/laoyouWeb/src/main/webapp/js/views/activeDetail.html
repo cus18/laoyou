@@ -1,0 +1,86 @@
+<div id="wrapper">
+    <hospital-menu title="active"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>活动详情</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+            <form role="form" name="activeForm" ng-submit="createActive(activeForm.$valid)" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="display:block;">封面图片</label>
+                            <input ng-hide="type == 'check'" type="text" class="form-control" ng-model="fileName" style="width:60%;float:left;">
+                            <button ng-hide="type == 'check'" class="btn btn-primary ml10" type="button" ng-class="{'bg-bbbbbb':imgDisabled}" style="width:84px;height:30px; position: relative;margin:2px;" img-upload></button>
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{thumb.imgSrc}}" ng-show="thumb.imgSrc" alt="" style="height:100px;">
+                            <img ng-if="type == 'check'" src="{{response.activityLogo}}" style="height:100px;">
+                            <button type="button" class="btn btn-primary" ng-click="saveClick()" ng-class="{'bg-bbbbbb':submitDisabled}" ng-show="thumb.imgSrc" style="margin:66px 0 0 15px;">上传</button>
+                        </div>
+                        <div class="form-group">
+                            <label>活动主题</label>
+                            <input class="form-control" placeholder="活动主题" ng-model="response.activityName" required/>
+                        </div>
+                        <div class="form-group input-daterange">
+                            <label>开始时间</label>
+                            <input class="form-control date-picker" type="text" style="text-align:left;" ng-model="response.activityStartDate" required/>
+                        </div>
+                        <div class="form-group input-daterange" data-date-format="yyyy-mm-dd hh:ii:ss">
+                            <label>结束时间</label>
+                            <input class="form-control date-picker" type="text" style="text-align:left;" ng-model="response.activityEndDate" required/>
+                        </div>
+                        <div class="form-group">
+                            <script src="js/libs/area.js"></script>
+                            <label>区域</label>
+                            <select ng-if="type == 'new'" class="form-control" id="s_province" name="s_province"></select> 
+                            <select ng-if="type == 'new'" class="form-control" id="s_city" name="s_city" ></select> 
+                            <select ng-if="type == 'new'" class="form-control" id="s_county" name="s_county"></select> 
+                            <input class="form-control" placeholder="详细地址" ng-model="response.activityAddress" required/>
+                        </div>
+                        <div class="form-group" style="position:relative;">
+                            <label>活动标签</label>
+                            <input class="form-control" placeholder="请选择" ng-model="response.type" ng-focus="labelFocus()" required/>
+                            <div class="LabelArea" ng-if="labelShow">
+                                <label>
+                                    <input type="radio" name="label" value="文化娱乐" ng-model="response.type">文化娱乐
+                                </label>
+                                <label>
+                                    <input type="radio" name="label" value="健身" ng-model="response.type">健身
+                                </label>
+                                <label>
+                                    <input type="radio" name="label" value="棋牌" ng-model="response.type">棋牌
+                                </label>
+                                <div style="margin-top:20px;">
+                                    <button class="btn btn-primary" style="margin:0 5% 0 60%;" ng-click="labelSure()">确定</button>
+                                    <button class="btn btn-default" ng-click="labelCancel()">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>人数上限（填写0表示不限制人数）</label>
+                            <input class="form-control" type="number" ng-model="response.peopleNum" required/>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;">详细描述</label>
+                            <textarea rows="6" style="width:100%;" ng-model="response.activityDetailInfo"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;">活动建群</label>
+                            <label><input type="radio" name="establish" checked disabled="disabled">创建</label>
+                            <label><input type="radio" name="establish" disabled="disabled">不创建</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" ng-if="type == 'new'" class="btn btn-primary" style="width:10%;">保存并发布</button>
+                <button class="btn btn-default" style="width:10%;" onclick="javascript:history.go(-1)">取消</button>
+            </form>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+</div>

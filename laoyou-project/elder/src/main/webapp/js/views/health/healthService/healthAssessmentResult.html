@@ -1,0 +1,21 @@
+<ion-view style="background:#f8f8f8;">
+
+        <header>
+            <a href="javascript:history.go(-1)">返回</a>
+            <h1>{{elderName}}</h1>
+            <em></em>
+        </header>
+        <div page-loading></div>
+        <div class="empty10"></div>
+        <!--headerTitle end-->
+        <section class="healthFileReport bgf mb10">
+            {{healthAssessmentResult.healthAssessmentTemplateName}}
+        </section>
+        <section class="AssessCont bgf">
+            <p>尊敬的{{elderName}}及家属：</p>
+            <p>
+                {{displayResult}}
+            </p>
+        </section>
+
+</ion-view>

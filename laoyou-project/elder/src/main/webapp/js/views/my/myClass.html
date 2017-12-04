@@ -1,0 +1,22 @@
+<div class="overhidden">
+    <!--headerTitle start-->
+    <header class="loginHead">
+        <h1><img class="logoImg" src="/elder/images/laoyou_logo.png" alt=""></h1>
+    </header>
+    <!--headerTitle end-->
+    <!--login start-->
+    <form class="loginForm" name="loginForm" ng-submit="submitForm(loginForm.$valid)" novalidate>
+        <div class="inputItem">
+            <input type="number" name="phoneNum" placeholder="手机号" ng-model="login.userPhone" ng-pattern="/^1[3|4|5|7|8]\d{9}$/" required/>
+        </div>
+        <div class="inputItem inputCodeItem">
+            <input type="text" name="phoneCode" placeholder="短信验证码" ng-model="login.userPhoneCode" ng-focus="login.errorHint=false" ng-disabled="loginForm.phoneNum.$invalid" required/>
+            <div ng-class="login.paraclass" ng-click="login.loginCode()" ng-if="loginForm.phoneNum.$valid">{{login.paracont || '获取验证码'}}</div>
+            <div class="getCodeBtn null" ng-if="loginForm.phoneNum.$invalid">{{login.paracont || '获取验证码'}}</div>
+            <div class="errorHint fontc00" ng-show="login.errorHint">验证码不正确</div>
+        </div>
+
+        <button type="submit" ng-disabled="loginForm.$invalid" ng-class="{'loginBtn':true,'suc':loginForm.$valid}">登 录</button>
+    </form>
+    <!--login end-->
+</div>

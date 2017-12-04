@@ -1,0 +1,117 @@
+<ion-view style="background:#2b2b2b;">
+	<div ng-if="messageType=='chatType1'">
+		<!--服务协议书-->
+		<a class="InfContainer">
+			<h3>{{groupChatData.servicePackageTemplateName}}</h3>
+			<div class="InfCont">由{{groupChatData.firstParty.firstPartyName}}提供的{{groupChatData.servicePackageTemplateName}}</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType2'">
+		<!--体检报告-->
+		<a class="InfContainer">
+			<h3>体检报告</h3>
+			<div class="InfReportCont">
+				<img ng-src="{{groupChatData.physicalExaminationData.split(';')[0]}}"/>
+				<div>
+					<p>提交时间：{{groupChatData.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+					<p>提交者：{{groupChatData.providerName}}</p>
+				</div>
+			</div>
+			<div ng-if="groupChatData.description" class="Inftxt">备注：{{groupChatData.description}}</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType3'">
+		<a class="InfContainer">
+			<h3>简易智力状态检查（MMSE）报告</h3>
+			<div class="InfCont">
+				<p><span>会员：</span>谭伯勋</p>
+				<p><span>提交者：</span>迟守爱</p>
+				<p><span>日期：</span>2017-04-21</p>
+			</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType4'">
+		<!--血压/心率-->
+		<a class="InfContainer">
+			<h3>血压/心率测量数据mmHg</h3>
+			<div class="InfCont">
+				<ul class="InfList clearfix">
+					<li>
+						<p>高压</p>
+						<b>{{groupChatData.data.diastolic}}</b>
+					</li>
+					<li>
+						<p>低压</p>
+						<b>{{groupChatData.data.systolic}}</b>
+					</li>
+					<li>
+						<p>心率</p>
+						<b>{{groupChatData.data.heartRate}}</b>
+					</li>
+				</ul>
+				<p>测量时间 {{groupChatData.measureTime}}</p>
+			</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType5'">
+		<!--血糖测量数据-->
+		<a class="InfContainer">
+			<h3>血糖测量数据mmol/L</h3>
+			<div class="InfCont">
+				<div class="InfBloodSugar">{{groupChatData.data.result}}</div>
+				<p>测量时间 {{groupChatData.measureTime}}</p>
+			</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType6'">
+		<!--检验报告-->
+		<a class="InfContainer">
+			<h3>检验报告</h3>
+			<div class="InfReportCont">
+				<img ng-src="{{groupChatData.reportImage.split(';')[0]}}"/>
+				<div>
+					<p>提交时间：{{groupChatData.testReportDate}}</p>
+					<p>提交者：{{groupChatData.providerName}}</p>
+				</div>
+			</div>
+			<div ng-if="groupChatData.description" class="Inftxt">备注：{{groupChatData.description}}</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType7'">
+		<!--诊疗记录-->
+		<a class="InfContainer">
+			<h3>诊疗记录</h3>
+			<div class="InfCont">
+				<p>记录时间：{{groupChatData.treatmentData}}</p>
+				<p>责任医生：{{groupChatData.providerName}}</p>
+			</div>
+			<div class="InfVideo clearfix">
+				<audio id="diagnoseAudio" ng-src="{{groupChatData.treatmentAudio}}"
+					   controls="controls"
+					   style="display:none">
+				</audio>
+				<div class="diagnoseAudioCtrl" ng-click="audioCtrl()">
+					<img ng-hide="paused" src="/elder/images/triangle_2@2x.png" alt="">
+					<img ng-show="paused" src="/elder/images/triangle_3@2x.png" alt="">
+				</div>
+			</div>
+			<div class="Inftxt">这是关于{{groupChatData.elderName}}的诊疗记录。</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+	<div ng-if="messageType=='chatType8'">
+		<!--用药提醒-->
+		<a class="InfContainer">
+			<h3>服药提醒</h3>
+			<div class="InfMedicine">{{groupChatData.usageTime.substring(10,16)}}</div>
+			<div class="InfCont">请按时服用{{groupChatData.dose}}{{groupChatData.drugName}}</div>
+			<div class="InfMore">查看详情</div>
+		</a>
+	</div>
+</ion-view>

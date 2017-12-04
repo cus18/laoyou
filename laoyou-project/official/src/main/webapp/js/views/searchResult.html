@@ -1,0 +1,24 @@
+<header></header>
+<div class="subBanner" style="background:url(/images/banner02.jpg) center no-repeat;"></div>
+<div class="container searchContainer" id="wrapper">
+    <h3 class="searchTit">搜索</h3>
+    <div class="searchContent">
+        <div class="searchForm clearfix">
+            <input type="text" ng-model="keyWord">
+            <img ng-click="search()" src="/images/search02.png" alt="">
+        </div>
+        <p>搜索结果：共找到关于“<span>{{keyWord}}</span>”的搜索结果<span>{{response.totalCount}}</span>条</p>
+    </div>
+    <ul class="newsContent searchResult">
+        <li ng-repeat="item in response.newsList">
+            <a ui-sref="pages({catalogId:item.category.id,articleId:item.id})" target="_blank">
+                <h4>{{item.title}}</h4>
+                <p class="newsArticle">{{item.articleData.content}}</p>
+            </a>
+        </li>
+    </ul>
+    <page></page>
+</div>
+<footer></footer>
+
+

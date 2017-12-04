@@ -1,0 +1,52 @@
+<ion-view style="background:white">
+    <div page-loading></div>
+    <form name="bloodSugarRecordForm" ng-submit="submitForm()" novalidate>
+        <!--headerTitle start-->
+        <header>
+            <div ng-if="h5Page" style="float:left;margin-top:4%;margin-left:2%;font-size:0.34rem;"
+                 ng-click="returnRootNative()">&lt;返回
+            </div>
+            <h1>血糖测量记录</h1>
+            <button ng-if="h5Page" ng-hide="bloodSugar.readOnly">保存</button>
+            <em ng-show="bloodSugar.readOnly"></em>
+        </header>
+        <div class="empty10"></div>
+        <!--headerTitle end-->
+        <!--content start-->
+        <section class="monitorContainer">
+            <div ng-class="{'monitorDataRecored':bloodSugar.recorded}">
+                <div class="monitorDataCont" id="measureCont" ng-hide="bloodSugar.readOnly">
+                    {{bloodSugar.measureNum || '添加测量值'}}
+                </div>
+                <div class="monitorDataCont" ng-show="bloodSugar.readOnly">
+                    {{bloodSugar.measureNum}}
+                </div>
+                <div class="bloodSugarUnit">mmol/L</div>
+            </div>
+            <div class="monitorDataInf">
+                <p>
+                    <em>测量时间：</em>
+                    <span id="measureTime">{{bloodSugar.measureTime || bloodSugar.nowTime}}</span>
+                    <span id="measureDate">{{bloodSugar.measureDate || bloodSugar.nowDate}}</span>
+                    <input ng-hide="bloodSugar.readOnly" type="text" value="" id="measureTimeInp" readonly/>
+                </p>
+                <p>
+                    <em>测量类型：</em>
+                    <span id="measureType" ng-hide="bloodSugar.readOnly">{{bloodSugar.measureType}}</span>
+                    <span ng-show="bloodSugar.readOnly">{{bloodSugar.measureType}}</span>
+                </p>
+                <p>
+                    <em>控制目标：</em>
+                    <span ng-hide="bloodSugar.readOnly"><a ui-sref="controlObjective({objectiveType:'bloodSugar'})">{{bloodSugar.objective || "请填写"}}mmol/L</a></span>
+                    <span ng-show="bloodSugar.readOnly">{{bloodSugar.objective}}mmol/L</span>
+                </p>
+            </div>
+            <div ng-if="bloodSugar.remark">
+                <p class="monitorTxt">文字备注</p>
+                <textarea ng-hide="bloodSugar.readOnly" name="remark" placeholder="请在这里输入..."  class="remarkcCont" ng-model="bloodSugar.remark"></textarea>
+                <p ng-show="bloodSugar.readOnly" class="remarkcCont">{{bloodSugar.remark || '无'}}</p>
+            </div>
+        </section>
+        <!--content end-->
+    </form>
+</ion-view>

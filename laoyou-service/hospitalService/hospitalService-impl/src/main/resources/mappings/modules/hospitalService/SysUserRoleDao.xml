@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.hospitalService.dao.SysUserRoleDao">
+
+	<insert id="addSysUserRole" parameterType="com.yhl.laoyou.modules.hospitalService.entity.SysUserRole">
+		insert into sys_hospital_user_role(`sys_hospital_user_id`,`role_id`)
+		value (#{sysHospitalUserID},#{roleID})
+	</insert>
+
+
+	<update id="updateSysUserRole" parameterType="com.yhl.laoyou.modules.hospitalService.entity.SysUserRole">
+		UPDATE `sys_hospital_user_role`
+		SET `role_id`=#{roleID}
+		WHERE  `sys_hospital_user_id`=#{sysHospitalUserID}
+	</update>
+
+
+</mapper>

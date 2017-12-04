@@ -1,0 +1,101 @@
+<div id="wrapper">
+    <hospital-menu title="index"></hospital-menu>
+    <div class="fixHeight"></div>
+
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>首页</h2>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h3 style="color:#1db4bd;font-size:34px;">{{elderNum}}</h3>
+                    <p>会员总人数</p>
+                    <div style="width:300px;margin:0 auto;">
+                        <highchart style="width:300px;height:260px;"
+                                   series="memberSeries"
+                                   options="columnCharts.options">
+                        </highchart>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3 style="color:#1db4bd;font-size:34px;">{{doctorNum}}</h3>
+                    <p>医生总人数</p>
+                    <div style="width:300px;margin:0 auto;">
+                        <highchart style="width:300px;height:260px;"
+                                   series="doctorSeries"
+                                   options="columnCharts.options">
+                        </highchart>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3 style="color:#1db4bd;font-size:34px;">{{nurseNum}}</h3>
+                    <p>护士总人数</p>
+                    <div style="width:300px;margin:0 auto;">
+                        <highchart style="width:300px;height:260px;"
+                                   series="nurseSeries"
+                                   options="columnCharts.options">
+                        </highchart>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin-top:40px;">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="padding-bottom:0px;">
+                            <div>糖尿病会员分析</div>
+                            <div class="row">
+                                <div class="col-md-4" style="padding-left:80px;">
+                                    <highchart style="width:200px;height:200px;"
+                                               series="diabeticSeries"
+                                               options="pieCharts.options">
+                                    </highchart>
+                                </div>
+                                <div class="col-md-8">
+                                    <highchart style="width:450px;height:200px;"
+                                               series="diabeticSeries"
+                                               options="barCharts.options">
+                                    </highchart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin-top:40px;">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="padding-bottom:0px;">
+                            <div>高血压会员分析</div>
+                            <div class="row">
+                                <div class="col-md-4" style="padding-left:80px;">
+                                    <highchart style="width:200px;height:200px;"
+                                               series="hypertensiveSeries"
+                                               options="pieCharts.options">
+                                    </highchart>
+                                </div>
+                                <div class="col-md-8">
+                                    <highchart style="width:450px;height:200px;"
+                                               series="hypertensiveSeries"
+                                               options="barCharts.options">
+                                    </highchart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+
+

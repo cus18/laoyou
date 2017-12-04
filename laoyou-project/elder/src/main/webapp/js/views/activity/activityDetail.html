@@ -1,0 +1,102 @@
+<ion-view style="background:white;">
+	<ion-header-bar align-title="center" class="bar-energized">
+		<div class="buttons">
+			<button class="button" ng-click="return()"><</button>
+		</div>
+		<h1 class="title">{{detailActivityInfo.activityName}}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<img class="full-image" style="height:190px"
+			 ng-src="{{detailActivityInfo.activityLogo}}">
+		<div class="tabs tabs-striped tabs-top tabs-color-assertive"
+			 style="border-radius:0;margin-top:150px;background-color:#f8f8f8">
+			<a ng-class="{true:'tab-item active',false:'tab-item'}[param.operation=='introduce']" ng-click="introduce()">
+				活动详情
+			</a>
+			<a ng-class="{true:'tab-item active',false:'tab-item'}[param.operation=='discuss']" ng-click="discuss()">
+				老友评论
+			</a>
+		</div>
+		<div class="card" style="margin-top:54px;width:100%;margin-left:0rem;font-size: 0.3rem;background-color:#f8f8f8"
+			 ng-if="param.operation=='introduce'">
+			<div class="item item-divider item-text-wrap"
+				 style="background:white;">
+				<i class="icon ion-ios-clock bar-energized" style="color:black;"></i>
+				&nbsp;
+				{{detailActivityInfo.activityStartDate|date:'yyyy/MM/dd HH:mm'}}&nbsp;至&nbsp;{{detailActivityInfo.activityEndDate|date:'yyyy/MM/dd HH:mm'}}
+			</div>
+			<div class="item item-divider item-text-wrap"
+				 style="background:transparent;">
+				<i class="icon ion-location" style="color: black;"></i>
+				&nbsp;
+				{{detailActivityInfo.activityAddress}}
+			</div>
+			<div class="item item-divider item-text-wrap"
+				 style="background:white;">
+				<i class="icon ion-person-stalker" style="color: black;"></i>
+				&nbsp;
+				已报名{{detailActivityInfo.activityAttendedNum}}人
+			</div>
+			<div class="item item-divider item-text-wrap"
+				 style="background:transparent;">
+				<i class="icon ion-person" style="color: black;"></i>
+				&nbsp;
+				主办方:{{detailActivityInfo.activityOwnerName}}
+			</div>
+			<div class="item item-body"
+				 style="background:white">
+				<h1 style="text-align: center;font-size: 0.4rem;">活动主题</h1>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;{{detailActivityInfo.activityDetailInfo}}</p>
+			</div>
+			<!--<div class="item item-body"-->
+				 <!--style="background:transparent">-->
+				<!--<h1 style="text-align: center;font-size: 0.4rem;">关于主办方</h1>-->
+				<!--<p>&nbsp;&nbsp;&nbsp;&nbsp;{{detailActivityInfo.activityOwnerIntro}}</p>-->
+			<!--</div>-->
+			<br/><br/><br/><br/>
+		</div>
+		<ion-scroll class="list" style="margin-top:54px;height:8rem;"
+					ng-if="param.operation=='discuss'">
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			<style>
+				.talkOdd {
+					background-color: white;
+					min-height:86px
+				}
+				.talkEven {
+					background-color: #f8f8f8;
+					min-height:86px
+				}
+			</style>
+			<a class="item item-thumbnail-left"
+			   ng-class-odd="'talkOdd'"
+			   ng-class-even="'talkEven'"
+			   ng-repeat="item in activityDiscussList">
+				<img ng-src="{{item.elderLogo}}" style="max-width:70px;max-height:60px;margin-left:10px;">
+				<h2>{{item.elderName}}</h2>
+				<p>{{item.discussContent}}</p>
+				<span class="item-note">
+                    {{item.discussDate|date:'yyyy/MM/dd HH:mm:ss'}}
+                </span>
+			</a>
+			<br/><br/>
+		</ion-scroll>
+	</ion-content>
+	<div style="position:absolute;top:30%;left:10%;min-width:295px;min-height:200px;background-color:#ddd;"
+		 ng-if="param.attendDiscuss">
+		<p style="margin-top:7px;margin-left:19px;font-size:16px;color:#ff8e01">
+			<span ng-click="cancelDiscuss()">取消</span>
+			<span style="margin-left:195px;color:blue" ng-click="submitDiscuss()">发表</span>
+		</p>
+		<textarea ng-model="param.discussContent"
+				placeholder="请输入评论内容" style="margin-top:10px;margin-left:18px;width:260px;height:150px;"></textarea>
+	</div>
+	<div class="bar bar-footer bar-energized" ng-if="detailActivityInfo.activityStatus != 'end'">
+		<div class="title" ng-if="param.operation=='introduce'&&param.activityAttendStatus=='0'" ui-sref="attendActivity({'activityId':param.activityId})">立即报名</div>
+		<div class="title" ng-if="param.operation=='introduce'&&param.activityAttendStatus=='1'" ng-click="attendActivityGroupTalk()">加入群聊</div>
+		<div class="title" ng-if="param.operation=='discuss'" ng-click="attendDiscuss()">评论</div>
+	</div>
+	<div class="bar bar-footer bar-energized" ng-if="detailActivityInfo.activityStatus == 'end'" style="background:#ccc;border-color:#ccc;">
+		<div class="title">活动已结束</div>
+	</div>
+</ion-view>

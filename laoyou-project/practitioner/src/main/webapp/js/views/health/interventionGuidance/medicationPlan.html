@@ -1,0 +1,70 @@
+<div page-loading></div>
+<div page-hint cont="信息填写不完整"></div>
+<form name="addMedicationPlanForm" ng-submit="medicationPlan.submitForm(addMedicationPlanForm.$valid)" novalidate>
+    <!--header start-->
+    <header>
+        <a href="javascript:history.go(-1);">返回</a>
+        <h1>服药干预计划</h1>
+        <button ng-show="editable">保存</button>
+        <span ng-if="pageType == 'checkPlan' && editable" ng-click="medicationPlan.delSure='true'">删除</span>
+        <em ng-hide="editable"></em>
+        <span ng-hide="editable" ng-click="editable=true">编辑</span>
+    </header>
+    <div class="empty10"></div>
+    <!--header end-->
+    <!--服药干预-->
+    <div class="addMidicineInf mb10">
+        <section class="addDrugName">
+            <i ng-if="!medicationPlan.drugName">添加药品名称</i>
+            <input ng-show="editable" type="text" id="addMedicineName" ng-model="medicationPlan.drugName" required>
+            <input ng-hide="editable" type="text" ng-model="medicationPlan.drugName" disabled>
+        </section>
+        <div>
+            <span>药物剂量：</span>
+            <input ng-show="editable" type="text" placeholder="请选择" id="addMedicineDosage" ng-model="medicationPlan.dose" required>
+            <input ng-hide="editable" type="text" ng-model="medicationPlan.dose" disabled>
+        </div>
+        <div>
+            <span>用药时间：</span>
+            <input ng-show="editable" type="text" placeholder="请添加" id="addMedicineTime" ng-model="medicationPlan.medicineTime" ng-required="pageType == 'newPlan'">
+            <input ng-hide="editable" type="text" ng-model="medicationPlan.medicineTime" disabled>
+        </div>
+        <ul class="medicineTimeShow clearfix">
+            <li ng-repeat="item in medicationPlan.timeData">{{item}}<img ng-if="editable" class="delTimeImg" src="/practitioner/images/icon_del.png" ng-click="delTime($event)"/></li>
+        </ul>
+        <div class="clearfix">
+            <span>用药重复：</span>
+            <div class="addMidicineOption clearfix">
+                <div class="MidicineOptionItem" ng-repeat="repeatOption in medicationPlan.repeatList">
+                    <input type="checkbox" id="{{repeatOption.value}}" ng-checked="isChecked(repeatOption.id)" ng-click="repeatSelection($event,repeatOption.id)" ng-disabled="!editable">
+                    <label for="{{repeatOption.value}}">{{repeatOption.name}}</label>
+                </div>
+            </div>
+        </div>
+        <section class="customContainer">
+            <span>用药周期：</span>
+            <div class="customItem">
+                <span>开始日期</span>
+                <input ng-show="pageType == 'newPlan'" type="text" id="customInputStart" placeholder="请添加" ng-model="medicationPlan.startTime" required>
+                <input ng-show="pageType == 'checkPlan'" type="text" ng-model="medicationPlan.startTime" disabled>
+            </div>
+            <div class="customItem">
+                <span>结束日期</span>
+                <input ng-show="editable" type="text" id="customInputEnd" placeholder="请添加" ng-model="medicationPlan.endTime" required>
+                <input ng-hide="editable" type="text" ng-model="medicationPlan.endTime" disabled>
+            </div>
+        </section>
+        <sectio>
+            <span class="monitorTxt">文字备注</span>
+            <textarea class="remarkcCont" ng-model="medicationPlan.remark" placeholder="请在这里输入..." ng-disabled="!editable"></textarea>
+        </sectio>
+    </div>
+</form>
+<!--确认删除-->
+<section ng-show="medicationPlan.delSure" class="footDelSure">
+    <p ng-click="medicationPlan.delMedicationPlan()">确认</p>
+    <p ng-click="medicationPlan.delSureFun()">取消</p>
+</section>
+
+
+

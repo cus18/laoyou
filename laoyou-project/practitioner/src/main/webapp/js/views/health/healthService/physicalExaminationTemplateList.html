@@ -1,0 +1,19 @@
+<!--headerTitle start-->
+<header>
+    <a href="javascript:history.back()">返回</a>
+    <h1>{{elderName}}</h1>
+    <em></em>
+</header>
+<div page-loading></div>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<div infinite-scroll="loadMore()">
+    <ul class="newAssessList bgf">
+        <a ng-repeat="item in physicalExaminationTemplateList">
+            <li>
+                {{item.physicalExaminationTemplateName}}
+            </li>
+        </a>
+    </ul>
+</div>
+<div id="bottom"></div>

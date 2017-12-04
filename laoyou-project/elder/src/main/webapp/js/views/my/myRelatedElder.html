@@ -1,0 +1,33 @@
+<ion-view style="background:white;">
+    <ion-header-bar align-title="center" class="bar-energized">
+        <div class="buttons">
+            <button class="button" onclick="window.history.go(-1)"><</button>
+        </div>
+        <h1 class="title">亲友圈</h1>
+    </ion-header-bar>
+    <ion-content>
+        <style>
+            .talkOdd {
+                background-color: white;
+            }
+            .talkEven {
+                background-color: #f8f8f8;
+            }
+        </style>
+        <div class="list">
+            <a class="item item-avatar item-text-wrap"
+               ng-repeat="item in relativeElderList"
+               ng-if="item.elderId!=elderId"
+               ng-class-odd="'talkOdd'"
+               ng-class-even="'talkEven'">
+                <img src="http://yhlofficial.oss-cn-beijing.aliyuncs.com/temp"
+                     style="max-width:60px;max-height:60px;border-radius:0">
+                <h2 style="margin-left:15px">{{item.elderName}}</h2>
+                <p style="font-size:0.05rem;margin-left:15px">性别：&nbsp;&nbsp;{{item.gender}}</p>
+                <button style="margin-top:-40px" class="item-note button button-balanced"
+                        ng-click="goHealthService(item)">健康服务</button>
+                <p style="font-size:0.05rem;margin-left:15px">年龄：&nbsp;&nbsp;{{item.age}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

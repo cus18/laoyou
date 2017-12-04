@@ -1,0 +1,46 @@
+<header></header>
+<div class="bannerContainer">
+    <div class="bannerImg">
+        <div class="bannerItem" ng-repeat="item in slides" style="background-image:url({{item.image}})"><a href="{{item.href}}"></a></div>
+    </div>
+    <img ng-click="change('prev')" class="bannerPrev" src="/images/prev.png"/>
+    <img ng-click="change('next')" class="bannerNext" src="/images/next.png"/>
+    <div class="bannerMenu">
+        <a ui-sref="pages({catalogId:'5c61c0390b1b4d10a9510e5f2cdb5a70',articleId:''})">智慧养老</a>
+        <a></a>
+        <a ui-sref="pages({catalogId:'be57eadd37994952becbc0d4afed9de7',articleId:''})">养老服务</a>
+        <a></a>
+        <a ui-sref="pages({catalogId:'d4b41be304c74b54bb43e8982e2b46a9',articleId:''})">人才培训</a>
+    </div>
+</div>
+<div class="indexNewsContainer clearfix">
+    <div class="fl">
+        <h3 class="newsTit">新闻中心</h3>
+        <div class="clearfix">
+            <div class="newsContentBox">
+                <ul class="newsContent fl" id="newsContent">
+                    <li ng-repeat="item in newsList">
+                        <a ui-sref="pages({catalogId:'edef3527821f407687ce890f031e98ba',articleId:item.id})" target="_blank">
+                            <h4>{{item.title}}</h4>
+                            <div class="newsArticle" style="margin-bottom:0px;">{{item.articleData.content}}</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="newsIcon fl">
+            </ul>
+        </div>
+    </div>
+    <div class="fr">
+        <a ui-sref="pages({catalogId:'1bd37c858de74c89936640f36821eb1d',articleId:''})" class="projectShow" ng-mouseover="indexProject('move')" ng-mouseout="indexProject('out')">
+            <img src="/images/pic02.png" alt="" />
+            <div class="projectText">
+                <h4>蓬莱智慧健康养老服务PPP项目</h4>
+                <p>居家、社区和机构养老“三位一体”，已入选财政部第三批PPP示范项目</p>
+            </div>
+        </a>
+        <a ui-sref="pages({catalogId:'7b60e7583a1a46428bcccddef960ca6a',articleId:''})" class="projectLayout"><img src="/images/img01.png"/></a>
+    </div>
+</div>
+<footer></footer>
+

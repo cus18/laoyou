@@ -1,0 +1,26 @@
+<div class="headerContainer" ng-mouseout="areaHide()">
+    <div class="header">
+        <a class="logo" ui-sref="index">
+            <img src="/images/logo.png" alt="" />
+        </a>
+        <div class="searchImg" ng-mouseover="searchShow()">
+            <img src="/images/search.png" alt="" />
+            <div ng-show="searchArea" class="searchInp">
+                <input type="text" ng-model="keyWord" placeholder="请输入要搜索的内容"/>
+                <a ui-sref="searchResult({keyWord:keyWord})" class="searchBtn"><img src="/images/search.png" alt="" /></a>
+            </div>
+        </div>
+        <ul class="nav">
+            <li>
+                <a ui-sref="index">首页</a>
+            </li>
+            <li ng-repeat="(x,y) in menuData" ng-mouseover="searchHide()" ng-class="{'active':x == response.primaryName}">
+                <a ui-sref="pages({catalogId:y[0].id,articleId:''})">{{x}}</a>
+                <ul class="subnav">
+                    <li ng-repeat="z in y"><a ui-sref="pages({catalogId:z.id,articleId:''})">{{z.name }}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="subNavArea" class="subnavContainer"></div>
+</div>

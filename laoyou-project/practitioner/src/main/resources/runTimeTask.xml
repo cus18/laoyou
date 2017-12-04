@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+	<!-- 定时器配置
+	task:executor/@pool-size：可以指定执行线程池的初始大小、最大大小
+	task:executor/@queue-capacity：等待执行的任务队列的容量
+	task:executor/@rejection-policy：当等待队已满时的策略，分为丢弃、由任务执行器直接运行等方式
+	-->
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:executor id="executor" keep-alive="3600" pool-size="100-200"
+				   queue-capacity="500" rejection-policy="CALLER_RUNS" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+
+	<bean id="scheduledQuarz" class="com.yhl.laoyou.webapp.task.RunTimeTask" />
+
+	<!--==========================================webapp部分================================================-->
+
+	<!-- 更新环信 Token -->
+	<bean id="updateEasemobTokenQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="updateEasemobToken"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每月十五号更新  -->
+	<bean id="updateEasemobTokenCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateEasemobTokenQuarzTask"/>
+		<property name="cronExpression" value="0 15 10 15 * ?"/>
+	</bean>
+
+	<!-- 获取新瑞时数据 -->
+	<bean id="getNewReachDataQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="getNewReachData"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!--每2分钟执行一次 -->
+	<bean id="getNewReachDataCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="getNewReachDataQuarzTask"/>
+		<property name="cronExpression" value="* 0/2 * * * ?"/>
+	</bean>
+
+	<!-- 获取环信聊天记录 -->
+	<bean id="getEasemobChatRecordQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="getEasemobChatRecord"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 延迟两个小时获取聊天记录  -->
+	<bean id="getEasemobChatRecordCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="getEasemobChatRecordQuarzTask"/>
+		<property name="cronExpression" value="0 0 0/2 * * ?"/>
+	</bean>
+
+	<!-- 生成用药干预 -->
+	<bean id="medicationPlanLoadQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="medicationPlanLoad"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每天 23:51 分生成第二天的用药干预  -->
+	<bean id="medicationPlanLoadCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="medicationPlanLoadQuarzTask"/>
+		<property name="cronExpression" value="0/1 * * * * ?"/>
+	</bean>
+
+	<!-- 提前十分钟给用户发送用药干预提醒 -->
+	<bean id="sendEasemobMessageByMedicationQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="sendEasemobMessageByMedication"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每分钟检测一次  -->
+	<bean id="sendEasemobMessageByMedicationCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendEasemobMessageByMedicationQuarzTask"/>
+		<property name="cronExpression" value="0 0/1 * * * ?"/>
+	</bean>
+
+	<!-- 更新活动状态 -->
+	<bean id="updateActivityStatusQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="updateActivityStatus"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每分钟检测一次  -->
+	<bean id="updateActivityStatusCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateActivityStatusQuarzTask"/>
+		<property name="cronExpression" value="0 0/1 * * * ?"/>
+	</bean>
+
+	<!-- 发送活动预约提醒 -->
+	<bean id="sendActivityRemindQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="sendActivityRemind"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每分钟检测一次  -->
+	<bean id="sendActivityRemindCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendActivityRemindQuarzTask"/>
+		<property name="cronExpression" value="0 0/1 * * * ?"/>
+	</bean>
+
+	<!-- 发送活动预约提醒 -->
+	<bean id="timeUpdateBannerStatusQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="timeUpdateBannerStatus"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每分钟检测一次  -->
+	<bean id="timeUpdateBannerStatusCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="timeUpdateBannerStatusQuarzTask"/>
+		<property name="cronExpression" value="0 0 1 * * ?"/>
+	</bean>
+
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="updateEasemobTokenCronTrigger"/>-->
+				<!--<ref bean="getNewReachDataCronTrigger"/>-->
+				<!--<ref bean="getEasemobChatRecordCronTrigger"/>-->
+				<!--<ref bean="sendEasemobMessageByMedicationCronTrigger"/>-->
+				<!--<ref bean="medicationPlanLoadCronTrigger"/>-->
+				<!--<ref bean="updateActivityStatusCronTrigger"/>-->
+				<!--<ref bean="sendActivityRemindCronTrigger"/>-->
+				<!--<ref bean="timeUpdateBannerStatusCronTrigger"/>-->
+			</list>
+		</property>
+		<property name="autoStartup" value="true"/>
+	</bean>
+
+</beans>

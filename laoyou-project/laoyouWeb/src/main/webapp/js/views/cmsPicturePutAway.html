@@ -1,0 +1,61 @@
+<div id="wrapper">
+    <hospital-menu title="cmsPicture"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>资源位上架</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+            <form role="form" name="bannerForm" novalidate>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>申请位置：</label>
+                            <input class="form-control" ng-model="app" style="display:inline;width:25%;" disabled/>
+                            <input class="form-control" ng-model="name" style="display:inline;width:25%;" disabled/>
+                            <select class="form-control" style="display:inline;width:25%;"
+                                    ng-model="banner.weights"
+                                    ng-options="item for item in weight"/>
+                        </div>
+                        <div class="form-group">
+                            <label>活动名称：</label>
+                            <input class="form-control" placeholder="活动名称" ng-model="banner.name" required/>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;">活动简单介绍：</label>
+                            <textarea rows="6" style="width:100%;" ng-model="banner.introduce" required></textarea>
+                        </div>
+                        <div class="form-group input-daterange">
+                            <label>上架时间：</label>
+                            <label><input type="radio" name="putAwayDate" ng-model="putAwayDate" value="1">立即上架</label>
+                            <label><input type="radio" name="putAwayDate" ng-model="putAwayDate" value="2">自定义上架时间</label>
+                            <div class="date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                                <input ng-show="putAwayDate == 2" class="form-control" type="text" style="text-align:left;" ng-model="banner.startDate" required/>
+                            </div>
+                        </div>
+                        <div class="form-group date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                            <label>下架时间：</label>
+                            <input class="form-control" type="text" style="text-align:left;" ng-model="banner.endDate" required/>
+                        </div>
+                        <div class="form-group" style="overflow:hidden;">
+                            <label style="display:block;">上传本地照片：</label>
+                            <input type="text" class="form-control" ng-model="fileName" style="width:60%;float:left;">
+                            <button class="btn btn-primary ml10" ng-class="{'bg-bbbbbb':imgDisabled}" style="width:84px;height:30px; position: relative;margin:2px;" img-upload></button>
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{thumb.imgSrc}}" ng-show="thumb.imgSrc" alt="" style="width:100px;height:100px;">
+                            <button type="button" class="btn btn-primary" ng-click="saveClick()" ng-class="{'bg-bbbbbb':submitDisabled}" ng-show="thumb.imgSrc" style="margin:66px 0 0 15px;">上传</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="select_hint">{{hintInf}}</div>
+                <button class="btn btn-primary" style="width:10%;" type="submit" ng-click="save()">保存并发布</button>
+                <button class="btn btn-default" style="width:10%;" ui-sref="cmsPicture">取消</button>
+            </form>
+        </div>
+    </div>
+</div>

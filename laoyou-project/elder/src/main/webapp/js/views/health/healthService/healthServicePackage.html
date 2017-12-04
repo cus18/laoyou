@@ -1,0 +1,134 @@
+<ion-view style="background:#f8f8f8;">
+    <div page-loading></div>
+    <form name="servicePackageForm" novalidate>
+        <!--headerTitle start-->
+        <header>
+            <div ng-if="h5Page" style="float:left;margin-top:4%;margin-left:2%;font-size:0.34rem;"
+                 ng-click="returnRootNative()">&lt;返回
+            </div>
+            <h1>服务协议书</h1>
+            <em ng-if="operation == 'existHealthServicePackage'"></em>
+            <button ng-if="operation == 'newHealthServicePackage' && h5Page" ng-click="commitHealthServicePackage(servicePackageForm.$valid)">保存</button>
+        </header>
+        <div class="empty10"></div>
+        <!--headerTitle end-->
+        <div ng-if="operation == 'existHealthServicePackage'" style="overflow:auto;height:12rem;">
+            <section class="serviceContainer bgf">
+                <section class="serviceTit">
+                    <p>{{healthServicePackageData.servicePackageTemplateName}}</p>
+                </section>
+                <section class="serviceDate">
+                    <span>合同编号：{{healthServicePackageData.contractNo}}</span>
+                    <span class="fr">{{healthServicePackageData.updateDate|date:'yyyy-MM-dd'}}</span>
+                </section>
+                <section class="serviceItem clearfix">
+                    <div class="serviceParties">甲方</div>
+                    <div class="servicePartiedInf">
+                        <p>甲方：{{healthServicePackageData.firstParty.firstPartyName}}</p>
+                        <p>联系电话：{{healthServicePackageData.firstParty.firstPartyPhone}}</p>
+                        <p>责任医生：{{healthServicePackageData.firstParty.doctorName}}</p>
+                        <p>联系电话：{{healthServicePackageData.firstParty.doctorPhone}}</p>
+                        <p>责任护士：{{healthServicePackageData.firstParty.nurseName}}</p>
+                        <p>联系电话：{{healthServicePackageData.firstParty.nursePhone}}</p>
+                    </div>
+                </section>
+                <section class="serviceItem clearfix">
+                    <div class="serviceParties ef">乙方</div>
+                    <div class="servicePartiedInf">
+                        <p>乙方：{{healthServicePackageData.secondParty.secondPartyName}}</p>
+                        <p>身份证号：{{healthServicePackageData.secondParty.idNum}}</p>
+                        <p>家庭住址：{{healthServicePackageData.secondParty.address}}</p>
+                        <p>个人电话：{{healthServicePackageData.secondParty.mobile}}</p>
+                        <p>家庭电话：{{healthServicePackageData.secondParty.telephone}}</p>
+                        <p>紧急情况联系人及电话：</p>
+                        <p>{{healthServicePackageData.secondParty.emergencyName}}：{{healthServicePackageData.secondParty.emergencyPhone}}</p>
+                    </div>
+                </section>
+            </section>
+            <div data-ng-bind-html="healthPackageTemplateDetail"></div>
+            <section class="serviceSign bgf">
+                <p>甲方（盖章）：</p>
+                <img ng-src="/elder/{{healthServicePackageData.firstParty.firstPartySignature}}"/>
+                <p>责任医生（签字）：</p>
+                <img ng-src="{{healthServicePackageData.firstParty.doctorSignature}}"
+                     style="width:150px;height:120px"/>
+                <p>责任护士（签字）：</p>
+                <img ng-src="{{healthServicePackageData.firstParty.nurseSignature}}"
+                     style="width:150px;height:120px"/>
+                <div class="grayline"></div>
+                <p>乙方（签字）：</p>
+                <img ng-src="{{healthServicePackageData.secondParty.secondPartySignature}}"
+                     style="width:150px;height:120px"/>
+            </section>
+        </div>
+        <div ng-if="operation == 'newHealthServicePackage'" style="overflow:auto;height:12rem;">
+            <section class="serviceContainer bgf">
+                <section class="serviceTit">
+                    <p>{{healthPackageTemplateName}}</p>
+                </section>
+                <section class="serviceItem clearfix">
+                    <div class="serviceParties">甲方</div>
+                    <div class="servicePartiedInf">
+                        <p>甲方：<input ng-model="healthServicePackageData.firstParty.firstPartyName" placeholder="请输入甲方名称" required/></p>
+                        <p>联系电话：<input ng-model="healthServicePackageData.firstParty.firstPartyPhone" placeholder="请输入联系电话" required/></p>
+                        <p>责任医生：<input ng-model="healthServicePackageData.firstParty.doctorName" placeholder="请输入责任医生姓名" required/></p>
+                        <p>联系电话：<input ng-model="healthServicePackageData.firstParty.doctorPhone" placeholder="请输入责任医生电话" required/></p>
+                        <p>责任护士：<input ng-model="healthServicePackageData.firstParty.nurseName" placeholder="请输入责任护士姓名" required/></p>
+                        <p>联系电话：<input ng-model="healthServicePackageData.firstParty.nursePhone" placeholder="请输入责任护士电话" required/></p>
+                    </div>
+                </section>
+                <section class="serviceItem clearfix">
+                    <div class="serviceParties ef">乙方</div>
+                    <div class="servicePartiedInf">
+                        <p>乙方：<input ng-model="healthServicePackageData.secondParty.secondPartyName" placeholder="请输入乙方名称" required/></p>
+                        <p>身份证号：<input ng-model="healthServicePackageData.secondParty.idNum" placeholder="请输入身份证号" required/></p>
+                        <p>家庭住址：<input ng-model="healthServicePackageData.secondParty.address" placeholder="请输入家庭住址" required/></p>
+                        <p>联系电话：<input ng-model="healthServicePackageData.secondParty.mobile" placeholder="请输入联系电话" required/></p>
+                        <p>固定电话：<input ng-model="healthServicePackageData.secondParty.telephone" placeholder="请输入固定电话" required/></p>
+                        <p>紧急情况联系人：</p>
+                        <p class="clearfix"><input ng-model="healthServicePackageData.secondParty.emergencyName" placeholder="请输入紧急情况联系人姓名" required/></p>
+                        <p>紧急情况联系人电话：</p>
+                        <p class="clearfix"><input ng-model="healthServicePackageData.secondParty.emergencyPhone" placeholder="请输入紧急情况联系人电话" required/></p>
+                    </div>
+                </section>
+            </section>
+            <div data-ng-bind-html="healthPackageTemplateDetail"></div>
+            <section class="serviceSign bgf">
+                <p>甲方（盖章）：</p>
+                <div class="signArea" ng-if="healthServicePackageData.firstParty.firstPartySignature==undefined">
+                    点击进入签名区
+                </div>
+                <img ng-src="/elder/{{healthServicePackageData.firstParty.firstPartySignature}}"
+                     ng-if="healthServicePackageData.firstParty.firstPartySignature!=undefined"/>
+                <p>责任医生（签字）：</p>
+                <div class="signArea"
+                     ng-click="takeDoctorSignature()"
+                     ng-if="healthServicePackageData.firstParty.doctorSignature==undefined">
+                    点击进入签名区
+                </div>
+                <img ng-src="{{healthServicePackageData.firstParty.doctorSignature}}"
+                     ng-if="healthServicePackageData.firstParty.doctorSignature!=undefined"
+                     style="width:150px;height:120px"/>
+                <p>责任护士（签字）：</p>
+                <div class="signArea"
+                     ng-click="takeNurseSignature()"
+                     ng-if="healthServicePackageData.firstParty.nurseSignature==undefined">
+                    点击进入签名区
+                </div>
+                <img ng-src="{{healthServicePackageData.firstParty.nurseSignature}}"
+                     ng-if="healthServicePackageData.firstParty.nurseSignature!=undefined"
+                     style="width:150px;height:120px"/>
+                <div class="grayline"></div>
+                <p>乙方（签字）：</p>
+                <div class="signArea"
+                     ng-click="takeSecondPartySignature()"
+                     ng-if="healthServicePackageData.secondParty.secondPartySignature==undefined">
+                    点击进入签名区
+                </div>
+                <img ng-src="{{healthServicePackageData.secondParty.secondPartySignature}}"
+                     ng-if="healthServicePackageData.secondParty.secondPartySignature!=undefined"
+                     style="width:150px;height:120px"/>
+            </section>
+        </div>
+    </form>
+</ion-view>

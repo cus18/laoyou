@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.notificationRemindService.dao.RemindUserDao">
+
+	<insert id="addRemindUser">
+		INSERT INTO`remind_user` (`sys_elder_user_id`, `remind_id`, `status`)
+		VALUES (#{sys_elder_user_id}, #{remind_id}, #{status})
+	</insert>
+
+	<update id="updateRemindUser">
+			UPDATE`remind_user` SET `status`=`1` WHERE  `id`=#{id}
+	</update>
+
+	<select id="getRemindByUnread" resultType="java.lang.Integer">
+		select count(*) from remind n
+		inner join remind_user nu on n.id=nu.remind_id
+		where nu.sys_elder_user_id=#{sysElderUserID} and status=0
+	</select>
+
+</mapper>

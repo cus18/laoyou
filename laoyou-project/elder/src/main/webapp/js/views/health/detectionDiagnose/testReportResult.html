@@ -1,0 +1,29 @@
+<ion-view style="background:white">
+    <!--headerTitle start-->
+    <div page-loading></div>
+    <header>
+        <div ng-if="h5Page" style="float:left;margin-top:4%;margin-left:2%;font-size:0.34rem;"
+             ng-click="returnRootNative()">&lt;返回
+        </div>
+        <h1>{{elderName}}</h1>
+        <em></em>
+    </header>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <!--content start-->
+    <div ng-if="testReportResult" style="overflow-y:auto;height:11rem;overflow-x:hidden;">
+        <div class="ordinaryTit">
+            <span>检验报告</span>
+        </div>
+        <div class="resultContDate">{{testReportResultData.testDate}}</div>
+        <section class="resultContainer bgf">
+            <div class="reportListTit">提交者：<span>{{testReportResultData.providerName}}</span>提交时间：<span>{{testReportResultData.testTime}}</span></div>
+            <img ng-src="{{item1}}"  ng-repeat="item1 in testReportResultData.testPicUrl.split(';')">
+        </section>
+        <section ng-if="testReportResultData.description" class="resultContText">
+            <div>文字备注</div>
+            <p>{{testReportResultData.description}}</p>
+        </section>
+    </div>
+    <!--content end-->
+</ion-view>

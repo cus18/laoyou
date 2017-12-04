@@ -1,0 +1,246 @@
+<div ng-if="value.type=='basicInfo'">
+    <div style="margin-left:24rem;font-size: 3rem;">空巢老年人基本信息登记表</div>
+    <div style="margin-left:2rem;color: red;">录入人姓名：<input ng-model="answer.inputerName"/></div>
+    <div style="margin-left: 2rem;margin-top: 2rem;">
+        丰台区
+        <input ng-model="answer.street"/>
+        街道、乡（镇）
+        <input ng-model="answer.community"/>
+        社区（村）
+    </div>
+    <div style="margin-left: 2rem;margin-top: 2rem;">
+        <h>基本信息</h>
+        <br><br>
+        姓名：<input ng-model="answer.name">&nbsp;&nbsp;
+        身份证号码：<input ng-model="answer.idCard">&nbsp;&nbsp;
+        年龄：<input ng-model="answer.age">&nbsp;&nbsp;
+        <br><br>
+        性别：<input type="radio" name="gendar" value="男" ng-model="answer.gendar"/>男
+        <input type="radio" name="gendar" value="女" ng-model="answer.gendar"/>女
+        &nbsp;&nbsp;
+        手机号码：<input ng-model="answer.mobile">&nbsp;&nbsp;
+        固定电话：<input ng-model="answer.phone">&nbsp;&nbsp;
+        <br><br>
+        民族：<input ng-model="answer.nation">&nbsp;&nbsp;
+        籍贯：<input ng-model="answer.origin">&nbsp;&nbsp;
+        政治面貌：<input type="radio" name="political" value="群众" ng-model="answer.political"/>群众
+        <input type="radio" name="political" value="党员" ng-model="answer.political"/>党员
+        <input type="radio" name="political" value="其他" ng-model="answer.political"/>其他
+        &nbsp;&nbsp;
+        <br><br>
+        文化程度：<input type="radio" name="cultural" value="小学及以下" ng-model="answer.cultural"/>小学及以下
+        <input type="radio" name="cultural" value="初中" ng-model="answer.cultural"/>初中
+        <input type="radio" name="cultural" value="高中" ng-model="answer.cultural"/>高中
+        <input type="radio" name="cultural" value="大专" ng-model="answer.cultural"/>大专
+        <input type="radio" name="cultural" value="本科及以上" ng-model="answer.cultural"/>本科及以上
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        婚姻状况：<input type="radio" name="marital" value="未婚" ng-model="answer.marital"/>未婚
+        <input type="radio" name="marital" value="已婚" ng-model="answer.marital"/>已婚
+        <input type="radio" name="marital" value="离异" ng-model="answer.marital"/>离异
+        <input type="radio" name="marital" value="丧偶" ng-model="answer.marital"/>丧偶
+        <br><br>
+        身份状况：
+        <input type="checkbox" ng-model="identity.a"/>普通老人
+        <input type="checkbox" ng-model="identity.b"/>低保老人
+        <input type="checkbox" ng-model="identity.c"/>失能失智老人
+        <input type="checkbox" ng-model="identity.d"/>其它
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        户口类型：<input type="radio" name="householdType" value="农村" ng-model="answer.householdType"/>农村
+        <input type="radio" name="householdType" value="城镇" ng-model="answer.householdType"/>城镇
+        <br><br>
+        户籍状况：<input type="radio" name="censusStatus" value="农村" ng-model="answer.censusStatus"/>本区户籍
+        <input type="radio" name="censusStatus" value="城镇" ng-model="answer.censusStatus"/>外区户籍
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        居住情况：<input type="radio" name="livingConditions" value="农村" ng-model="answer.livingConditions"/>独居
+        <input type="radio" name="livingConditions" value="城镇" ng-model="answer.livingConditions"/>夫妻同住
+        <br><br>
+        户籍地址：<input ng-model="answer.permanentAddress">&nbsp;&nbsp;&nbsp;&nbsp;
+        户籍地址所在区：<input ng-model="answer.permanentArea" placeholder="北京市户籍填写所在区，如“丰台”、“海淀”等，否则填写“外地”" style="width:35rem;">
+        <br><br>
+        常住地址：<input ng-model="answer.livingAddress">&nbsp;&nbsp;&nbsp;&nbsp;
+        社区（村）电话：<input ng-model="answer.communityPhone">&nbsp;&nbsp;&nbsp;&nbsp;
+        <br><br>
+        是否残疾：<input type="radio" name="disability" value="是" ng-model="answer.disability"/>是
+        <input type="radio" name="disability" value="否" ng-model="answer.disability"/>否
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        残疾证：<input type="radio" name="disabilityCard" value="有" ng-model="answer.disabilityCard"/>有
+        <input type="radio" name="disabilityCard" value="无" ng-model="answer.disabilityCard"/>无
+    </div>
+    <div style="margin-top:2rem;margin-left:2rem;">
+        <h>联系人</h>
+        <br><br>
+        亲人1：<input ng-model="answer.relativesName1">&nbsp;&nbsp;
+        关系：<input ng-model="answer.relativeRelationship1">&nbsp;&nbsp;
+        联系电话：<input ng-model="answer.relativesPhone1">&nbsp;&nbsp;
+        居住地址：<input ng-model="answer.relativesAddress1">&nbsp;&nbsp;
+        <br><br>
+        亲人一居住地所在区：<input ng-model="answer.relativesArea1" style="width:35rem;" placeholder="北京市户籍填写所在区，如“丰台”、“海淀”等，否则填写“外地”">&nbsp;&nbsp;
+        <br><br>
+        亲人2：<input ng-model="answer.relativesName2">&nbsp;&nbsp;
+        关系：<input ng-model="answer.relativeRelationship2">&nbsp;&nbsp;
+        联系电话：<input ng-model="answer.relativesPhone2">&nbsp;&nbsp;
+        居住地址：<input ng-model="answer.relativesAddress2">&nbsp;&nbsp;
+        <br><br>
+        亲人二居住地所在区：<input ng-model="answer.relativesArea2" style="width:35rem;" placeholder="北京市户籍填写所在区，如“丰台”、“海淀”等，否则填写“外地”">&nbsp;&nbsp;
+        <br><br>
+        村干部：<input ng-model="answer.villageCadres">&nbsp;&nbsp;
+        联系电话：<input ng-model="answer.villageCadresPhone">&nbsp;&nbsp;
+        居住地址：<input ng-model="answer.villageCadresAddress">&nbsp;&nbsp;
+        <br><br>
+        党员志愿者：<input ng-model="answer.partyMemberVolunteers">&nbsp;&nbsp;
+        联系电话：<input ng-model="answer.partMemberVolunteersPhone">&nbsp;&nbsp;
+        居住地址：<input ng-model="answer.partMemberVolunteersAddress">&nbsp;&nbsp;
+        <br><br>
+        备注：<input ng-model="answer.remark">&nbsp;&nbsp;
+        <br><br>
+        填表人：<input ng-model="answer.formHolder">&nbsp;&nbsp;
+        审核人：<input ng-model="answer.auditor">&nbsp;&nbsp;
+    </div>
+</div>
+
+<div ng-if="value.type=='serviceInfo'" style="margin-left:5rem;margin-top:2rem;">
+    <div style="margin-left: 6rem;font-size: 2rem;">
+        <input style="width: 27rem;font-size: 1rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入" ng-model="answer.street">
+        街道、乡（镇）空巢老年人居家养老服务需求调查
+    </div>
+    <br><br>
+    <div style="color:red;">录入人姓名：<input ng-model="answer.inputerName"/></div>
+    <br><br>
+    调查者姓名：<input ng-model="answer.name">
+    <br><br>
+    调查者年龄: <input style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入" ng-model="answer.age">
+    <br><br>
+    调查者身份证号: <input style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入" ng-model="answer.idCard">
+    <br><br>
+    1、原职业情况：（单选）
+    <br>
+    <input type="radio" name="lastJob" value="a" ng-model="answer.lastJob"/>&nbsp;&nbsp;A、干部（机关人员、教师、工程师、军人、医务人员）
+    <br>
+    <input type="radio" name="lastJob" value="b" ng-model="answer.lastJob"/>&nbsp;&nbsp;B、农民
+    <br>
+    <input type="radio" name="lastJob" value="c" ng-model="answer.lastJob"/>&nbsp;&nbsp;C、工人
+    <br>
+    <input type="radio" name="lastJob" value="d" ng-model="answer.lastJob"/>&nbsp;&nbsp;D、经商
+    <br>
+    <input type="radio" name="lastJob" value="e" ng-model="answer.lastJob"/>&nbsp;&nbsp;E、其他<input ng-model="answer.lastJobE" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">
+    <br><br>
+    2、您目前的经济来源情况？（单位：元/月）（可多选）
+    <br>
+    <input type="checkbox" ng-model="moneySource.moneyA"/>&nbsp;&nbsp;A、子女赡养费：&nbsp;&nbsp;<input ng-model="answer.moneySourceA" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">元/月
+    <br>
+    <input type="checkbox" ng-model="moneySource.moneyB"/>&nbsp;&nbsp;B、退休金收入：&nbsp;&nbsp;<input ng-model="answer.moneySourceB" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">元/月
+    <br>
+    <input type="checkbox" ng-model="moneySource.moneyC"/>&nbsp;&nbsp;C、其他：&nbsp;&nbsp;<input ng-model="answer.moneySourceC" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">元/月
+    <br><br>
+    3、是否中共党员：
+    <br>
+    <input type="radio" name="ifPartyMembers" value="a" ng-model="answer.ifPartyMembers"/>&nbsp;&nbsp;A、是；
+    <br>
+    <input type="radio" name="ifPartyMembers" value="b" ng-model="answer.ifPartyMembers"/>&nbsp;&nbsp;B、否；
+    <br><br>
+    4、您需要党组织提供什么服务？（党员填写、可多选）
+    <br>
+    <input type="checkbox" ng-model="needPartyServices.a"/>&nbsp;&nbsp;A、定期开展组织生活；
+    <br>
+    <input type="checkbox" ng-model="needPartyServices.b"/>&nbsp;&nbsp;B、定期提供学习材料；
+    <br>
+    <input type="checkbox" ng-model="needPartyServices.c"/>&nbsp;&nbsp;C、定期开展谈心谈话；
+    <br>
+    <input type="checkbox" ng-model="needPartyServices.d"/>&nbsp;&nbsp;D、安排志愿者岗位服务；
+    <br>
+    <input type="checkbox" ng-model="needPartyServices.e"/>&nbsp;&nbsp;E、其他：&nbsp;&nbsp;<input ng-model="needPartyServicesE" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">
+    <br><br>
+    5、您慢性病情况；（可多选）
+    <br>
+    <input type="checkbox" ng-model="sickness.a"/>&nbsp;&nbsp;A、无；
+    <br>
+    <input type="checkbox" ng-model="sickness.b"/>&nbsp;&nbsp;B、高血压；
+    <br>
+    <input type="checkbox" ng-model="sickness.c"/>&nbsp;&nbsp;C、糖尿病；
+    <br>
+    <input type="checkbox" ng-model="sickness.d"/>&nbsp;&nbsp;D、冠心病；
+    <br>
+    <input type="checkbox" ng-model="sickness.e"/>&nbsp;&nbsp;E、脑卒中；
+    <br>
+    <input type="checkbox" ng-model="sickness.f"/>&nbsp;&nbsp;F、其他：&nbsp;&nbsp;<input ng-model="sicknessF" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">
+    <br><br>
+    6、是否需要院前急救（120或999）？
+    <br>
+    <input type="radio" name="needFirstAidServices" value="a" ng-model="answer.needFirstAidServices"/>&nbsp;&nbsp;A、是；
+    <br>
+    <input type="radio" name="needFirstAidServices" value="b" ng-model="answer.needFirstAidServices"/>&nbsp;&nbsp;B、否；
+    <br><br>
+    7、您希望我们今后为您提供哪些公共卫生和基本医疗服务？（可多选）
+    <br><br>
+    7.1、公共卫生服务：
+    <br>
+    <input type="checkbox" ng-model="needHealthServices.a"/>&nbsp;&nbsp;A、健康教育；
+    <br>
+    <input type="checkbox" ng-model="needHealthServices.b"/>&nbsp;&nbsp;B、预防保健；
+    <br>
+    <input type="checkbox" ng-model="needHealthServices.c"/>&nbsp;&nbsp;C、健康评估和预警；
+    <br><br>
+    7.2、基本医疗服务
+    <br>
+    <input type="checkbox" ng-model="needMedicalServices.a"/>&nbsp;&nbsp;A、多见病、多发病的整治；
+    <br>
+    <input type="checkbox" ng-model="needMedicalServices.b"/>&nbsp;&nbsp;B、入户巡诊；
+    <br>
+    <input type="checkbox" ng-model="needMedicalServices.c"/>&nbsp;&nbsp;C、转诊住院；
+    <br>
+    <input type="checkbox" ng-model="needMedicalServices.d"/>&nbsp;&nbsp;D、其他服务；
+    <br><br>
+    8、您希望何种方式养老？（可多选）
+    <br>
+    <input type="checkbox" ng-model="whatPension.a"/>&nbsp;&nbsp;A、居家养老接受养老照料中心（驿站）提供上门服务；
+    <br>
+    <input type="checkbox" ng-model="whatPension.b"/>&nbsp;&nbsp;B、社区驿站日托养老（白天提供配餐、活动服务，晚上回家居住）；
+    <br>
+    <input type="checkbox" ng-model="whatPension.c"/>&nbsp;&nbsp;C、入住街道养老照料中心；
+    <br>
+    <input type="checkbox" ng-model="whatPension.d"/>&nbsp;&nbsp;D、入住社会化养老机构；
+    <br>
+    <input type="checkbox" ng-model="whatPension.e"/>&nbsp;&nbsp;E、其他：<input ng-model="whatPensionE" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">
+    <br><br>
+    9、您需要什么样的服务？（可多选）
+    <br><br>
+    9.1、生活服务：
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.a"/>&nbsp;&nbsp;A、打扫卫生；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.b"/>&nbsp;&nbsp;B、定制菜肴；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.c"/>&nbsp;&nbsp;C、洗衣；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.d"/>&nbsp;&nbsp;D、购物（代购）；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.e"/>&nbsp;&nbsp;E、家电维修；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.f"/>&nbsp;&nbsp;F、文化娱乐；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.g"/>&nbsp;&nbsp;G、精神慰籍；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.h"/>&nbsp;&nbsp;H、钟点工；
+    <br>
+    <input type="checkbox" ng-model="needLifeServices.i"/>&nbsp;&nbsp;I、陪同看病；
+    <br><br>
+    9.2、紧急救助服务<input type="checkbox" ng-model="answer.needEmergencyServices"/>
+    <br><br>
+    9.3、防走失定位服务<input type="checkbox" ng-model="answer.needGPSServices"/>
+    <br><br>
+    10、是否有医院配置智能养老呼叫设备？
+    <br>
+    <input type="radio" name="needPhoneServices" value="a" ng-model="answer.needPhoneServices"/>&nbsp;&nbsp;A、是；
+    <br>
+    <input type="radio" name="needPhoneServices" value="b" ng-model="answer.needPhoneServices"/>&nbsp;&nbsp;B、否；
+    <br><br>
+    11、如果愿意配置智能养老呼叫设备，您认为需要配置哪些功能和服务？
+    <br>
+    <input ng-model="answer.whatNeedPhoneServices" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">
+    <br><br>
+    调查人：&nbsp;&nbsp;<input ng-model="answer.formHolder" style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">&nbsp;&nbsp;
+    <br>
+    被调查人：&nbsp;&nbsp;<input style="width: 27rem;" placeholder="若填写了其他信息就输入文字，没有填写就不输入">&nbsp;&nbsp;
+</div>
+
+<button ng-click="submit()" style="margin-left:5rem;margin-top:1rem;">提交保存</button>

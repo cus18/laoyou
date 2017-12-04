@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.myService.dao.SurveyDao">
+
+	<insert id="createSurveyAnswer"
+			parameterType="com.yhl.laoyou.common.dto.survey.AnswerDTO"
+			keyProperty="id">
+		INSERT INTO`survey_answer`
+			(`id`,
+			`question_id`,
+			`question_name`,
+			`worker_name`,
+			`worker_phone`,
+			`question_answer`,
+			`update_date`,
+			`elder_identity_num`)
+		VALUES
+			(#{id},
+			#{questionId},
+			#{questionName},
+			#{workerName},
+			#{workerPhone},
+			#{questionAnswer},
+			#{updateDate},
+			#{elderIdentityNum})
+	</insert>
+
+	<select id="findSurveyAnswer" resultType="com.yhl.laoyou.common.dto.survey.AnswerDTO">
+		select * FROM survey_answer
+		where 1=1
+		<if test="id != null and id != '' ">
+			and id=#{id}
+		</if>
+		<if test="questionId != null and questionId != '' ">
+			and question_id=#{questionId}
+		</if>
+		<if test="questionName != null and questionName != '' ">
+			and question_name=#{questionName}
+		</if>
+		<if test="workerName != null and workerName != '' ">
+			and worker_name=#{workerName}
+		</if>
+		<if test="workerPhone != null and workerPhone != '' ">
+			and worker_phone=#{workerPhone}
+		</if>
+		<if test="questionAnswer != null and questionAnswer != '' ">
+			and question_answer=#{questionAnswer}
+		</if>
+		<if test="elderIdentityNum != null and elderIdentityNum != '' ">
+			and elder_identity_num=#{elderIdentityNum}
+		</if>
+	</select>
+
+	<update id="updateSurveyAnswer" parameterType="com.yhl.laoyou.common.dto.survey.AnswerDTO">
+		UPDATE survey_answer SET
+		<if test="id != null and id != '' ">
+			id=#{id}
+		</if>
+		<if test="questionId != null and questionId != '' ">
+			,question_id=#{questionId}
+		</if>
+		<if test="questionName != null and questionName != '' ">
+			,question_name=#{questionName}
+		</if>
+		<if test="workerName != null and workerName != '' ">
+			,worker_name=#{workerName}
+		</if>
+		<if test="workerPhone != null and workerPhone != '' ">
+			,worker_phone=#{workerPhone}
+		</if>
+		<if test="questionAnswer != null and questionAnswer != '' ">
+			,question_answer=#{questionAnswer}
+		</if>
+		<if test="updateDate != null and updateDate != '' ">
+			,update_date=#{updateDate}
+		</if>
+		<if test="elderIdentityNum != null and elderIdentityNum != '' ">
+			,elder_identity_num=#{elderIdentityNum}
+		</if>
+		WHERE
+		`id`=#{id}
+	</update>
+
+	<select id="getAnswerUserNum" resultType="int">
+		select count(*) FROM survey_answer where elder_identity_num and question_id=1
+	</select>
+
+	<insert id="createSurveyAnswerFinal"
+			parameterType="com.yhl.laoyou.common.dto.survey.AnswerDTO"
+			keyProperty="id">
+		INSERT INTO survey_answer_final
+		(id,
+		question_id,
+		question_name,
+		worker_name,
+		worker_phone,
+		question_answer,
+		update_date,
+		elder_identity_num)
+		VALUES
+		(#{id},
+		#{questionId},
+		#{questionName},
+		#{workerName},
+		#{workerPhone},
+		#{questionAnswer},
+		#{updateDate},
+		#{elderIdentityNum})
+	</insert>
+
+	<insert id="batchCreateSurveyAnswerFinal" parameterType="com.yhl.laoyou.common.dto.survey.AnswerDTO">
+		INSERT INTO survey_answer_final
+		(id,
+		question_id,
+		question_name,
+		worker_name,
+		worker_phone,
+		question_answer,
+		update_date,
+		elder_identity_num)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.id},
+			#{item.questionId},
+			#{item.questionName},
+			#{item.workerName},
+			#{item.workerPhone},
+			#{item.questionAnswer},
+			#{item.updateDate},
+			#{item.elderIdentityNum})
+		</foreach>
+	</insert>
+
+	<select id="getSurveyIdCard" resultType="String">
+		SELECT elder_identity_num FROM survey_answer group by elder_identity_num ORDER BY elder_identity_num
+	</select>
+
+	<select id="getSurveyAnswer" resultType="com.yhl.laoyou.common.dto.survey.AnswerDTO">
+		select * from survey_answer where elder_identity_num=#{idCard}
+	</select>
+
+	<delete id="deleteSurvey">
+		delete from survey_answer where elder_identity_num=#{idCard}
+	</delete>
+
+</mapper>

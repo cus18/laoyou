@@ -1,0 +1,26 @@
+<ion-view style="background:#2b2b2b;">
+    <!--headerTitle start-->
+    <div page-loading></div>
+    <header>
+        <a ng-if="h5Page" ng-click="enterGroupTalk()">群聊</a>
+        <h1>{{elderName}}</h1>
+    </header>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <div>
+        <div class="ordinaryTit">
+            <span>服药提醒</span>
+        </div>
+        <div class="remindContainer bgf">
+            <img class="remindIcon" src="/elder/images/icon_medicine.png" alt="">
+            <div class="remindTxt bgf">
+                <p>{{medicationHint}}</p>
+                <p>{{medicationRemind.dose}}{{medicationRemind.drugName}}</p>
+            </div>
+            <div ng-if="medicationBtn">
+                <div class="remindBtn remindSucBtn" ng-click="updateStatus('1')">确认已服药</div>
+                <div class="remindBtn" ng-click="updateStatus('0')">没有服药，忽略此提醒</div>
+            </div>
+        </div>
+    </div>
+</ion-view>

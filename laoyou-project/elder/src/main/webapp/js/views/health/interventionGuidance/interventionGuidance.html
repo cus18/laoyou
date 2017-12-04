@@ -1,0 +1,111 @@
+<ion-view style="background:white;">
+    <div page-loading></div>
+    <elder-head></elder-head>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <!--干预与指导tab-->
+    <ul class="primaryTab bgf mb10">
+        <a ng-click="goMenu('medicineIntervention','interventionPlan')">
+            <li ng-class="{'on': firstMenu == 'medicineIntervention'}" >服药干预</li>
+        </a>
+        <a ng-click="goMenu('mealRecord')">
+            <li ng-class="{'on': firstMenu == 'mealRecord'}">饮食记录</li>
+        </a>
+        <a ng-click="goMenu('sportRecord','week')">
+            <li ng-class="{'on': firstMenu == 'sportRecord'}">运动记录</li>
+        </a>
+    </ul>
+    <!--服药干预-->
+    <div ng-if="firstMenu == 'medicineIntervention'" style="margin-top:-12px;">
+        <ul class="secondary bgf secondaryBor">
+            <a ng-click="goMenu('medicineIntervention','interventionPlan')">
+                <li ng-class="{'on': secondMenu == 'interventionPlan'}">
+                    <img ng-if="secondMenu == 'interventionPlan'" src="/elder/images/icon_plan1.png"/>
+                    <img ng-if="secondMenu == 'medicationRecord'" src="/elder/images/icon_plan2.png"/>
+                    干预计划
+                </li>
+            </a>
+            <a ng-click="goMenu('medicineIntervention','medicationRecord')">
+                <li ng-class="{'on': secondMenu == 'medicationRecord'}">
+                    <img ng-if="secondMenu == 'medicationRecord'" src="/elder/images/icon_record1.png"/>
+                    <img ng-if="secondMenu == 'interventionPlan'" src="/elder/images/icon_record2.png"/>
+                    服药记录
+                </li>
+            </a>
+        </ul>
+        <div ng-if="secondMenu == 'interventionPlan'" style="overflow:auto;height:10rem;">
+            <div class="contItemTit">进行中的服药干预计划</div>
+            <div class="medicinePlanContainer">
+                <a class="medicinePlanItem clearfix" ng-click="goMedicationPlan('checkPlan',false,item.id)" ng-repeat="item in uncompletedMedicationPlan">
+                    <div class="medicinePlanDrugName">{{item.drugName}}{{item.dose}}</div>
+                    <p><span>开始</span>{{item.startTime}}</p>
+                    <p><span>结束</span>{{item.endTime}}</p>
+                </a>
+            </div>
+            <div class="contItemTit">已完成的服药干预计划</div>
+            <div class="medicinePlanContainer completedPlan" ng-if="completeMedicationPlan">
+                <a class="medicinePlanItem clearfix" ng-click="goMedicationPlan('checkPlan',false,item.id)" ng-repeat="item in completeMedicationPlan">
+                    <div class="medicinePlanDrugName">{{item.drugName}}{{item.dose}}</div>
+                    <p>{{item.startTime}}至{{item.endTime}}</p>
+                </a>
+            </div>
+        </div>
+        <div ng-if="secondMenu == 'medicationRecord'" style="overflow:auto;height:10rem;">
+            <section class="calendar">
+                <div calendar="myCalendar1"
+                     ui-calendar="medicationRecordUiConfig.calendar">
+                </div>
+            </section>
+            <div class="medicationRecord bgf" ng-repeat="item in medicationRecordDatas">
+                <h3>{{item.usageDate}}</h3>
+                <p>服药时间：{{item.usageTime}}</p>
+                <div class="medicationRecordDrug">
+                    <span>{{item.drugName}}{{item.dose}}</span>
+                    <i ng-class="{'none':item.status == '未服用'}">{{item.status}}</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--饮食记录-->
+    <div ng-if="firstMenu == 'mealRecord'" style="overflow:auto;height:10rem;">
+        <section class="calendar" id="directives-calendar-mealReport">
+            <div calendar="myCalendar1"
+                 ui-calendar="mealRecordUiConfig.calendar">
+            </div>
+        </section>
+        <a ng-click="createMealRecord()" class="newHealthArea mb10">
+            <span>添加新的饮食记录</span>
+        </a>
+        <div ng-repeat="item in mealRecordDatas">
+            <div class="reportList bgf" ng-click="goMealRecord(item.createDate,item.createTime)">
+                <p class="reportListTit">{{item.createDate}}</p>
+                <p class="reportListDate">记录时间：<span>{{item.createTime}}</span></p>
+                <div class="reportImg clearfix">
+                    <div ng-repeat="item2 in item.imageURL.split(';')">
+                        <img ng-src="{{item2}}?x-oss-process=image/resize,m_fill,h_100,w_100" alt=""/>
+                    </div>
+                </div>
+                <p ng-if="item.content" class="reportCont">{{item.content}}</p>
+            </div>
+        </div>
+    </div>
+
+    <!--运动记录-->
+    <div ng-if="firstMenu == 'sportRecord'">
+        <h3 class="sportTit bgf" style="color:#ff8e01">{{sport.sportTit}}</h3>
+        <ul class="sportCont bgf clearfix">
+            <li>{{sport.sportStep}}<span>步</span></li>
+            <li>{{sport.sportKilometer/100}}<span>千米</span></li>
+            <li>{{sport.sportKilocalorie}}<span>大卡</span></li>
+        </ul>
+
+        <section class="sportCurve bgf">
+            <highchart style="width:100%;height:300px"
+                       series="sportSeries"
+                       options="sportCharts.options">
+            </highchart>
+        </section>
+    </div>
+    <!--服药干预 end-->
+</ion-view>

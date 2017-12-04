@@ -1,0 +1,188 @@
+<div id="wrapper">
+    <hospital-menu title="member"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><a ng-click="singleAddMemberCancel()" href="javascript:;">会员管理</a>：{{pageTitle}}</h2>
+                    <h5>提示：所有信息为必填项，没有该项内容可以写无 </h5>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+            <form role="form" name="singleMemberForm" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            个人资料
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>会员卡号</label>
+                                        <input class="form-control" ng-model="singleMember.memberCarID" placeholder="系统自动生成" disabled/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>出生日期</label>
+                                        <input class="form-control datepicker" ng-model="singleMember.birthday" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>身份证号</label>
+                                        <input class="form-control" ng-model="singleMember.idNum" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>民族</label>
+                                        <input class="form-control" ng-model="singleMember.nation" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>职业</label>
+                                        <select class="form-control" ng-model="singleMember.career" required>
+                                            <option>国家机关、党群组织、企业、事业单位负责人</option>
+                                            <option>专业技术人员</option>
+                                            <option>办事人员和有关人员</option>
+                                            <option>商业、服务业人员</option>
+                                            <option>农、林、牧、渔、水利从业人员</option>
+                                            <option>生产、运输设备操作人员和有关人员</option>
+                                            <option>军人</option>
+                                            <option>不便分类的其他从业人员</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>医疗费用支付方式</label>
+                                        <select class="form-control" ng-model="singleMember.costWay" required>
+                                            <option>全公费</option>
+                                            <option>部分公费</option>
+                                            <option>城镇职工医疗保险</option>
+                                            <option>城镇居民医疗保险</option>
+                                            <option>商业医疗保险</option>
+                                            <option>新型农村合作医疗</option>
+                                            <option>贫困救助</option>
+                                            <option>全自费</option>
+                                            <option>其他</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ABO血型</label>
+                                        <select class="form-control" ng-model="singleMember.aboBloodType" required>
+                                            <option>A型</option>
+                                            <option>B型</option>
+                                            <option>AB型</option>
+                                            <option>O型</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>药物过敏史</label>
+                                        <textarea class="form-control" rows="3" ng-model="singleMember.allergicHistory" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>姓名</label>
+                                        <input class="form-control" ng-model="singleMember.elderName" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>性别</label>
+                                        <select class="form-control" ng-model="singleMember.gender" required>
+                                            <option>男</option>
+                                            <option>女</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>手机号</label>
+                                        <input class="form-control" ng-model="singleMember.phone" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>工作单位</label>
+                                        <input class="form-control" ng-model="singleMember.workPlace" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>文化程度</label>
+                                        <select class="form-control" ng-model="singleMember.education" required>
+                                            <option>小学</option>
+                                            <option>初中</option>
+                                            <option>高中</option>
+                                            <option>技工学校</option>
+                                            <option>中等专业学校</option>
+                                            <option>大学专科或专科学院</option>
+                                            <option>大学本科</option>
+                                            <option>研究生及以上</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>婚姻状况</label>
+                                        <select class="form-control" ng-model="singleMember.marriage" required>
+                                            <option>已婚</option>
+                                            <option>未婚</option>
+                                            <option>离婚</option>
+                                            <option>丧偶</option>
+                                            <option>分居</option>
+                                            <option>未说明婚姻状况</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>RH血型</label>
+                                        <select class="form-control" ng-model="singleMember.rhBloodType" required>
+                                            <option>未知</option>
+                                            <option>RH阴性</option>
+                                            <option>RH阳性</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>暴露史</label>
+                                        <textarea class="form-control" rows="3" placeholder="请输入化学品、毒物或者射线的暴露史" ng-model="singleMember.exposureHistory" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Form Elements -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            其他
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>既往史</label>
+                                            <textarea class="form-control" rows="3" placeholder="请输入以往疾病、手术、外伤情况" ng-model="singleMember.pastHistory" required></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>生活环境</label>
+                                            <textarea class="form-control" rows="3" placeholder="请描述厨房排风设施、燃料类型、饮水等情况" ng-model="singleMember.livestock" required></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>家族史</label>
+                                            <textarea class="form-control" rows="3" placeholder="请输入直系亲属有无患病情况" ng-model="singleMember.familyHistory" required></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Form Elements -->
+                </div>
+            </div>
+            <button class="btn btn-primary" style="width:10%;" type="submit" ng-click="singleAddMemberSubmit(singleMemberForm.$valid)">保存</button>
+            <button class="btn btn-default" style="width:10%;" ng-click="singleAddMemberCancel()">取消</button>
+            </form>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+</div>

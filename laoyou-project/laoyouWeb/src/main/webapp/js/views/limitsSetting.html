@@ -1,0 +1,120 @@
+<div id="wrapper">
+    <hospital-menu title="limitsSetting"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>机构管理</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+            <!--机构列表start-->
+            <div class="col-md-12">
+                <!-- Advanced Tables -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        机构列表
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <div class="dataTables_wrapper form-inline" role="grid">
+                                <div class="panel-heading">
+                                    <input type="text" class="form-control input-sm" placeholder="机构名称" style="width:20%;" ng-model="param.searchValue">
+                                    <button class="btn btn-default" style="width:10%;margin:0 2% 0 10%;" ng-click="searchPageList()">查询</button>
+                                    <button class="btn btn-primary" style="width:10%;" ng-click="popup('new')">新增机构</button>
+                                </div>
+                                <table class="table table-striped table-bordered table-hover text-center" id="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">序号</th>
+                                        <th class="text-center">机构名称</th>
+                                        <th class="text-center">所在城市</th>
+                                        <th class="text-center">联系地址</th>
+                                        <th class="text-center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in response.list">
+                                        <td></td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.area}}</td>
+                                        <td>{{item.address}}</td>
+                                        <td>
+                                            <a ng-click="popup('edit',item.sysUserID)">修改</a>
+                                            <a ng-click="delete(item.sysUserID)">删除</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div page-tool></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Advanced Tables -->
+            </div>
+            <!--机构列表end-->
+            <!--新增修改机构 start-->
+            <div ng-if="settingAlert" class="row shadeContainer">
+                <div class="col-md-6" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{title}}
+                            <button type="button" class="close" ng-click="close()">x</button>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" name="settingForm" ng-submit="subSettingForm(settingForm.$valid)" novalidate style="margin-left:20px;">
+                                <div class="form-group">
+                                    <label style="width:100px;">机构名称：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.name">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">所在城市：</label>
+                                    <select class="form-control" style="display:inline;width:auto;" id="s_province" name="s_province"></select> 
+                                    <select class="form-control" style="display:inline;width:auto;" id="s_city" name="s_city"></select> 
+                                    <select class="form-control" style="display:inline;width:auto;" id="s_county" name="s_county"></select>
+                                    <script>_init_area();</script>
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">联系地址：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.address">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">咨询电话：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.phone">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">传真：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.fax">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">邮编：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.zipCode">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">网址：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.webSite">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">E-mail：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="setting.email">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width:100px;">急救电话：</label>
+                                    <input type="text" class="form-control" style="display:inline;width:auto;" ng-model="setting.emergencyCall" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" style="width:20%;">保存</button>
+                                    <button type="button" class="btn btn-default" style="width:20%;" ng-click="close()">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <del-tool info="确认要删除该机构？"></del-tool>
+        </div>
+    </div>
+</div>

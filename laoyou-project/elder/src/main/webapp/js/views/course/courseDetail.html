@@ -1,0 +1,105 @@
+<ion-view style="background:#f8f8f8;" ng-if="!param.startCourseFlag">
+	<ion-header-bar align-title="center" class="bar-energized">
+		<div class="buttons">
+			<button class="button" ng-click="return()"><</button>
+		</div>
+		<h1 class="title">{{param.onlineCourseDetail.onlineCourseName}}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<img class="full-image" style="height:150px"
+			 ng-src="{{param.onlineCourseDetail.onlineCourseLogo}}">
+		<p style="color:black;margin-left:25px;margin-top:15px;">
+			<i class="icon ion-clock"></i>&nbsp;<span>课程时长</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			{{param.onlineCourseDetail.onlineCourseDuration}}小时</p>
+		<div class="list" style="margin-top:15px;">
+			<div class="item item-divider">
+				课程简介
+			</div>
+			<a class="item item-text-wrap" style="color: black;font-size:12px;">
+				{{param.onlineCourseDetail.onlineCourseOutline}}
+			</a>
+		</div>
+		<!--<div class="list" style="margin-top:15px;">-->
+			<!--<div class="item item-divider">-->
+				<!--&nbsp;授课老师-->
+			<!--</div>-->
+			<!--<a class="item item-text-wrap" style="color: black;font-size:12px;">-->
+				<!--<i class="icon ion-person" style="font-size:15px">-->
+					<!--&nbsp;{{param.onlineCourseDetail.onlineCourseTeacherName}}-->
+				<!--</i>-->
+				<!--<br>-->
+				<!--{{param.onlineCourseDetail.onlineCourseTeacherLevel}}-->
+			<!--</a>-->
+		<!--</div>-->
+		<div style="background:white;width:90%;margin-left:5%;">
+			<h2 style="font-size:1px;">&nbsp;&nbsp;</h2>
+			<h1 style="font-size: 15px;color: blue;margin-left: 73%;width: 25%;">{{onlineCourseDiscussData.list.length}}条评论</h1>
+			<ion-item ng-repeat="item in onlineCourseDiscussData.list" style="border-color: transparent;color: black;width:90%;margin-left:5%;">
+				<a style="color:black;font-size:15px;"><i class="icon ion-person"></i>&nbsp;{{item.elderName}}</a>
+				<p style="font-size:15px;">{{item.onlineCourseDiscussContent}}</p>
+			</ion-item>
+			<i class="icon ion-chevron-down" style="margin-left:50%;color:black;" ng-click="loadMoreDiscuss()"></i>
+		</div>
+		<br/><br/><br/><br/>
+	</ion-content>
+	<div class="bar bar-footer bar-energized">
+		<div class="title" ng-click="startCourse(param.courseId)">开始学习</div>
+	</div>
+</ion-view>
+<ion-view style="background:#f8f8f8;" ng-if="param.startCourseFlag">
+	<ion-header-bar align-title="center" class="bar-energized">
+		<div class="buttons">
+			<button class="button" ng-click="return()"><</button>
+		</div>
+		<h1 class="title">{{param.onlineCourseDetail.onlineCourseName}}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<div>
+			<video ng-src="{{param.playURL}}"
+				   controls="controls" style="height:200px;width:100%;" />
+		</div>
+		<ion-list>
+			<style>
+				.talkOdd {
+					background-color: white;
+				}
+				.talkEven {
+					background-color: #f8f8f8;
+				}
+			</style>
+			<ion-item ng-repeat="item in param.onlineCourseDetail.onLineCourseDataDTOList"
+					  style="color:black"
+					  ng-class-odd="'talkOdd'"
+					  ng-class-even="'talkEven'">
+				<p style="font-size:15px;color:blue;" ng-click="playCourse($index)" ng-if="param.playIndex==$index">
+					{{item.onlineCourseName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.onlineCourseDuration}}小时
+				</p>
+				<p style="font-size:15px;" ng-click="playCourse($index)" ng-if="param.playIndex!=$index">
+					{{item.onlineCourseName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.onlineCourseDuration}}小时
+				</p>
+			</ion-item>
+		</ion-list>
+		<div class="list" style="margin-top:15px;">
+			<div class="item item-divider" style="text-align:center">
+				评论
+			</div>
+			<div class="item item-input-inset">
+				<label class="item-input-wrapper">
+					<input type="text" placeholder="评论内容" ng-model="param.submitDiscussContent">
+				</label>
+				<button class="button button-small button-assertive" ng-click="submitDiscuss()">
+					发表
+				</button>
+			</div>
+		</div>
+		<ion-list>
+			<ion-item ng-repeat="item in onlineCourseDiscussData.list" style="color:black">
+				<p class="item-note">{{item.onlineCourseDiscussDate|date:'yyyy/MM/dd HH:mm:ss'}}</p>
+				<a style="color:black;font-size:15px;"><i class="icon ion-person"></i>&nbsp;{{item.elderName}}</a>
+				<p style="font-size:15px;">{{item.onlineCourseDiscussContent}}</p>
+			</ion-item>
+			<i class="icon ion-chevron-down" style="margin-left:50%;color:black;" ng-click="loadMoreDiscuss()"></i>
+			<br/><br/>
+		</ion-list>
+	</ion-content>
+</ion-view>

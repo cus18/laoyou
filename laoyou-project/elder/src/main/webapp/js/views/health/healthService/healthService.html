@@ -1,0 +1,171 @@
+<ion-view style="background:white;">
+    <div page-loading></div>
+    <elder-head></elder-head>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <ul class="primaryTab bgf mb10">
+        <a ng-click="goMenu('healthServicePackage','')">
+            <li ng-class="{'on': firstMenu == 'healthServicePackage'}" >服务套餐</li>
+        </a>
+        <a ng-click="goMenu('healthArchives','basicInfo')">
+            <li ng-class="{'on': firstMenu == 'healthArchives'}">健康档案</li>
+        </a>
+        <a ng-click="goMenu('healthAssessment','')">
+            <li ng-class="{'on': firstMenu == 'healthAssessment'}">健康评估</li>
+        </a>
+    </ul>
+    <!--健康服务tab-->
+    <div ng-if="firstMenu == 'healthServicePackage'">
+        <!--服务套餐-->
+        <ul class="healthReportList">
+            <a ng-click="gotoHealthServicePackage(item.servicePackageId,'existHealthServicePackage')"
+               ng-repeat="item in healthServicePackageList">
+                <li>
+                    <p class="contractNo"><em>合同编号：{{item.contractNo}}</em></p>
+                    <p class="contractName">{{item.servicePackageTemplateName}}</p>
+                    <p class="contractInf"><span>甲方：{{item.firstParty.firstPartyName}}</span>乙方：{{item.secondParty.secondPartyName}}</p>
+                    <p class="contractInf"><span>日期：{{item.updateDate|date:'yyyy-MM-dd'}}</span></p>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div ng-if="firstMenu == 'healthArchives'">
+        <ul class="secondary bgf">
+            <a ng-click="goMenu('healthArchives','basicInfo')">
+                <li ng-class="{'on': secondMenu == 'basicInfo'}">
+                    <img ng-if="secondMenu == 'physicalExamination'" src="/elder/images/group_242@2x.png"/>
+                    <img ng-if="secondMenu == 'basicInfo'" src="/elder/images/group_242@1x.png"/>
+                    基本信息
+                </li>
+            </a>
+            <a ng-click="goMenu('healthArchives','physicalExamination')">
+                <li ng-class="{'on': secondMenu == 'physicalExamination'}">
+                    <img ng-if="secondMenu == 'basicInfo'" src="/elder/images/group_251@2x.png"/>
+                    <img ng-if="secondMenu == 'physicalExamination'" src="/elder/images/group_251@1x.png"/>
+                    健康体检
+                </li>
+            </a>
+        </ul>
+        <div class="secondaryMarB" ng-if="secondMenu == 'physicalExamination'"></div>
+        <!--健康档案-基本信息-->
+        <div class="healthFileItem" ng-if="secondMenu == 'basicInfo'">
+            <div class="contItemMarB"></div>
+            <section class="contItem">
+                <div>
+                    <span>档案编号*</span>
+                    <i>{{healthArchiveBasicInfo.healthArchiveId}}</i>
+                </div>
+                <div>
+                    <span>姓名*</span>
+                    <i>{{healthArchiveBasicInfo.elderName}}</i>
+                </div>
+                <div>
+                    <span>性别</span>
+                    <i>{{healthArchiveBasicInfo.gender}}</i>
+                </div>
+                <div>
+                    <span>出生日期</span>
+                    <i>{{healthArchiveBasicInfo.birthday|date:'yyyy-MM-dd'}}</i>
+                </div>
+                <div>
+                    <span>身份证号</span>
+                    <i>{{healthArchiveBasicInfo.idNum}}</i>
+                </div>
+            </section>
+            <div class="contItemMarB"></div>
+            <section class="contItem">
+                <div>
+                    <span>工作单位</span>
+                    <i>{{healthArchiveBasicInfo.workPlace}}</i>
+                </div>
+                <div>
+                    <span>民族</span>
+                    <i>{{healthArchiveBasicInfo.nation}}</i>
+                </div>
+                <div>
+                    <span>文化程度</span>
+                    <i>{{healthArchiveBasicInfo.education}}</i>
+                </div>
+                <div>
+                    <span>职业</span>
+                    <i>{{healthArchiveBasicInfo.career}}</i>
+                </div>
+                <div>
+                    <span>婚姻状况</span>
+                    <i>{{healthArchiveBasicInfo.marriage}}</i>
+                </div>
+            </section>
+            <div class="contItemMarB"></div>
+            <section class="contItem">
+                <div>
+                    <span>医疗费用支付方式</span>
+                    <i>{{healthArchiveBasicInfo.costWay}}</i>
+                </div>
+                <div>
+                    <span>ABO血型</span>
+                    <i>{{healthArchiveBasicInfo.aboBloodType}}</i>
+                </div>
+                <div>
+                    <span>RH血型</span>
+                    <i>{{healthArchiveBasicInfo.rhBloodType}}</i>
+                </div>
+                <div>
+                    <span>药物过敏史</span>
+                    <i>{{healthArchiveBasicInfo.allergicHistory}}</i>
+                </div>
+                <div>
+                    <span>暴露史</span>
+                    <i>{{healthArchiveBasicInfo.exposureHistory}}</i>
+                </div>
+            </section>
+            <section class="contItemTit">
+                既往史
+            </section>
+            <section class="contItem">
+                <div style="line-height:0.6rem;">
+                    <i>{{healthArchiveBasicInfo.pastHistory || '未填写'}}</i>
+                </div>
+            </section>
+            <section class="contItemTit">
+                家族史
+            </section>
+            <section class="contItem">
+                <div style="line-height:0.6rem;">
+                    <i>{{healthArchiveBasicInfo.familyHistory || '未填写'}}</i>
+                </div>
+            </section>
+            <section class="contItemTit">
+                生活环境
+            </section>
+            <section class="contItem">
+                <div style="line-height:0.6rem;">
+                    <i>{{healthArchiveBasicInfo.livestock || '未填写'}}</i>
+                </div>
+            </section>
+        </div>
+        <div class="healthFileItem" ng-if="secondMenu == 'physicalExamination'">
+            <div class="reportList bgf" ng-repeat="item in healthArchivePhysicalExaminationList">
+                <a ng-click="goPhysicalExamination(item.physicalExaminationId)">
+                    <p class="reportListTit" style="color:black;">{{item.updateDate.substring(0,10)}}</p>
+                    <p class="reportListDate">提交者：<span>{{item.providerName}}</span>提交时间：<span>{{item.updateDate.substring(11,16)}}</span></p>
+                    <div class="reportImg clearfix">
+                        <div ng-repeat="item1 in item.physicalExaminationData.split(';')">
+                            <img ng-src="{{item1}}?x-oss-process=image/resize,m_fill,h_100,w_100" alt=""/>
+                        </div>
+                    </div>
+                    <p ng-if="item.description" class="reportCont">{{item.description}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="healthFileItem" ng-if="firstMenu == 'healthAssessment'">
+        <ul class="healthAssessmentList bgf">
+            <a ui-sref="healthAssessmentResult({existHealthAssessmentId:item.healthAssessmentTemplateId,keyId:item._id})" ng-repeat="item in healthArchiveAssessmentList">
+                <li>
+                    <p>{{item.healthAssessmentTemplateName}}</p>
+                    <p class="healthReportDate">日期：<span>{{item.updateDate|date:'yyyy-MM-dd'}}</span>提交者：{{item.providerName}}</p>
+                </li>
+            </a>
+        </ul>
+    </div>
+</ion-view>

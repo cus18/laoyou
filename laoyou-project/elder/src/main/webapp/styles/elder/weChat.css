@@ -1,0 +1,90 @@
+body{
+    background:#fff;
+    font-size:16px;
+    color:#070d25;
+}
+.logo_area{
+    padding:8% 0px;
+}
+.laoyou_logo{
+    width:12%;
+    float:left;
+    border-right:1px solid #cbcbcb;
+    padding-right:5%;
+    margin-right:5%;
+    margin-left:22%;
+}
+.company_logo{
+    width:40%;
+    margin-top:2%;
+}
+.menu_tab{
+    width:100%;
+    background:#f5f5f5;
+    border-top:1px solid #dbdbdb;
+    border-bottom:1px solid #dbdbdb;
+    overflow:hidden;
+}
+.menu_tab li{
+    width:50%;
+    float:left;
+}
+.menu_tab li a{
+    color:#9b9b9b;
+    padding:5% 0px;
+    width:40%;
+    margin:0 auto;
+    text-align:center;
+}
+.menu_tab li.active a{
+    color:#ff8e01;
+    border-bottom:2px solid #ff8e01;
+}
+.aboutUs{
+    padding:9% 7% 0%;
+}
+.aboutUs p{
+    line-height:1.6em;
+    text-indent:2em;
+}
+.title_content{
+    text-align:center;
+    margin:10% 0% 4%;
+}
+.title{
+    color:#9b9b9b;
+    font-size:1em;
+    position:relative;
+}
+.title:before,.title:after{
+    display:block;
+    content:'';
+    width:8px;
+    height:1px;
+    background:#9b9b9b;
+    position:absolute;
+    top:50%;
+}
+.title:before{
+    left:-16px;
+}
+.title:after{
+    right:-16px;
+}
+.partner{
+    overflow:hidden;
+}
+.partner img{
+    width:33%;
+    float:left;
+}
+.contact{
+    display:none;
+    margin-bottom:10%;
+}
+.contact div{
+    text-align:center;
+}
+.map{
+    width:100%;
+}

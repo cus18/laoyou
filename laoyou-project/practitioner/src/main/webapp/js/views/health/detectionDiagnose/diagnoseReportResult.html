@@ -1,0 +1,34 @@
+<!--headerTitle start-->
+<div page-loading></div>
+<header>
+    <div ng-if="h5Page" style="float:left;margin-top:4%;margin-left:2%;font-size:0.34rem;"
+         ng-click="enterGroupTalk()">&lt; 群聊
+    </div>
+    <h1>{{elderName}}</h1>
+    <em></em>
+</header>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<!--content start-->
+<div ng-if="diagnoseReportResult">
+    <div class="ordinaryTit">
+        <span>诊疗记录</span>
+    </div>
+    <div class="resultContDate">{{diagnoseReportResultData.recordDate.substring(0,10)}}</div>
+    <section class="resultContainer bgf">
+        <div class="reportListTit">责任医生：<span>{{testReportResultData.providerName}}</span>记录时间：<span>{{diagnoseReportResultData.recordDate.substring(11,20)}}</span></div>
+        <audio id="diagnoseAudio" ng-src="{{diagnoseReportResultData.audioUrl}}"
+               controls="controls" style="display:none;">
+        </audio>
+        <div class="diagnoseAudioCtrl" ng-click="audioCtrl()">
+            <img ng-hide="paused" src="/practitioner/images/triangle_2@2x.png" alt="">
+            <img ng-show="paused" src="/practitioner/images/triangle_3@2x.png" alt="">
+        </div>
+        <div class="diagnoseAudioTime">{{duration}}</div>
+    </section>
+    <section class="resultContText">
+        <div>文字记录</div>
+        <p>{{diagnoseReportResultData.description}}</p>
+    </section>
+</div>
+<!--content end-->

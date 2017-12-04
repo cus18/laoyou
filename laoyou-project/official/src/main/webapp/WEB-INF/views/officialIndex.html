@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="华录健康养老">
+    <meta name="keywords" content="华录健康养老发展有限公司">
+</head>
+<base href="/"/>
+<link href="/styles/official/common.css" rel="stylesheet" />
+<link href="/styles/official/index.css" rel="stylesheet" />
+<title>华录健康养老</title>
+<body>
+<div ui-view></div>
+</body>
+<script>
+    "use strict";
+    var require = {
+        waitSeconds: 15,
+        urlArgs: "ver=1.0.5",  //防止读取缓存，调试用
+        deps : ['js/mainOfficial']
+    };
+    var officialVersion = "1.0.4";
+    var picVersion = "1.0.1";
+    var appName = 'mainOfficial';
+</script>
+<script type="text/javascript" src="/js/libs/require.min.js"></script>
+<script src="/js/libs/jquery-2.1.3.min.js"></script>
+<script src="/js/libs/bootstrap.min.js"></script>
+</html>
+

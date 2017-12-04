@@ -1,0 +1,785 @@
+<div id="wrapper">
+    <hospital-menu title="member"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><a ui-sref="member">会员管理</a> / {{elderName}}</h2>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="span2  col-xs-12 col-sm-3 col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>管理团队</li>
+                        <li ng-class="{'active': menu == 'ownerDoctor'}" >
+                            <a ng-click="goMemberDetail('ownerDoctor')">责任医生-{{owner.doctorName || '点击指派'}}</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'ownerNurse'}" >
+                            <a ng-click="goMemberDetail('ownerNurse')">责任护士-{{owner.nurseName || '点击指派'}}</a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>健康服务</li>
+                        <li ng-class="{'active': menu == 'servicePackage'}" >
+                            <a ng-click="goMemberDetail('servicePackage')">服务套餐</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'healthArchives'}">
+                            <a ng-click="goMemberDetail('healthArchives')">健康档案</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'healthAssessment'}">
+                            <a ng-click="goMemberDetail('healthAssessment')">健康评估</a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>检测与诊疗</li>
+                        <li ng-class="{'active': menu == 'detection'}">
+                            <a ng-click="goMemberDetail('detection')">远程监测</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'testReport'}">
+                            <a ng-click="goMemberDetail('testReport')">检验报告</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'diagnoseReport'}">
+                            <a ng-click="goMemberDetail('diagnoseReport')">诊疗记录</a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>干预与指导</li>
+                        <li ng-class="{'active': menu == 'medicineIntervention'}">
+                            <a ng-click="goMemberDetail('medicineIntervention')">服药干预</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'mealRecord'}">
+                            <a ng-click="goMemberDetail('mealRecord')">饮食记录</a>
+                        </li>
+                        <li ng-class="{'active': menu == 'sportRecord'}">
+                            <a ng-click="goMemberDetail('sportRecord')">运动记录</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-10">
+                    <div ng-if="menu == 'ownerDoctor'">
+                        责任医生<hr style="margin-top:5px;">
+                        <div class="row"  style="margin-top: 2%;">
+                            <div class="col-md-12">
+                                <!-- 医生信息列表 Tables -->
+                                <div class="table-responsive">
+                                    <div class="dataTables_wrapper form-inline">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_length">
+                                                    <label>
+                                                        每页显示
+                                                        <select ng-model="pageSize"
+                                                                ng-options="page for page in pageSizes"
+                                                                ng-change="displayPageList()"/>
+                                                        条记录
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_filter">
+                                                    <label>
+                                                        <input type="text" class="form-control input-sm" ng-model="param.searchValue" />
+                                                        <button class="btn btn-default" ng-click="searchPageList()">点击搜索</button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th>选择</th>
+                                                <th class="text-center">姓名</th>
+                                                <th class="text-center">职称</th>
+                                                <th class="text-center">所在科室</th>
+                                                <th class="text-center">会员数量</th>
+                                                <th class="text-center">服务套餐数量</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in response.list">
+                                                <td><input type="radio" name="ownerDoctor" value="{{item.easemobID}}-{{item.name}}" ng-model="owner.ownerDoctor"/></td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.title}}</td>
+                                                <td>{{item.department}}</td>
+                                                <td>{{item.memberNum}}</td>
+                                                <td>{{item.serviceNum}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--End 医生信息列表 Tables -->
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'ownerNurse'">
+                        责任护士<hr style="margin-top:5px;">
+                        <div class="row"  style="margin-top: 2%;">
+                            <div class="col-md-12">
+                                <!-- 护士信息列表 Tables -->
+                                <div class="table-responsive">
+                                    <div class="dataTables_wrapper form-inline">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_length">
+                                                    <label>
+                                                        每页显示
+                                                        <select ng-model="pageSize"
+                                                                ng-options="page for page in pageSizes"
+                                                                ng-change="displayPageList()"/>
+                                                        条记录
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_filter">
+                                                    <label>
+                                                        <input type="text" class="form-control input-sm" ng-model="param.searchValue" />
+                                                        <button class="btn btn-default" ng-click="searchPageList()">点击搜索</button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th>选择</th>
+                                                <th class="text-center">姓名</th>
+                                                <th class="text-center">职称</th>
+                                                <th class="text-center">所在科室</th>
+                                                <th class="text-center">会员数量</th>
+                                                <th class="text-center">服务套餐数量</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in response.list">
+                                                <td><input type="radio" name="ownerNurse" value="{{item.easemobID}}-{{item.name}}" ng-model="owner.ownerNurse"/></td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.title}}</td>
+                                                <td>{{item.department}}</td>
+                                                <td>{{item.memberNum}}</td>
+                                                <td>{{item.serviceNum}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--End 医护人员信息列表 Tables -->
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'servicePackage'">
+                       <span ng-if="!serviceDetail">服务套餐</span>
+                       <span ng-if="serviceDetail"><a ng-click="serviceDetailShow()" style="color:#333;cursor:pointer;">服务套餐</a>-套餐详情</span>
+                       <hr style="margin-top:5px;">
+                       <table ng-if="!serviceDetail" class="table table-striped table-bordered table-hover text-center">
+                           <thead>
+                           <tr>
+                               <th class="text-center">合同编号</th>
+                               <th class="text-center">套餐名称</th>
+                               <th class="text-center">责任医生</th>
+                               <th class="text-center">责任护士</th>
+                               <th class="text-center">生效日期</th>
+                               <th class="text-center">操作</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <tr ng-repeat="item in healthServicePackageList">
+                               <td>{{item.contractNo}}</td>
+                               <td>{{item.servicePackageTemplateName}}</td>
+                               <td>{{owner.doctorName}}</td>
+                               <td>{{owner.nurseName}}</td>
+                               <td>{{item.updateDate|date:'yyyy-MM-dd'}}</td>
+                               <td><a href="javascript:;" ng-click="serviceDetailShow(item.servicePackageId)">查看</a></td>
+                           </tr>
+                           </tbody>
+                       </table>
+                       <div ng-if="serviceDetail" class="row">
+                            <div class="col-md-12">
+                                <h3 style="text-align:center;">{{healthServicePackageData.servicePackageTemplateName}}</h3>
+                                <p style="padding-top:0px;text-align:center;font-size:14px;">
+                                    日期：{{healthServicePackageData.updateDate|date:'yyyy-MM-dd'}}&nbsp;
+                                    合同编号：{{healthServicePackageData.contractNo}}
+                                </p>
+                                <div class="col-md-12" style="margin-bottom:5%;">
+                                    <div class="col-md-5" style="border-right:1px solid #dcdcdc;">
+                                        <p>甲方：{{healthServicePackageData.firstParty.firstPartyName}}</p>
+                                        <p>联系电话：{{healthServicePackageData.firstParty.firstPartyPhone}}</p>
+                                        <p>责任医生：{{healthServicePackageData.firstParty.doctorName}}</p>
+                                        <p>联系电话：{{healthServicePackageData.firstParty.doctorPhone}}</p>
+                                        <p>责任护士：{{healthServicePackageData.firstParty.nurseName}}</p>
+                                        <p>联系电话：{{healthServicePackageData.firstParty.nursePhone}}</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p>乙方：{{healthServicePackageData.secondParty.secondPartyName}}</p>
+                                        <p>身份证号：{{healthServicePackageData.secondParty.idNum}}</p>
+                                        <p>家庭住址：{{healthServicePackageData.secondParty.address}}</p>
+                                        <p>个人电话：{{healthServicePackageData.secondParty.mobile}}</p>
+                                        <p>家庭电话：{{healthServicePackageData.secondParty.telephone}}</p>
+                                        <p>紧急情况联系人及电话：{{healthServicePackageData.secondParty.emergencyName}}：{{healthServicePackageData.secondParty.emergencyPhone}}</p>
+                                    </div>
+                                </div>
+                                <div data-ng-bind-html="healthPackageTemplateDetail"></div>
+                                <section>
+                                    <p>甲方（盖章）：</p>
+                                    <img ng-src="/practitioner/{{healthServicePackageData.firstParty.firstPartySignature}}"/>
+                                    <p>责任医生（签字）：</p>
+                                    <img ng-src="{{healthServicePackageData.firstParty.doctorSignature}}"
+                                         style="width:150px;height:120px"/>
+                                    <p>责任护士（签字）：</p>
+                                    <img ng-src="{{healthServicePackageData.firstParty.nurseSignature}}"
+                                         style="width:150px;height:120px"/>
+                                    <div class="grayline"></div>
+                                    <p>乙方（签字）：</p>
+                                    <img ng-src="{{healthServicePackageData.secondParty.secondPartySignature}}"
+                                         style="width:150px;height:120px"/>
+                                </section>
+                            </div>
+                       </div>
+                   </div>
+                    <div ng-if="menu == 'healthArchives'">
+                        健康档案<hr style="margin-top:5px;">
+                        <ul id="healthArchivesTab" class="nav nav-tabs" style="margin-bottom:2%;">
+                            <li class="active">
+                                <a href="#basicInfo" data-toggle="tab" ng-click="healthArchivesCont('basicInfo')">基本信息</a>
+                            </li>
+                            <li>
+                                <a href="#physicalExamination" data-toggle="tab" ng-click="healthArchivesCont('physical')">健康体检</a>
+                            </li>
+                        </ul>
+                        <div id="healthArchivesContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="basicInfo">
+                                <table class="table table-striped table-bordered table-hover text-center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">个人资料</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>会员卡号</td>
+                                        <td>{{healthArchiveBasicInfo.memberCarID}}</td>
+                                        <td>姓名</td>
+                                        <td>{{healthArchiveBasicInfo.elderName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>出生日期</td>
+                                        <td>{{healthArchiveBasicInfo.birthday|date:'yyyy-MM-dd'}}</td>
+                                        <td>姓别</td>
+                                        <td>{{healthArchiveBasicInfo.gender}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>身份证号</td>
+                                        <td>{{healthArchiveBasicInfo.idNum}}</td>
+                                        <td>手机</td>
+                                        <td>{{healthArchiveBasicInfo.phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>民族</td>
+                                        <td>{{healthArchiveBasicInfo.nation}}</td>
+                                        <td>工作单位</td>
+                                        <td>{{healthArchiveBasicInfo.workPlace}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>职业</td>
+                                        <td>{{healthArchiveBasicInfo.career}}</td>
+                                        <td>文化程度</td>
+                                        <td>{{healthArchiveBasicInfo.education}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>医疗费用支付方式</td>
+                                        <td>{{healthArchiveBasicInfo.costWay}}</td>
+                                        <td>婚姻状况</td>
+                                        <td>{{healthArchiveBasicInfo.marriage}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ABO血型</td>
+                                        <td>{{healthArchiveBasicInfo.aboBloodType}}</td>
+                                        <td>Rh血型</td>
+                                        <td>{{healthArchiveBasicInfo.rhBloodType}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>药物过敏史</td>
+                                        <td>{{healthArchiveBasicInfo.allergicHistory}}</td>
+                                        <td>暴露史</td>
+                                        <td>{{healthArchiveBasicInfo.exposureHistory}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped table-bordered table-hover text-center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">其他</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="width:25%;">既往史</td>
+                                        <td>{{healthArchiveBasicInfo.pastHistory}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>家族史</td>
+                                        <td>{{healthArchiveBasicInfo.familyHistory}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>生活环境</td>
+                                        <td>{{healthArchiveBasicInfo.livestock}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="physicalExamination">
+                                <div class="row" style="margin-bottom:2%;">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <ul class="list-group" ng-if="hint != 'none'">
+                                                <li class="list-group-item" ng-repeat="item in healthArchivePhysicalExaminationList">
+                                                    <p style="padding-top:0px;"><span style="margin-right:30px;">提交者：{{item.providerName}}</span>提交时间：{{item.updateDate}}</p>
+                                                    <div class="reportImg">
+                                                        <div ng-repeat="item1 in item.physicalExaminationData.split(';')">
+                                                            <img src="{{item1}}"/>
+                                                        </div>
+                                                    </div>
+                                                    <p style="padding-top:0px;">{{item.description}}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'healthAssessment'">
+                        <span ng-if="!healthAssessmentResult">健康评估</span>
+                        <span ng-if="healthAssessmentResult"><a ng-click="showAssessmentResult()" style="color:#333;cursor:pointer;">健康评估</a>-评估结果</span>
+                        <hr style="margin-top:5px;">
+                        <table ng-if="!healthAssessmentResult" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                            <tr>
+                                <th style="text-align:center;">提交日期</th>
+                                <th style="text-align:center;">评估类型</th>
+                                <th style="text-align:center;">提交人</th>
+                                <th style="text-align:center;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in healthArchiveAssessmentList">
+                                <td>{{item.updateDate|date:'yyyy-MM-dd'}}</td>
+                                <td>{{item.healthAssessmentTemplateName}}</td>
+                                <td>{{item.providerName}}</td>
+                                <td>
+                                    <a ng-click="showAssessmentResult(item.healthAssessmentTemplateId,item._id)" href="javascript:;">查看</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="healthAssessmentResult">
+                            <h3 class="text-center">{{healthAssessmentResult.healthAssessmentTemplateName}}</h3>
+                            <p>尊敬的{{healthAssessmentResult.elderName}}及家属</p>
+                            <p style="text-indent:2em;">{{displayResult}}</p>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'detection'">
+                        远程监测<hr style="margin-top:5px;">
+                        <ul id="detectionTab" class="nav nav-tabs" style="margin-bottom:2%;">
+                            <li class="active">
+                                <a href="#bloodSugar" data-toggle="tab" ng-click="detectionCont('bloodSugar')">血糖</a>
+                            </li>
+                            <li>
+                                <a href="#bloodPresser" data-toggle="tab" ng-click="detectionCont('bloodPresser')">血压</a>
+                            </li>
+                        </ul>
+                        <div id="detectionContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="bloodSugar">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <span style="margin-right:2%;">选择时间</span>
+                                                <select ng-model="detection.time" ng-change="chooseHealthDataTime()">
+                                                    <option>最近一周</option>
+                                                    <option>最近一个月</option>
+                                                    <option>最近三个月</option>
+                                                    <option>最近半年</option>
+                                                </select>
+                                            </div>
+                                            <table class="table table-striped table-bordered table-hover text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th style="text-align:center;">测量日期</th>
+                                                    <th style="text-align:center;">凌晨血糖</th>
+                                                    <th style="text-align:center;">空腹血糖</th>
+                                                    <th style="text-align:center;">早餐后血糖</th>
+                                                    <th style="text-align:center;">午餐前血糖</th>
+                                                    <th style="text-align:center;">午餐后血糖</th>
+                                                    <th style="text-align:center;">晚餐前血糖</th>
+                                                    <th style="text-align:center;">晚餐后血糖</th>
+                                                    <th style="text-align:center;">睡前血糖</th>
+                                                    <th style="text-align:center;">备注</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in healthDatas">
+                                                    <td>{{item.date|date:'yyyy-MM-dd'}}</td>
+                                                    <td>{{item.bloodSugar.dawn}}</td>
+                                                    <td>{{item.bloodSugar.beforeBreakFast}}</td>
+                                                    <td>{{item.bloodSugar.afterBreakFast}}</td>
+                                                    <td>{{item.bloodSugar.beforeLunch}}</td>
+                                                    <td>{{item.bloodSugar.afterLunch}}</td>
+                                                    <td>{{item.bloodSugar.beforeDinner}}</td>
+                                                    <td>{{item.bloodSugar.afterDinner}}</td>
+                                                    <td>{{item.bloodSugar.beforeSleep}}</td>
+                                                    <td>{{item.remark}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        凌晨血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title="charts.bloodSugar.title"
+                                                   series="charts.bloodSugar.dawnSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        空腹血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title="charts.bloodSugar.title"
+                                                   series="charts.bloodSugar.beforeBreakFastSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        早餐后血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodSugar.title'
+                                                   series="charts.bloodSugar.afterBreakFastSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        午餐前血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodSugar.title'
+                                                   series="charts.bloodSugar.beforeLunchSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        午餐后血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodSugar.title'
+                                                   series="charts.bloodSugar.afterLunchSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        晚餐前血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodSugar.title'
+                                                   series="charts.bloodSugar.beforeDinnerSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        晚餐后血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodSugar.title'
+                                                   series="charts.bloodSugar.afterDinnerSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        睡前血糖
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodSugar.title'
+                                                   series="charts.bloodSugar.beforeSleepSeries"
+                                                   options="charts.bloodSugar.options">
+                                        </highchart>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="bloodPresser">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <span style="margin-right:2%;">选择时间</span>
+                                                <select ng-model="detection.time" ng-change="chooseHealthDataTime()">
+                                                    <option>最近一周</option>
+                                                    <option>最近一个月</option>
+                                                    <option>最近三个月</option>
+                                                    <option>最近半年</option>
+                                                </select>
+                                            </div>
+                                            <table class="table table-striped table-bordered table-hover text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th style="text-align:center;">测量时间</th>
+                                                    <th style="text-align:center;">收缩压/高压</th>
+                                                    <th style="text-align:center;">舒张压/低压</th>
+                                                    <th style="text-align:center;">心率</th>
+                                                    <th style="text-align:center;">备注</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in healthDatas">
+                                                    <td>{{item.measureTime|date:'yyyy-MM-dd'}}</td>
+                                                    <td>{{item.diastolic}}</td>
+                                                    <td>{{item.systolic}}</td>
+                                                    <td>{{item.heartRate}}</td>
+                                                    <td>{{item.remark}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        血压
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodPressure.title'
+                                                   series="charts.bloodPressure.pressureSeries"
+                                                   options="charts.bloodPressure.options">
+                                        </highchart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        心率
+                                        <highchart style="width:450px;height:350px;"
+                                                   title='charts.bloodPressure.title'
+                                                   series="charts.bloodPressure.heartRateSeries"
+                                                   options="charts.bloodPressure.options">
+                                        </highchart>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'testReport'">
+                        检验报告<hr style="margin-top:5px;">
+                        <div class="row" style="margin-bottom:2%;">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                                        <span style="margin-right:5%;">选择日期</span>
+                                        <span>开始日期<input name="dtBegin" type="text" class="input-sm" style="margin-left:2%;" ng-model="startDate"></span>
+                                        <span style="margin:0 10% 0 5%;">结束日期<input name="dtEnd" type="text" class="input-sm" style="margin-left:2%;" ng-model="endDate"></span>
+                                        <button class="btn btn-default" style="width:10%;" ng-click="testReportData(startDate,endDate)">搜索</button>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="item in testReportDatas">
+                                            <p style="padding-top:0px;"><span style="margin-right:20px;">提交者：{{item.providerName}}</span>提交时间：{{item.testDate}}&nbsp;{{item.testTime}}</p>
+                                            <div class="reportImg">
+                                                <div ng-repeat="item2 in item.testPicUrl.split(';')">
+                                                    <img ng-src="{{item2}}" alt=""/>
+                                                </div>
+                                            </div>
+                                            <p style="padding-top:0px;">{{item.description}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'diagnoseReport'">
+                        诊疗记录<hr style="margin-top:5px;">
+                        <div class="row" style="margin-bottom:2%;">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                                        <span style="margin-right:5%;">选择日期</span>
+                                        <span>开始日期<input name="dtBegin" type="text" class="input-sm" style="margin-left:2%;"></span>
+                                        <span style="margin:0 10% 0 5%;">结束日期<input name="dtEnd" type="text" class="input-sm" style="margin-left:2%;"></span>
+                                        <button class="btn btn-default" style="width:10%;">搜索</button>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="item in diagnoseReportDatas">
+                                            <p style="padding-top:0px;"><span style="margin-right:10px;">记录时间：{{item.recordDate}}</span>责任医生：{{item.providerName}}</p>
+                                            <video controls="" name="media" style="width:300px;height:40px;">
+                                                <source ng-src="{{item.audioUrl}}" type="audio/mpeg">
+                                            </video>
+                                            <p ng-if="item.description">文字备注：{{item.description}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'medicineIntervention'">
+                        服药干预<hr style="margin-top:5px;">
+                        <ul id="medicineInterventionTab" class="nav nav-tabs" style="margin-bottom:2%;">
+                            <li class="active">
+                                <a href="#medicinePlan" data-toggle="tab" ng-click="medicineCont('plan')">服药干预</a>
+                            </li>
+                            <li>
+                                <a href="#medicineRecord" data-toggle="tab" ng-click="medicineCont('record')">服药记录</a>
+                            </li>
+                        </ul>
+                        <div id="medicineInterventionContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="medicinePlan">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <span style="margin-right:2%;">药品名称</span>
+                                                <select>
+                                                    <option>西格列汀二甲双胍片(II)</option>
+                                                    <option>亚莫利格列美脲片</option>
+                                                </select>
+                                            </div>
+                                            <table class="table table-striped table-bordered table-hover text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th style="text-align:center;">药品名称</th>
+                                                    <th style="text-align:center;">剂量</th>
+                                                    <th style="text-align:center;">用药时间</th>
+                                                    <th style="text-align:center;">重复</th>
+                                                    <th style="text-align:center;">开始日期</th>
+                                                    <th style="text-align:center;">结束日期</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in uncompletedMedicationPlan">
+                                                    <td>{{item.drugName}}</td>
+                                                    <td>{{item.dose}}</td>
+                                                    <td>{{item.usageTime}}</td>
+                                                    <td>{{item.repeat}}</td>
+                                                    <td>{{item.startTime}}</td>
+                                                    <td>{{item.endTime}}</td>
+                                                </tr>
+                                                <tr ng-repeat="item in completeMedicationPlan">
+                                                    <td>{{item.drugName}}</td>
+                                                    <td>{{item.dose}}</td>
+                                                    <td>{{item.usageTime}}</td>
+                                                    <td>{{item.repeat}}</td>
+                                                    <td>{{item.startTime}}</td>
+                                                    <td>{{item.endTime}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="medicineRecord">
+                                <div class="row" style="margin-bottom:2%;">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                                                <span style="margin-right:5%;">选择日期</span>
+                                                <span>开始日期<input name="dtBegin" type="text" class="input-sm" style="margin-left:2%;" ng-model="startDate"></span>
+                                                <span style="margin:0 10% 0 5%;">结束日期<input name="dtEnd" type="text" class="input-sm" style="margin-left:2%;" ng-model="endDate"></span>
+                                                <button class="btn btn-default" style="width:10%;" ng-click="medicationStatus(startDate,endDate)">搜索</button>
+                                            </div>
+                                            <table class="table table-striped table-bordered table-hover text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th style="text-align:center;">记录时间</th>
+                                                    <th style="text-align:center;">药品名称</th>
+                                                    <th style="text-align:center;">服用状态</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in medicationRecordDatas">
+                                                    <td>{{item.usageDate}}&nbsp;{{item.usageTime}}</td>
+                                                    <td>{{item.drugName}}{{item.dose}}</td>
+                                                    <td>{{item.status}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'mealRecord'">
+                        饮食记录<hr style="margin-top:5px;">
+                        <div class="row" style="margin-bottom:2%;">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                                        <span style="margin-right:5%;">选择日期</span>
+                                        <span>开始日期<input name="dtBegin" type="text" class="input-sm" style="margin-left:2%;" ng-model="startDate"></span>
+                                        <span style="margin:0 10% 0 5%;">结束日期<input name="dtEnd" type="text" class="input-sm" style="margin-left:2%;" ng-model="endDate"></span>
+                                        <button class="btn btn-default" style="width:10%;" ng-click="dietPlanData(startDate,endDate)">搜索</button>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="item in mealRecordDatas">
+                                            <p style="padding-top:0px;">记录时间：{{item.createDate}}&nbsp;{{item.createTime}}</p>
+                                            <div class="reportImg">
+                                                <div ng-repeat="item2 in item.imageURL.split(';')">
+                                                    <img ng-src="{{item2}}"/>
+                                                </div>
+                                            </div>
+                                            <p style="padding-top:0px;">{{item.content}}</p>
+                                        </li>
+                                    </ul>
+                                    <div class="panel-footer" style="overflow: hidden;">
+                                        <div class="col-sm-6">
+                                            <div class="dataTables_info" role="alert" aria-live="polite" aria-relevant="all">
+                                                显示第1到10条记录
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="dataTables_paginate paging_simple_numbers">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button previous"><a href="javascript:;">上一页</a></li>
+                                                    <li class="paginate_button"><a href="javascript:;">1</a></li>
+                                                    <li class="paginate_button active"><a href="javascript:;">2</a></li>
+                                                    <li class="paginate_button" ><a href="javascript:;">3</a></li>
+                                                    <li class="paginate_button"><a href="javascript:;">4</a></li>
+                                                    <li class="paginate_button"><a href="javascript:;">5</a></li>
+                                                    <li class="paginate_button"><a href="javascript:;">6</a></li>
+                                                    <li class="paginate_button next"><a href="javascript:;">下一页</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="menu == 'sportRecord'">
+                        运动记录<hr style="margin-top:5px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>{{sport.sportStep}}步</span><span style="margin:0 20%;">{{sport.sportKilometer/100}}千米</span><span>{{sport.sportKilocalorie}}大卡</span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10%;">
+                            <highchart style="width:700px;height:300px;"
+                                       series="sportSeries"
+                                       options="sportCharts.options">
+                            </highchart>
+                        </div>
+                    </div>
+                    <div id="page-tool" style="display: none;">
+                        <div page-tool></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary" style="width:10%;" ng-click="selectOwnerDoctor()">确定</button>
+                                <button class="btn btn-default" style="width:10%;">取消</button>
+                            </div>
+                        </div>
+                        <div class="shadeContainer" ng-if="ownerHint">
+                            <div class="alertContainer" style="line-height:100px;text-align:center;font-size:16px;">指派成功</div>
+                        </div>
+                    </div>
+                    <div id="detail-page" style="display:none;">
+                        <p ng-if="hint == 'none'" class="text-center">{{noneDatas}}</p>
+                        <div detail-page></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+<ion-view style="background:white;">
+	<ion-header-bar align-title="center" class="bar-energized">
+		<div class="buttons" ng-if="param.questionIndex>0">
+			<button class="button" ng-click="prevItem()">上一题</button>
+		</div>
+		<h1 class="title">{{param.currentQuestion.questionTemp|titlecut}}</h1>
+		<div class="buttons" ng-if="param.questionIndex<param.questionMaxItem-1&&!param.answerlock">
+			<button class="button" ng-click="nextItem('next')">下一题</button>
+		</div>
+		<div class="buttons" ng-if="param.questionIndex==param.questionMaxItem-1">
+			<button class="button" ng-click="nextItem('finish')">完成&提交</button>
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<div ng-if="param.surveyFlag!='finish'">
+			<ion-list ng-if="param.currentQuestion.questionType=='multi'">
+				<h1 class="item item-input-inset item-text-wrap">
+					{{param.currentQuestion.questionId}}、{{param.currentQuestion.questionName}}
+				</h1>
+				<ion-checkbox class="item-text-wrap"
+							  ng-checked="{{item.checked}}"
+							  ng-repeat="item in param.currentQuestion.questionData"
+							  ng-click="clickCheckBox($index)">
+					{{item.questionItem}}.&nbsp;&nbsp;{{item.questionItemName}}
+				</ion-checkbox>
+			</ion-list>
+			<ion-list ng-if="param.currentQuestion.questionType=='single'">
+				<h1 class="item item-input-inset item-text-wrap">
+					{{param.currentQuestion.questionId}}、{{param.currentQuestion.questionName}}
+				</h1>
+				<ion-radio class="item-text-wrap"
+						   ng-model="param.singleChoice"
+						   ng-value="item.questionItem"
+						   ng-repeat="item in param.currentQuestion.questionData">
+					{{item.questionItem}}.&nbsp;&nbsp;{{item.questionItemName}}
+				</ion-radio>
+			</ion-list>
+			<div class="list" ng-if="param.currentQuestion.questionType=='select'">
+				<h1 class="item item-input-inset item-text-wrap">
+					{{param.currentQuestion.questionId}}、请输入{{param.currentQuestion.questionName}}
+				</h1>
+				<div ng-if="param.currentQuestion.questionStatus=='censusDetailAddress'">
+					<label class="item item-input item-select">
+						<div class="input-label item-text-wrap" style="width:50%;">
+							省/自治区/直辖市
+						</div>
+						<select ng-model="param.selectedProvince">
+							<option ng-repeat="item in param.province">{{item.name}}</option>
+						</select>
+					</label>
+					<label class="item item-input-inset item-select">
+						<div class="input-label item-text-wrap" style="margin-left:5px;">
+							市/州/地区
+						</div>
+						<select ng-model="param.selectedCity">
+							<option ng-repeat="item in param.city">{{item.name}}</option>
+						</select>
+					</label>
+					<label class="item item-input item-select">
+						<div class="input-label item-text-wrap">
+							乡/镇/街道
+						</div>
+						<select ng-model="param.selectedTown">
+							<option ng-repeat="item in param.town">{{item.name}}</option>
+						</select>
+					</label>
+					<label class="item item-input item-select">
+						<div class="input-label item-text-wrap">
+							社区/村
+						</div>
+						<select ng-model="param.selectedVillage">
+							<option ng-repeat="item in param.village">{{item}}</option>
+						</select>
+					</label>
+					<label class="item item-input-inset">
+						<input type="text"
+							   placeholder="填写楼栋/单元/门牌号（109号楼9单元10楼E门）"
+							   ng-model="param.inputValue">
+					</label>
+				</div>
+				<div ng-if="param.currentQuestion.questionStatus=='livingDetailAddress'">
+					<label class="item item-input item-select">
+						<div class="input-label item-text-wrap" style="width:50%;">
+							省/自治区/直辖市
+						</div>
+						<select ng-model="param.selectedProvince">
+							<option ng-repeat="item in param.province">{{item.name}}</option>
+						</select>
+					</label>
+					<label class="item item-input-inset item-select">
+						<div class="input-label item-text-wrap" style="margin-left:5px;">
+							市/州/地区
+						</div>
+						<select ng-model="param.selectedCity">
+							<option ng-repeat="item in param.city">{{item.name}}</option>
+						</select>
+					</label>
+				</div>
+				<div ng-if="param.currentQuestion.questionStatus=='livingDetailAddress'&&!param.beadhouse">
+					<label class="item item-input item-select">
+						<div class="input-label item-text-wrap">
+							乡/镇/街道
+						</div>
+						<select ng-model="param.selectedTown">
+							<option ng-repeat="item in param.town">{{item.name}}</option>
+						</select>
+					</label>
+					<label class="item item-input item-select">
+						<div class="input-label item-text-wrap">
+							社区/村
+						</div>
+						<select ng-model="param.selectedVillage">
+							<option ng-repeat="item in param.village">{{item}}</option>
+						</select>
+					</label>
+					<label class="item item-input-inset">
+						<input type="text" placeholder="填写楼栋/单元/门牌号（109号楼9单元10楼E门）"
+							   ng-model="param.inputValue">
+					</label>
+				</div>
+				<div ng-if="param.currentQuestion.questionStatus=='livingDetailAddress'&&param.beadhouse">
+					<div class="item item-input-inset">
+						<label class="item-input-wrapper">
+							<input type="text" ng-model="param.inputValue" placeholder="请输入养老机构名称">
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="list" ng-if="param.currentQuestion.questionType=='input'">
+				<h1 class="item item-input-inset item-text-wrap">
+					{{param.currentQuestion.questionId}}、请输入{{param.currentQuestion.questionName}}
+				</h1>
+				<div class="item item-input-inset">
+					<label class="item-input-wrapper">
+						<input type="text" ng-model="param.inputValue" placeholder="填写内容">
+					</label>
+				</div>
+			</div>
+		</div>
+		<div ng-if="param.surveyFlag=='finish'">
+			<button class="button button-block button-royal" ng-click="createNewSurvey()">
+				问卷保存成功，开始录入新用户
+			</button>
+		</div>
+	</ion-content>
+	<div class="tabs tabs-icon-top">
+		<a class="tab-item" ng-click="help()">
+			<i class="icon ion-help"></i>
+			帮助
+		</a>
+		<a class="tab-item" ng-click="loginOut()">
+			<i class="icon ion-android-walk"></i>
+			退出
+		</a>
+	</div>
+</ion-view>

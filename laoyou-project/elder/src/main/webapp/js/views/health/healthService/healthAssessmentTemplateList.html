@@ -1,0 +1,20 @@
+<ion-view style="background:#2b2b2b;">
+    <!--headerTitle start-->
+    <div page-loading></div>
+    <header>
+        <a href="javascript:history.go(-1)">返回</a>
+        <h1>{{elderName}}</h1>
+        <em></em>
+    </header>
+    <div class="empty10"></div>
+    <!--headerTitle end-->
+    <ul class="newAssessList bgf">
+        <a ui-sref="healthAssessment({healthAssessmentTemplateId:item.healthAssessmentTemplateId})"
+           ng-repeat="item in healthAssessmentTemplateList">
+            <li>
+                <img ng-src="{{item.healthAssessmentTemplateIcon}}"/>
+                {{item.healthAssessmentTemplateName}}
+            </li>
+        </a>
+    </ul>
+</ion-view>

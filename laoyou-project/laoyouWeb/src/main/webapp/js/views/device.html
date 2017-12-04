@@ -1,0 +1,157 @@
+<div id="wrapper">
+    <hospital-menu title="device"></hospital-menu>
+    <div class="fixHeight"></div>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>设备管理</h2>
+                    </div>
+                </div>
+                <hr>
+                <a class="btn btn-primary" ng-click="newDeviceInf()">新的设备</a>
+                <div class="row" style="margin-top: 2%;">
+                    <div class="col-md-6">
+                        <table class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center">设备类型</th>
+                                <th class="text-center">设备数量</th>
+                                <th class="text-center">绑定会员数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-class="{even:!$even,odd:!$odd}"
+                                    ng-repeat="item in deviceStatisicList">
+                                    <td>{{item.deviceType}}</td>
+                                    <td>{{item.deviceNum}}</td>
+                                    <td>{{item.deviceBindNum}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- 设备信息列表 Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                设备信息列表
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="dataTables_wrapper form-inline">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_length">
+                                                    <label>
+                                                        每页显示
+                                                        <select ng-model="pageSize"
+                                                                ng-options="page for page in pageSizes"
+                                                                ng-change="displayPageList()"/>
+                                                        条记录
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_filter">
+                                                    <label>
+                                                        <input type="text" class="form-control input-sm" ng-model="param.searchValue" />
+                                                        <button class="btn btn-default" ng-click="searchPageList()">点击搜索</button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">设备类型</th>
+                                                <th class="text-center">设备ID</th>
+                                                <th class="text-center">设备信息备注</th>
+                                                <th class="text-center">绑定会员名</th>
+                                                <th class="text-center">绑定会员ID</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in response.list"
+                                                    ng-class="{even:!$even,odd:!$odd}">
+                                                    <td>{{item.type}}</td>
+                                                    <td>{{item.deviceId}}</td>
+                                                    <td>{{item.remarks}}</td>
+                                                    <td>{{item.username}}</td>
+                                                    <td>{{item.memberId}}</td>
+                                                    <td>
+                                                        <a ng-click="newDeviceInf()" href="javascript:;">编辑</a>
+                                                        <a ng-click="delDeviceInf(item.id)" href="javascript:;">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div page-tool></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End 设备信息列表 Tables -->
+                    </div>
+                </div>
+                <!--添加修改设备 start-->
+                <div ng-if="deviceInf" class="row shadeContainer">
+                    <div class="col-md-4" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                添加/修改设备信息
+                                <button type="button" class="close" ng-click="newDeviceInf()">x</button>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label style="width:100px;">设备类型</label>
+                                        <select ng-model="deviceParam.deviceType"
+                                                ng-options="type for type in deviceTypes"
+                                                ng-change="getDeviceType()"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">设备名称</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="deviceParam.deviceName"
+                                               style="display:inline;width:auto;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">设备ID</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="deviceParam.deviceId"
+                                               style="display:inline;width:auto;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">设备信息备注</label>
+                                        <textarea type="text" class="form-control"
+                                                  ng-model="deviceParam.remarks"
+                                                  style="display:inline;width:auto;"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">绑定用户</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="deviceParam.memberId"
+                                               style="display:inline;width:auto;">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" style="width:20%;" ng-click="CreateDeviceInf('add')">确定</button>
+                                        <button type="button" class="btn btn-default" style="width:20%;" ng-click="CreateDeviceInf('cancel')">取消</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+
+

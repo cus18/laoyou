@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.sys.dao.SysHospitalUserDao">
+
+
+    <insert id="insertSysHospitalUser">
+		INSERT INTO sys_hospital_user(
+		id,
+		sys_user_id,
+		sys_office_id,
+		create_date,
+		update_date,
+		easemobID,
+		easemobPassword
+		) VALUES (
+		#{id},
+		#{sysUserID},
+		#{sysOfficeID},
+		now(),
+		now(),
+		#{easemobID},
+		#{easemobPassword}
+		)
+	</insert>
+
+
+    <select id="getSysHospitalUserByUserID" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysHospitalUserDTO">
+		select shu.id,shu.sys_user_id as sysUserID,
+		so.name as officeName,shu.sys_office_id as sysOfficeID,
+		shur.role_id as sysRoleID,su.name as name,
+		su.phone as phone,shu.create_date as createDate,
+		shu.update_date as updateDate,shu.loginToken as loginToken,
+		shu.easemobID as easemobID,shu.easemobPassword as easemobPassword,
+		su.gender,su.photo
+		from sys_hospital_user shu
+		inner join sys_user su on shu.sys_user_id=su.id
+		inner join sys_office so on shu.sys_office_id=so.id
+		inner join sys_hospital_user_role shur on shur.sys_hospital_user_id=shu.id
+		where su.id=#{sysUserID}
+	</select>
+
+	<select id="getSysHospitalUserByEasemobID" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysHospitalUserDTO">
+		SELECT * FROM `sys_hospital_user` where easemobID=#{easemobID}
+	</select>
+
+    <update id="updateLoginToken">
+		UPDATE`sys_hospital_user`
+		SET
+		`loginToken`=#{loginToken}
+		WHERE
+		`id`=#{id}
+	</update>
+
+	<select id="getSysHospitalUserList" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysHospitalUserDTO">
+		select shu.id,shu.sys_user_id as sysUserID,
+		so.name as officeName,shu.sys_office_id as sysOfficeID,
+		shur.role_id as sysRoleID,su.name as name,
+		su.phone as phone,shu.create_date as createDate,
+		shu.update_date as updateDate,shu.loginToken as loginToken,
+		shu.easemobID as easemobID,shu.easemobPassword as easemobPassword,
+		su.gender,su.photo
+		from sys_hospital_user shu
+		inner join sys_user su on shu.sys_user_id=su.id
+		inner join sys_office so on shu.sys_office_id=so.id
+		inner join sys_hospital_user_role shur on shur.sys_hospital_user_id=shu.id
+		where su.del_flag !='1'
+		<if test="searchValue != null and searchValue != ''">
+		 and ( su.name	like  CONCAT(CONCAT('%', #{searchValue}), '%') or  su.email	like  CONCAT(CONCAT('%', #{searchValue}), '%')
+			or su.area	like  CONCAT(CONCAT('%', #{searchValue}), '%'))
+		</if>
+	</select>
+
+	<select id="getSysHospitalUserByInfo" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysHospitalUserDTO" parameterType="com.yhl.laoyou.common.dto.practitioner.Settings.SysHospitalUserDTO">
+		SELECT * FROM sys_hospital_user where 1=1
+		<if test="sysUserID != null and sysUserID != ''">
+			and sys_user_id = #{sysUserID}
+		</if>
+	</select>
+
+	<select id="getAllHospital" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysHospitalUserDTO">
+		select shu.id,su.id as sysUserID,name from sys_user su
+		inner join sys_hospital_user shu on su.id=shu.sys_user_id
+	</select>
+</mapper>

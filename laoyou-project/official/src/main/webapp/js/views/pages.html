@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <header></header>
+    <div class="subBanner" style="background:url(/images/banner02.jpg) center no-repeat;"></div>
+    <div class="container clearfix">
+        <div class="fl">
+            <div class="mapMenu">
+                <span></span>&nbsp;&gt;&nbsp;{{response.primaryName}}&nbsp;&gt;&nbsp;{{response.twoLevelName}}
+            </div>
+            <div>
+                <div class="titLeft">{{response.primaryName}}</div>
+                <ul class="listLeft clearfix">
+                    <li ng-repeat="item in response.twoLevelCategory" ng-class="{'active':item.name == response.twoLevelName}"><a ui-sref="pages({catalogId:item.id,articleId:''})">{{item.name}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content fr">
+            <h3>{{response.primaryName}}</h3>
+            <div ng-if="response.news.length == '1'">
+                <div ng-if="response.primaryName == '新闻中心'">
+                    <b class="newsDate">{{response.news[0].createDate}}</b>
+                    <h5>{{response.news[0].title}}</h5>
+                    <hr>
+                </div>
+                <div id="article"></div>
+            </div>
+            <ul ng-if="response.news.length != '1'" class="newsContent">
+                <li ng-repeat="item in response.news">
+                    <a ui-sref="pages({catalogId:catalogId,articleId:item.id})" target="_blank">
+                        <div class="newsDate">{{item.createDate | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                        <h4>{{item.title}}</h4>
+                        <div class="newsArticle">{{item.articleData.content}}</div>
+                    </a>
+                </li>
+            </ul>
+            <page></page>
+        </div>
+    </div>
+    <footer></footer>
+</div>

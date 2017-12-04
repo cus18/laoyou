@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.sys.dao.SysElderUserDao">
+
+
+	<insert id="insertSysElderUser">
+		INSERT INTO sys_elder_user(
+		id,
+		sys_user_id,
+		easemobID,
+		easemobPassword,
+		memberCardID,
+		create_date,
+		update_date,
+		sys_hospital_id
+		) VALUES (
+		#{id},
+		#{sysUserID},
+		#{easemobID},
+		#{easemobPassword},
+		#{memberCardID},
+		now(),
+		now(),
+		#{sysHospitalID}
+		)
+	</insert>
+
+	<select id="getSysElder" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysElderUserDTO">
+		SELECT * FROM `sys_elder_user` where sys_user_id=#{sysUserID}
+	</select>
+
+	<select id="getSysElderUser" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysElderUserDTO">
+		SELECT * FROM `sys_elder_user` where id=#{elderId}
+	</select>
+
+	<update id="updateLoginToken">
+		UPDATE`sys_elder_user`
+		SET
+		`loginToken`=#{loginToken}
+		WHERE
+		`id`=#{id}
+	</update>
+
+	<select id="getSysElderUserByEasemobID" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysElderUserDTO">
+		SELECT *,sys_user_id as sysUserID FROM `sys_elder_user` where easemobID=#{easemobID}
+	</select>
+
+	<select id="getSysElderUserMemberCardID" resultType="java.lang.String">
+		select seu.memberCardID from sys_elder_user seu order by seu.memberCardID desc limit 1
+	</select>
+
+	<delete id="delSysElderUser">
+		delete from sys_elder_user where id=#{id}
+	</delete>
+
+	<select id="getSysElderUserByHospitalID" resultType="com.yhl.laoyou.common.dto.practitioner.Settings.SysElderUserDTO">
+		SELECT seu.id,seu.sys_user_id as sysUserID,seu.easemobID,seu.easemobPassword,seu.memberCardID,seu.loginToken,
+ 		seu.sys_hospital_id as sysHospitalID  FROM `sys_elder_user` seu
+		inner join sys_user su on su.id=seu.sys_user_id
+		where sys_hospital_id=#{sysHospitalID}  and su.del_flag=0
+		<if test="search != null and search !=''">
+			and (name like  CONCAT('%',#{search},'%') or age like  CONCAT('%',#{search},'%'))
+		</if>
+	</select>
+
+	<select id="getSysElderUserCountByHospitalID" resultType="java.lang.Integer">
+		SELECT count(*) FROM `sys_elder_user` where sys_hospital_id=#{sysHospitalID}
+	</select>
+
+	<select id="getSysElderUserCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM sys_elder_user
+	</select>
+
+</mapper>

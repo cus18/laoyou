@@ -1,0 +1,54 @@
+<ion-view style="background:white;">
+    <ion-header-bar align-title="center" class="bar-energized">
+        <div class="buttons">
+            <button class="button" ng-click="return()"><</button>
+        </div>
+        <h1 class="title">活动</h1>
+    </ion-header-bar>
+    <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+        <div class="tabs" style="background-color:#f8f8f8;border-color:#f8f8f8">
+            <a ng-class="{true:'tab-item active',false:'tab-item'}[param.page.requestData=='0']"
+               ng-style="{'color':'black','border-bottom-color':'#ff8e01'}"
+               ng-click="chooseActivity('comm')">
+                社区活动
+            </a>
+            <a ng-class="{true:'tab-item active',false:'tab-item'}[param.page.requestData=='2']"
+               ng-style="{'color':'black','border-bottom-color':'#ff8e01'}"
+               ng-click="chooseActivity('hot')">
+                热门活动
+            </a>
+        </div>
+    </div>
+    <ion-content style="margin-top: 47px;">
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+        <style>
+            .talkOdd {
+                background-color: white;
+            }
+            .talkEven {
+                background-color: #f8f8f8;
+            }
+        </style>
+        <div class="list">
+            <a class="item item-avatar item-text-wrap"
+               ng-repeat="item in activityList"
+               ui-sref="activityDetail({activityId:item.activityId})"
+               ng-class-odd="'talkOdd'"
+               ng-class-even="'talkEven'">
+                <img ng-src="{{item.activityLogo}}"
+                     style="max-width:50px;max-height:50px;border-radius:0;margin-left:-5px;">
+                <h2>{{item.activityName}}</h2>
+                <p><i class="icon ion-location"></i>&nbsp;&nbsp;{{item.activityAddress}}</p>
+                <span class="item-note">
+                    {{item.activityAttendedNum}}人参与
+                </span>
+                <p><i class="icon ion-ios-clock-outline"></i>&nbsp;&nbsp;
+                    <span ng-if="item.activityStatus=='waiting'">未开始</span>
+                    <span ng-if="item.activityStatus=='ongoing'">进行中</span>
+                    <span ng-if="item.activityStatus=='end'">已结束</span>
+                </p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+

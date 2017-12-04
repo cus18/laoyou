@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.myService.dao.ActivityDao">
+
+	<insert id="addActivity" parameterType="com.yhl.laoyou.modules.activityService.entity.Activity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO`activity`
+		(`banner`,
+		`title`,
+		`startDate`,
+		`endDate`,
+		`address`,
+		`description`,
+		`type`,
+		`sys_user_id`,
+		`userType`,
+		`peopleNum`
+		)
+		VALUES (
+		#{banner},
+		#{title},
+		#{startDate},
+		#{endDate},
+		#{address},
+		#{description},
+		#{type},
+		#{sysUserID},
+		#{userType},
+		#{peopleNum}
+		)
+	</insert>
+
+	<select id="getActivityList" resultType="com.yhl.laoyou.common.dto.activity.ActivityDTO">
+		select a.id as activityId,a.banner as activityLogo,a.title as activityName,
+		a.address as activityAddress, a.startDate as activityStartDate,aeg.groupid as activityEasemobGroupID,
+		a.endDate as activityEndDate, a.status as activityStatus ,a.description as activityDetailInfo,
+		su.name as activityOwnerName,su.photo as activityOwnerLogo,su.remarks as activityOwnerIntro,count(au.id) as activityAttendedNum,a.peopleNum
+		,a.type
+		from activity a
+		left join sys_user su on su.id=a.sys_user_id
+		left join activity_user au on au.activity_id=a.id
+		left join activity_easemob_group aeg on aeg.id=a.easemob_group_id
+		where a.del_flag='0'
+		<if test="id != null and id != '' ">
+			and a.id=#{id}
+		</if>
+		<if test="search != null and search != '' ">
+			and (a.title like  CONCAT(CONCAT('%', #{search}), '%') or a.description like CONCAT(CONCAT('%', #{search}), '%') or a.address like CONCAT(CONCAT('%', #{search}), '%'))
+		</if>
+		group by a.id
+	</select>
+
+	<select id="getActivityListByTask" resultType="com.yhl.laoyou.modules.activityService.entity.Activity">
+		select a.id ,a.`status`
+		from activity a
+		where a.del_flag='0' AND  (DATE_FORMAT(a.startDate,"%Y-%m-%d %H:%i")&lt;=DATE_FORMAT(now(),"%Y-%m-%d %H:%i")
+		and
+		a.status="waiting") or (DATE_FORMAT(a.endDate,"%Y-%m-%d %H:%i")&lt;=DATE_FORMAT(now(),"%Y-%m-%d %H:%i")
+		and
+		a.status="ongoing")
+	</select>
+
+	<select id="getActivityListByElderID" resultType="com.yhl.laoyou.common.dto.activity.AttendedActivityDTO">
+		select a.id as activityId,a.easemob_group_id as activityGroupId,a.banner as activityLogo,a.title as activityName from activity a
+		left join activity_user au on a.id=au.activity_id
+		where a.del_flag='0' au.sys_elder_user_id = #{elderID} group by a.id order by startDate desc
+	</select>
+
+	<select id="getMyActivityListByElderID" resultType="com.yhl.laoyou.common.dto.activity.ActivityDTO">
+		select a.id as activityId,a.banner as activityLogo,a.title as activityName,
+		a.address as activityAddress, a.startDate as activityStartDate,
+		a.endDate as activityEndDate, a.status as activityStatus ,a.description as activityDetailInfo,
+		su.name as activityOwnerName,su.photo as activityOwnerLogo,su.remarks as activityOwnerIntro,a.status as activityStatus,
+		count(au.id) as activityAttendedNum
+		from activity a
+		left join activity_user au on a.id=au.activity_id
+		left join sys_user su on a.sys_user_id=su.id
+		where a.del_flag='0'
+		<if test="elderID != null and elderID != '' ">
+			  and au.sys_elder_user_id=#{elderID}
+		</if>
+		group by a.id
+		<choose>
+			<when test="activityType = '2' ">
+					ORDER BY activityAttendedNum desc
+			</when>
+			<otherwise>
+					order by startDate desc
+			</otherwise>
+		</choose>
+		limit #{pageNo}
+	</select>
+
+	<select id="getMyHospitalActivityListByHospitalID" resultType="com.yhl.laoyou.common.dto.activity.ActivityDTO">
+		select a.id as activityId,a.banner as activityLogo,a.title as activityName,
+		a.address as activityAddress, a.startDate as activityStartDate,
+		a.endDate as activityEndDate, a.status as activityStatus ,a.description as activityDetailInfo,
+		su.name as activityOwnerName,su.photo as activityOwnerLogo,su.remarks as activityOwnerIntro,a.status as activityStatus
+		from activity a
+		left join activity_user au on a.id=au.activity_id
+		left join sys_user su on a.sys_user_id=su.id
+		left join sys_hospital_user sh on su.id=sh.sys_user_id
+		where a.del_flag='0' and sh.id=#{hospitalID}  group by a.id  limit 2
+	</select>
+
+	<update id="updateActivityStatus">
+		UPDATE`activity` SET `status`=#{status} WHERE  `id`=#{id}
+	</update>
+
+	<select id="getMyFavoriteActivityList" resultType="com.yhl.laoyou.common.dto.activity.AttendedActivityDTO">
+		select a.id as activityId,a.easemob_group_id as activityGroupId,a.banner as activityLogo,a.title as activityName from activity a
+		inner join activity_favorite af on a.id=af.activity_id
+		where a.del_flag='0' and af.sys_elder_user_id = #{sysElderUserID} order by startDate desc
+	</select>
+
+
+	<select id="getActivityByGroupID" resultType="com.yhl.laoyou.modules.activityService.entity.Activity">
+		SELECT * FROM`activity`
+		where easemob_group_id = #{groupID} and del_flag='0'
+	</select>
+
+
+	<select id="getReadyActivity" resultType="com.yhl.laoyou.modules.activityService.entity.Activity">
+		select * from activity
+		where  DATE_FORMAT(startDate ,"%Y-%m-%d %H:%i") = DATE_FORMAT(DATE_add(now(),INTERVAL 30 MINUTE) ,"%Y-%m-%d %H:%i")
+	</select>
+
+	<update id="updateActivityEasemobGroup">
+		UPDATE`activity` SET `easemob_group_id`=#{easemobGroupID} WHERE  id=#{id}
+	</update>
+
+	<insert id="insertIP">
+		INSERT INTO`weibo_ip` (`ip`) VALUES (#{IP})
+	</insert>
+
+	<select id="getActivityListByBackEnd" resultType="com.yhl.laoyou.common.dto.activity.ActivityDTO">
+		select a.id as activityId,a.banner as activityLogo,a.title as activityName,
+		a.address as activityAddress, a.startDate as activityStartDate,
+		a.endDate as activityEndDate, a.status as activityStatus ,a.description as activityDetailInfo,
+		su.name as activityOwnerName,su.photo as activityOwnerLogo,su.remarks as activityOwnerIntro,
+		a.peopleNum ,a.createTime
+		from activity a
+		left join activity_user au on a.id=au.activity_id
+		left join sys_user su on a.sys_user_id=su.id
+		left join sys_hospital_user sh on su.id=sh.sys_user_id
+		where a.del_flag='0'
+		<if test="searchValue != null and searchValue != ''">
+		and (a.title like  CONCAT('%',#{searchValue},'%')
+		</if>
+		<if test="status == 'end'">
+			and a.status='end'
+		</if>
+		<if test="status == 'publish'">
+			and (a.status='ongoing' or a.status='waiting')
+		</if>
+		<if test="hospitalID != null and hospitalID != '' and hospitalID != '1'.toString() ">
+			and sh.id=#{hospitalID}
+		</if>
+		<if test="startDate != null and startDate != '' and  endDate != null and endDate != ''">
+			and a.startDate &lt; #{startDate} and a.endDate &gt; #{endDate}
+		</if>
+		group by a.id
+	</select>
+
+	<update id="delActivity">
+		UPDATE`activity` SET `del_flag`=#{del_flag} WHERE  id=#{id}
+	</update>
+
+	<select id="getAllActivityListByBackEnd" resultType="com.yhl.laoyou.common.dto.activity.ActivityDTO">
+		select a.id as activityId,a.banner as activityLogo,a.title as activityName,
+		a.address as activityAddress, a.startDate as activityStartDate,aeg.groupid as activityEasemobGroupID,
+		a.endDate as activityEndDate, a.status as activityStatus ,a.description as activityDetailInfo,
+		su.name as activityOwnerName,su.photo as activityOwnerLogo,su.remarks as activityOwnerIntro,count(au.id) as activityAttendedNum,a.peopleNum
+		,a.type,a.createTime
+		from activity a
+		left join sys_user su on su.id=a.sys_user_id
+		left join activity_user au on au.activity_id=a.id
+		left join activity_easemob_group aeg on aeg.id=a.easemob_group_id
+		left join sys_hospital_user shu on su.id=shu.sys_user_id
+		where a.del_flag='0'
+		<if test="hospitalID != null and hospitalID != '' ">
+			and shu.id=#{hospitalID}
+		</if>
+		<if test="activityName != null and activityName != '' ">
+			and (a.title like  CONCAT(CONCAT('%', #{activityName}), '%')
+		</if>
+		<if test="activityStartDate != null and activityStartDate != '' and  activityEndDate != null and activityEndDate != ''">
+			and a.createTime &lt; #{activityStartDate} and a.createTime &gt; #{activityEndDate}
+		</if>
+		group by a.id
+	</select>
+
+</mapper>

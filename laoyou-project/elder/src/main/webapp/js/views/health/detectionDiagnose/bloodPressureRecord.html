@@ -1,0 +1,54 @@
+<ion-view style="background:white">
+    <div page-loading></div>
+    <form name="bloodSugarRecordForm" ng-submit="submitForm()" novalidate>
+        <!--headerTitle start-->
+        <header>
+            <div ng-if="h5Page" style="float:left;margin-top:4%;margin-left:2%;font-size:0.34rem;"
+                 ng-click="returnRootNative()">&lt;返回
+            </div>
+            <h1>血压测量记录</h1>
+            <button ng-if="h5Page" ng-hide="bloodPressure.readOnly">保存</button>
+            <em ng-show="bloodPressure.readOnly"></em>
+        </header>
+        <div class="empty10"></div>
+        <!--headerTitle end-->
+        <!--content start-->
+        <section class="monitorContainer">
+            <div id="measureCont" ng-click="bloodPressure.emptyCont=true" ng-hide="bloodPressure.readOnly">
+                <div ng-if="!bloodPressure.emptyCont" class="monitorDataCont bloodPressureCont">添加测量值</div>
+                <div ng-if="bloodPressure.emptyCont" class="pressureItem clearfix">
+                    <p id="diastolic">{{bloodPressure.diastolic || '--'}}</p>
+                    <p id="systolic">{{bloodPressure.systolic || '--'}}</p>
+                    <p id="heartRate">{{bloodPressure.heartRate || '--'}}</p>
+                </div>
+            </div>
+            <div ng-show="bloodPressure.readOnly">
+                <div class="pressureItem">
+                    <p>{{bloodPressure.diastolic}}</p>
+                    <p>{{bloodPressure.systolic}}</p>
+                    <p>{{bloodPressure.heartRate}}</p>
+                </div>
+            </div>
+            <ul class="bloodPressureUnit clearfix"><li>高压</li><li>低压</li><li>心率</li></ul>
+            <div class="monitorDataInf">
+                <p>
+                    <em>测量时间：</em>
+                    <span id="measureTime">{{bloodPressure.measureTime || bloodPressure.nowTime}}</span>
+                    <span id="measureDate">{{bloodPressure.measureDate || bloodPressure.nowDate}}</span>
+                    <input ng-hide="bloodPressure.readOnly" type="text" value="" id="measureTimeInp" readonly/>
+                </p>
+                <p>
+                    <em>控制目标：</em>
+                    <span ng-hide="bloodPressure.readOnly"><a ui-sref="controlObjective({objectiveType:'bloodPressure'})">{{bloodPressure.objective || "请填写"}}mmol/L</a></span>
+                    <span ng-show="bloodPressure.readOnly">{{bloodPressure.objective}}mmol/L</span>
+                </p>
+            </div>
+            <div ng-if="bloodPressure.remark">
+                <p class="monitorTxt">文字备注</p>
+                <textarea ng-hide="bloodPressure.readOnly" name="remark" placeholder="请在这里输入..."  class="remarkcCont" ng-model="bloodPressure.remark"></textarea>
+                <p ng-show="bloodPressure.readOnly" class="remarkcCont">{{bloodPressure.remark || '无'}}</p>
+            </div>
+        </section>
+        <!--content end-->
+    </form>
+</ion-view>

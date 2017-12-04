@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.notificationRemindService.dao.RemindTemplateDao">
+
+	<insert id="addRemindTemplate">
+		INSERT INTO`remind_template`
+		(`icon`,`type`,`title`,`content`,`uri`,`toUse`)
+		VALUES
+		(#{icon},#{type},#{title},#{content},#{uri},#{toUse})
+	</insert>
+
+	<select id="getRemindTemplateEntityByID" resultType="com.yhl.laoyou.modules.notificationRemindService.entity.RemindTemplateEntity">
+			SELECT `id`, `icon`,`title`,type, `content`, `uri`, toUse,`create_by`, `create_date`, `update_date`, `del_flage`
+			FROM`remind_template`
+			WHERE  `id`=#{ID}
+	</select>
+
+	<select id="getRemindTemplateEntityList" resultType="com.yhl.laoyou.modules.notificationRemindService.entity.RemindTemplateEntity">
+		SELECT `id`, `icon`,`title`,type, `content`, `uri`, toUse,`create_by`, `create_date`, `update_date`, `del_flage`
+		FROM `remind_template`
+		WHERE  del_flage!=1
+		<if test="title !=null and title !=''">
+			AND title like  CONCAT(CONCAT('%', #{title}), '%')
+		</if>
+		<if test="startUpdateDate !=null and startUpdateDate !='' and endUpdateDate !=null and endUpdateDate !=''">
+			AND update_date &gt; #{startUpdateDate} AND update_date &lt; #{endUpdateDate}
+		</if>
+	</select>
+
+	<update id="updateRemindTemplate">
+		UPDATE remind_template SET
+		update_date=now()
+		<if test="icon!= ''and icon!=null">
+		,icon=#{icon}
+		</if>
+		<if test="type!= ''and type!=null">
+			,type=#{type}
+		</if>
+		<if test="toUse!= ''and toUse!=null">
+			,toUse=#{toUse}
+		</if>
+		<if test="title!= ''and title!=null">
+			,title=#{title}
+		</if>
+		<if test="content!= '' and content!=null">
+			,content=#{content}
+		</if>
+		<if test="uri!= '' and uri!=null">
+			,uri=#{uri}
+		</if>
+		WHERE id = #{id}
+	</update>
+
+	<update id="deleteRemindTemplate">
+		UPDATE remind_template SET
+		del_flage='1'
+		WHERE id = #{id}
+	</update>
+</mapper>

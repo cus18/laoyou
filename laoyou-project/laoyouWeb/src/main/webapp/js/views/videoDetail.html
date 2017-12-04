@@ -1,0 +1,60 @@
+<div id="wrapper">
+    <hospital-menu title="video"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>直播详情</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+            <form role="form" name="singleMemberForm" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="display:block;">封面图片</label>
+                            <img src="/hospital/images/doctor_group_welcome.png" alt="" style="width:100px;height:100px;" id="uploadImg">
+                            <input class="form-control" type="file" style="width:80%;float:right;margin-top:60px;" id="uploadInp"/>
+                        </div>
+                        <div class="form-group">
+                            <label>直播标题</label>
+                            <input class="form-control" placeholder="活动主题"/>
+                        </div>
+                        <div class="form-group date-picker input-daterange" data-date-format="yyyy-mm-dd hh:ii">
+                            <label>开播时间</label>
+                            <input class="form-control" type="text"/>
+                        </div>
+                        <div class="form-group" style="position:relative;">
+                            <label>直播标签</label>
+                            <input class="form-control" placeholder="请选择" ng-model="videoLabel" ng-focus="labelFocus()"/>
+                            <div class="LabelArea" ng-if="labelShow">
+                                <label>
+                                    <input type="radio" name="label" value="标签1" ng-model="videoLabel">标签1
+                                </label>
+                                <label>
+                                    <input type="radio" name="label" value="标签2" ng-model="videoLabel">标签2
+                                </label>
+                                <label>
+                                    <input type="radio" name="label" value="标签3" ng-model="videoLabel">标签3
+                                </label>
+                                <div style="margin-top:20px;">
+                                    <button class="btn btn-primary" style="margin:0 5% 0 60%;" ng-click="labelSure()">确定</button>
+                                    <button class="btn btn-default" ng-click="labelCancel()">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;">详细描述</label>
+                            <textarea rows="6" style="width:100%;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button ng-if="type == 'new'" class="btn btn-primary" style="width:10%;" type="submit" ng-click="">保存并发布</button>
+                <button class="btn btn-default" style="width:10%;" ui-sref="video({type:'video'})">取消</button>
+            </form>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<ion-view style="background:#f8f8f8;">
+    <ion-content>
+        <div style="margin-top:10px;" ng-if="relativeElderList.length>1">
+            <button ng-class="{true:'button button-small button-balanced',false:'button button-small button-stable'}[elderId==item.elderID]"
+                    style="margin-top:15px;margin-left:15px;border-color:black;"
+                    ng-repeat="item in relativeElderList"
+                    ng-click="chooseRelativeElder(item.elderID)">
+                {{item.elderName}}
+            </button>
+        </div>
+        <div class="list card">
+            <div class="item item-avatar">
+                <img src="http://yhlofficial.oss-cn-beijing.aliyuncs.com/temp">
+                <button class="item-note button button-balanced"
+                        ui-sref="healthService({firstMenu:'healthArchives',secondMenu:'basicInfo'})">查看健康档案</button>
+                <h2>{{elderName}}</h2>
+                <p>{{gender}}&nbsp;&nbsp;{{age}}岁</p>
+            </div>
+            <div class="item item-body" ng-if="healthServicePackageList!=null">
+                <p style="width:100%">健康产品
+                    <span style="float:right"
+                             ui-sref="healthService({firstMenu:'healthServicePackage',secondMenu:''})">
+                        更多<i class="icon ion-chevron-right"></i>
+                    </span>
+                </p>
+                <ion-item ng-repeat="item in healthServicePackageList" ui-sref="healthServicePackage({servicePackageId:item.servicePackageId,operation:'existHealthServicePackage'})">
+                    <span style="border-radius: 50%;
+                                height: 16px;
+                                width: 16px;
+                                display: inline-block;
+                                background: #387ef5;
+                                vertical-align: top;
+                                margin-left: 5px;
+                                margin-top: 2px;
+                                position: absolute;">
+                        <span style="display: block;
+                                    color: #FFFFFF;
+                                    text-align: center;
+                                    font-size: 0.01rem;
+                                    margin-top: -2px;">{{$index+1}}
+                        </span>
+                    </span>
+                    <p style="margin-left:30px;margin-top:0px;">{{item.servicePackageTemplateName}}</p>
+                </ion-item>
+                <ion-item>
+                    <div style="margin-left: 1%" ui-sref="healthService({'firstMenu':'healthServicePackage','secondMenu':''})">
+                        <img src="http://yhllaoyoubanner.oss-cn-hangzhou.aliyuncs.com/1.png"
+                             style="width:50px;height:50px;">
+                        <p style="margin-top:3px;margin-left:-3px;">健康服务</p>
+                    </div>
+                    <div style="margin-top:-73px;margin-left:40%;" ui-sref="detectionDiagnose({'firstMenu':'detection','secondMenu':'bloodSugarTable'})">
+                        <img src="http://yhllaoyoubanner.oss-cn-hangzhou.aliyuncs.com/2.png"
+                              style="width:50px;height:50px;">
+                        <p style="margin-top:3px;margin-left:-2px;">检测诊疗</p>
+                    </div>
+                    <div style="margin-left:77%;margin-top:-73px;" ui-sref="interventionGuidance({'firstMenu':'medicineIntervention','secondMenu':'interventionPlan','recordDate':''})">
+                        <img src="http://yhllaoyoubanner.oss-cn-hangzhou.aliyuncs.com/3.png"
+                             style="width:50px;height:50px;">
+                        <p style="margin-top:3px;margin-left:-4px;">干预指导</p>
+                    </div>
+                </ion-item>
+            </div>
+            <div class="item item-body" ng-if="healthServicePackageList==null">
+                <ion-item>
+                    <img style="width:280px"
+                         src="http://yhllaoyoubanner.oss-cn-hangzhou.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720170823092919.png?x-oss-process=image/resize,m_fill,h_150,w_400"/>
+                </ion-item>
+                <ion-item>
+                    <p>您可以联系养老机构签约已有的服务套餐～</p>
+                </ion-item>
+            </div>
+        </div>
+        <h2 style="font-size:18px;margin-top:35px;margin-left:15px;width:100%">
+            健康课堂
+            <span style="float:right;margin-right:30px;" ui-sref="courseList({type:'vod'})">更多<i class="icon ion-chevron-right"></i></span>
+        </h2>
+        <div class="list" style="margin-top: 15px;">
+            <a class="item item-avatar item-text-wrap"
+               ng-repeat="item in onlineCourseList"
+               ui-sref="courseDetail({courseId:item.onlineCourseId,courseType:'vod'})">
+                <img ng-src="{{item.onlineCourseLogo}}"
+                     style="max-width:50px;max-height:50px;border-radius:0;margin-left:-5px;">
+                <h2>{{item.onlineCourseName}}</h2>
+                <!--<p><i class="icon ion-ios-book"></i>&nbsp;&nbsp;{{item.onlineCourseOutline}}</p>-->
+                <p><i class="icon ion-eye"></i>&nbsp;&nbsp;{{item.onlineCourseStudyNum}}人观看</p>
+            </a>
+            <br/><br/><br/><br/>
+        </div>
+    </ion-content>
+</ion-view>
+

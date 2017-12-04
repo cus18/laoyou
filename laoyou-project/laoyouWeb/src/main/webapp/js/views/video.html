@@ -1,0 +1,286 @@
+<div id="wrapper">
+    <hospital-menu ng-if="type == 'liveVideo'" title="liveVideo"></hospital-menu>
+    <hospital-menu ng-if="type == 'video'" title="video"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{video.pageTitle}}</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+            <!--直播列表start-->
+            <ul id="videoTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#underwayVideo" data-toggle="tab" ng-click="">进行中</a>
+                </li>
+                <li>
+                    <a href="#finishedVideo" data-toggle="tab" ng-click="">已结束</a>
+                </li>
+            </ul>
+            <div id="videoContent" class="tab-content">
+                <div class="tab-pane fade in active" style="margin-top: 2%;" id="underwayVideo">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{video.listTitle}}
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="dataTables_wrapper form-inline" role="grid">
+                                        <div class="panel-heading">
+                                            <input type="text" class="form-control input-sm" placeholder="{{video.placeholder}}" style="width:15%;">
+                                            <div class="date-picker input-daterange" data-date-format="yyyy-mm-dd" style="display:inline;">
+                                                <span style="margin:0 5%">
+                                                    发起时间<input name="dtBegin" type="text" class="input-sm" ng-model="startDate" style="margin-left:2%;">
+                                                    —<input name="dtEnd" type="text" class="input-sm" ng-model="endDate" style="margin-left:1%;">
+                                                </span>
+                                            </div>
+                                            <button class="btn btn-default" style="width:10%;" ng-click="">查询</button>
+                                            <button class="btn btn-primary" style="width:10%;" ui-sref="videoDetail({type:'new'})">{{video.newVideo}}</button>
+                                        </div>
+                                        <table ng-if="type == 'liveVideo'" class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">直播主题</th>
+                                                <th class="text-center">开始时间</th>
+                                                <th class="text-center">发起时间</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">发起机构</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>我是活动名称</td>
+                                                <td>2017-07-27 12:00:32</td>
+                                                <td>2017-07-27 13:00:00</td>
+                                                <td>直播中</td>
+                                                <td>发起机构</td>
+                                                <td>
+                                                    <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>我是活动名称</td>
+                                                <td>2017-07-27 12:00:32</td>
+                                                <td>2017-07-27 13:00:00</td>
+                                                <td>待开始</td>
+                                                <td>发起机构</td>
+                                                <td>
+                                                    <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                    <a ng-click="delete(Id)">取消</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table ng-if="type == 'video'" class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">视频名称</th>
+                                                <th class="text-center">上传时间</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>我是视频名称</td>
+                                                <td>2017-07-27 12:00:32</td>
+                                                <td>
+                                                    <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                    <a ng-click="delete(Id)">删除</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div page-tool></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Advanced Tables -->
+                    </div>
+                </div>
+                <div class="tab-pane fade" style="margin-top: 2%;" id="finishedVideo">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{video.listTitle}}
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="dataTables_wrapper form-inline" role="grid">
+                                        <div class="panel-heading">
+                                            <input type="text" class="form-control input-sm" placeholder="{{video.placeholder}}" style="width:15%;">
+                                            <div class="date-picker input-daterange" data-date-format="yyyy-mm-dd" style="display:inline;">
+                                                <span style="margin:0 5%">
+                                                    发起时间<input name="dtBegin" type="text" class="input-sm" ng-model="startDate" style="margin-left:2%;">
+                                                    —<input name="dtEnd" type="text" class="input-sm" ng-model="endDate" style="margin-left:1%;">
+                                                </span>
+                                            </div>
+                                            <button class="btn btn-default" style="width:10%;" ng-click="">查询</button>
+                                            <button class="btn btn-primary" style="width:10%;" ng-click="">{{video.newVideo}}</button>
+                                        </div>
+                                        <table ng-if="type == 'liveVideo'" class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">直播主题</th>
+                                                <th class="text-center">开始时间</th>
+                                                <th class="text-center">发起时间</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">发起机构</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>我是活动名称</td>
+                                                <td>2017-07-27 12:00:32</td>
+                                                <td>2017-07-27 13:00:00</td>
+                                                <td>已结束</td>
+                                                <td>发起机构</td>
+                                                <td>
+                                                    <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                    <a ng-click="delete(Id)">删除</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table ng-if="type == 'video'" class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">视频名称</th>
+                                                <th class="text-center">上传时间</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>我是视频名称</td>
+                                                <td>2017-07-27 12:00:32</td>
+                                                <td>
+                                                    <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                    <a ng-click="delete(Id)">删除</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div page-tool></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Advanced Tables -->
+                    </div>
+                </div>
+            </div>
+            <!--直播列表end-->
+            <!--全部直播start-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{video.pageTitle}}
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="dataTables_wrapper form-inline" role="grid">
+                                    <div class="panel-heading">
+                                        <input type="text" class="form-control input-sm" placeholder="{{video.placeholder}}" style="width:15%;">
+                                        <select class="input-sm" style="margin:2px 0 0 2%;width:15%;">
+                                            <option>选择发起机构</option>
+                                            <option>机构1</option>
+                                            <option>机构2</option>
+                                        </select>
+                                        <div class="date-picker input-daterange" data-date-format="yyyy-mm-dd" style="display:inline;">
+                                                <span style="margin:0 5%">
+                                                    发起时间<input name="dtBegin" type="text" class="input-sm" ng-model="startDate" style="margin-left:2%;">
+                                                    —<input name="dtEnd" type="text" class="input-sm" ng-model="endDate" style="margin-left:1%;">
+                                                </span>
+                                        </div>
+                                        <button class="btn btn-default" style="width:10%;" ng-click="">查询</button>
+                                    </div>
+                                    <table ng-if="type == 'liveVideo'" class="table table-striped table-bordered table-hover text-center">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">直播主题</th>
+                                            <th class="text-center">开始时间</th>
+                                            <th class="text-center">发起时间</th>
+                                            <th class="text-center">状态</th>
+                                            <th class="text-center">发起机构</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>我是活动名称</td>
+                                            <td>2017-07-27 12:00:32</td>
+                                            <td>2017-07-27 13:00:00</td>
+                                            <td>待开始</td>
+                                            <td>发起机构</td>
+                                            <td>
+                                                <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                <a>审核下架</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>我是活动名称</td>
+                                            <td>2017-07-27 12:00:32</td>
+                                            <td>2017-07-27 13:00:00</td>
+                                            <td>直播中</td>
+                                            <td>发起机构</td>
+                                            <td>
+                                                <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                <a>叫停</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>我是活动名称</td>
+                                            <td>2017-07-27 12:00:32</td>
+                                            <td>2017-07-27 13:00:00</td>
+                                            <td>已结束</td>
+                                            <td>发起机构</td>
+                                            <td>
+                                                <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                <a ng-click="delete(Id)">删除</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table ng-if="type == 'video'" class="table table-striped table-bordered table-hover text-center">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">视频名称</th>
+                                            <th class="text-center">上传机构</th>
+                                            <th class="text-center">上传时间</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>我是视频名称</td>
+                                            <td>上传机构</td>
+                                            <td>2017-07-27 12:00:32</td>
+                                            <td>
+                                                <a ui-sref="videoDetail({type:'check'})">详情</a>
+                                                <a ng-click="delete(Id)">删除</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div page-tool></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--全部直播end-->
+            <del-tool info="确认要删除该视频？"></del-tool>
+        </div>
+    </div>
+</div>

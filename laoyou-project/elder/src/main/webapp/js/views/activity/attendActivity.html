@@ -1,0 +1,53 @@
+<ion-view style="background:white">
+	<ion-header-bar align-title="center" class="bar-energized">
+		<div class="buttons">
+			<button class="button" onclick="window.history.go(-1)"><</button>
+		</div>
+		<h1 class="title" ng-if="!param.attended">活动报名</h1>
+		<h1 class="title" ng-if="param.attended">报名成功</h1>
+	</ion-header-bar>
+	<ion-content>
+		<div ng-if="!param.attended">
+			<style>
+				.talkEven {
+					background-color: white;
+				}
+				.talkOdd {
+					background-color: #f8f8f8;
+				}
+			</style>
+			<h1 style="font-size:15px;margin-top:20px;margin-left:15px;">请选择活动参与者</h1>
+			<div style="margin-top:10px">
+				<ion-list>
+					<ion-checkbox ng-model="item.checked"
+								  ng-repeat="item in relativeElderList"
+								  ng-checked="item.checked"
+								  ng-class-odd="'talkOdd'"
+								  ng-class-even="'talkEven'">
+						<p><span style="color:blue;font-size:16px;">{{item.elderName}}</span>&nbsp;&nbsp;{{item.gender}}&nbsp;&nbsp;{{item.age}}岁</p>
+					</ion-checkbox>
+				</ion-list>
+			</div>
+			<h2 style="font-size:15px;margin-top:35px;margin-left:15px;">您报名的活动信息</h2>
+			<div class="list" style="margin-top: 15px;">
+				<a class="item item-avatar item-text-wrap" style="background: #f8f8f8">
+					<img ng-src="{{detailActivityInfo.activityLogo}}"
+						 style="max-width:50px;max-height:50px;border-radius:0;margin-left:-5px;">
+					<h2>{{detailActivityInfo.activityName}}</h2>
+					<p><i class="icon ion-ios-clock-outline"></i>&nbsp;&nbsp;
+						{{detailActivityInfo.activityStartDate|date:'yyyy/MM/dd: HH:mm'}} 至 {{detailActivityInfo.activityEndDate|date:'yyyy/MM/dd: HH:mm'}}</p>
+					<p><i class="icon ion-location"></i>&nbsp;&nbsp;{{detailActivityInfo.activityAddress}}</p>
+				</a>
+			</div>
+		</div>
+		<div ng-if="param.attended">
+			<h1 style="font-size:15px;margin-top:90px;margin-left:15px;">恭喜您报名成功{{detailActivityInfo.activityName}}！</h1>
+			<button class="button button-positive" style="margin-left:25%;margin-top:70px;width:50%;" ng-click="enterActivityGroupTalk()">
+				进入活动群聊
+			</button>
+		</div>
+	</ion-content>
+	<div class="bar bar-footer bar-energized" ng-if="!param.attended">
+		<div class="title" ng-click="confirmAttend()">确认报名</div>
+	</div>
+</ion-view>

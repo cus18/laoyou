@@ -1,0 +1,17 @@
+<!--headerTitle start-->
+<header>
+    <a href="javascript:history.go(-1)">返回</a>
+    <h1>{{elderName}}</h1>
+    <em></em>
+</header>
+<div page-loading></div>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<ul class="newAssessList bgf">
+    <a ui-sref="healthServicePackage({servicePackageId:item.healthServicePackageTemplateId,operation:'newHealthServicePackage'})"
+       ng-repeat="item in healthServicePackageTemplateList">
+        <li>
+            {{item.healthServicePackageTemplateName}}
+        </li>
+    </a>
+</ul>

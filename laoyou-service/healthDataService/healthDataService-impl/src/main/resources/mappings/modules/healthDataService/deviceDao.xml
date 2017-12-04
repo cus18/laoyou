@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.healthDataService.dao.DeviceDao">
+
+    <insert id="addDevice" parameterType="com.yhl.laoyou.common.dto.hospital.DeviceDTO" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into sys_device (name, type,
+        deviceId, remarks,memberId,userName,isDel)
+        values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=TIMESTAMP},
+        #{deviceId,jdbcType=VARCHAR}, #{remarks,jdbcType=TIMESTAMP} ,#{memberId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},0)
+    </insert>
+
+    <update id="updateDevice" parameterType="com.yhl.laoyou.common.dto.hospital.DeviceDTO">
+        update sys_device
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null">
+                deviceId = #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                memberId = #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                userName = #{userName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="delDevice" parameterType="java.lang.Integer">
+        update sys_device set isDel = 1 where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAllType" resultType="java.lang.String">
+        SELECT type FROM sys_device group by type
+    </select>
+
+    <select id="getDeviceNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM sys_device where type = #{type} and isDel = 0
+    </select>
+
+    <select id="deviceBindNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM sys_device where type = #{type} and memberId!='' and memberId is not null and isDel = 0
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<!--headerTitle start-->
+<header>
+    <a ng-if="h5Page" ng-click="enterGroupTalk()">群聊</a>
+    <h1>{{elderName}}</h1>
+</header>
+<div page-loading></div>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<div>
+    <div class="ordinaryTit">
+        <span>服药提醒</span>
+    </div>
+    <div class="remindContainer bgf">
+        <img class="remindIcon" src="/practitioner/images/icon_medicine.png" alt="">
+        <div class="remindTxt bgf">
+            <p>{{medicationHint}}</p>
+            <p>{{medicationRemind.dose}}{{medicationRemind.drugName}}</p>
+        </div>
+    </div>
+</div>

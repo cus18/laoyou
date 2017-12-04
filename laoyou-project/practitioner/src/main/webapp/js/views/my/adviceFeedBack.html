@@ -1,0 +1,13 @@
+<!--headerTitle start-->
+<header>
+    <a href="javascript:history.go(-1)">设置</a>
+    <h1>意见反馈</h1>
+    <span ng-click="submitForm(adviceForm.$valid)">提交</span>
+</header>
+<div class="empty10"></div>
+<!--headerTitle end-->
+<!--content start-->
+<form name="adviceForm" novalidate>
+    <textarea name="adviceCont" class="opinionTxt" ng-model="adviceCont" required></textarea>
+</form>
+<!--content end-->

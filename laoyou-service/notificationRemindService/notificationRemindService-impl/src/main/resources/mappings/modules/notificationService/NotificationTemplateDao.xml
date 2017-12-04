@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.notificationRemindService.dao.NotificationTemplateDao">
+
+	<insert id="addNotificationTemplate">
+		INSERT INTO `notification_template`
+			(`title`, `content`, `uri`, `create_by`)
+		  VALUES ( #{title}, #{content}, #{uri}, #{create_by})
+	</insert>
+
+	<select id="getNotificationTemplateList" resultType="com.yhl.laoyou.modules.notificationRemindService.entity.NotificationTemplateEntity">
+		select * from notification_template
+		where del_flage != '1'
+		<if test="title!=null and title!=''">
+			AND title like  CONCAT(CONCAT('%', #{title}), '%')
+		</if>
+		<if test="startUpdateDate !=null and startUpdateDate !='' and endUpdateDate !=null and endUpdateDate !=''">
+			AND update_date &gt; #{startUpdateDate} AND update_date &lt; #{endUpdateDate}
+		</if>
+	</select>
+
+	<select id="getNotificationTemplateByID" resultType="com.yhl.laoyou.modules.notificationRemindService.entity.NotificationTemplateEntity">
+		select * from notification_template
+		where id=#{id}
+	</select>
+
+	<update id="updateNotificationTemplate">
+		UPDATE notification_template SET
+		update_date=now()
+		<if test="title!= ''and title!=null">
+			,title=#{title}
+		</if>
+		<if test="content!= ''and content!=null">
+			,content=#{content}
+		</if>
+		<if test="uri!= '' and uri!=null">
+			,uri=#{uri}
+		</if>
+		WHERE id = #{id}
+	</update>
+
+	<update id="deleteNotificationTemplate">
+		UPDATE notification_template SET
+		del_flage='1'
+		WHERE id = #{id}
+	</update>
+</mapper>

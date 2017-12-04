@@ -1,0 +1,103 @@
+<div id="wrapper">
+    <hospital-menu title="cmsSend"></hospital-menu>
+    <div class="fixHeight"></div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>发送消息与提醒</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+            <!--content start-->
+            <ul id="cmsSend" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#news" data-toggle="tab" ng-click="">发送消息</a>
+                </li>
+                <li>
+                    <a href="#remind" data-toggle="tab" ng-click="">发送提醒</a>
+                </li>
+            </ul>
+            <div id="cmsSendContent" class="tab-content">
+                <div class="tab-pane fade in active" style="margin-top: 2%;" id="news">
+                    <div class="col-md-6">
+                        <form role="form" name="TemplateForm" novalidate>
+                            <div class="form-group">
+                                <label style="width:110px;">请选择模板：</label>
+                                <select class="form-control" style="display:inline;width:auto;">
+                                    <option value="">来自于消息模板</option>
+                                    <option value="">标题1</option>
+                                    <option value="">标题2</option>
+                                    <option value="">标题3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style="width:110px;">消息内容：</label>
+                                <textarea class="form-control" style="display:inline;height:200px;" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label style="width:110px;">接收人：</label>
+                                <label style="margin-right:20px;"><input type="radio" name="recipient" ng-model="recipient">定向发送</label>
+                                <label><input type="radio" name="recipient" ng-model="recipient">群发</label>
+                            </div>
+                            <div class="form-group" style="padding-left:110px;">
+                                <div>
+                                    <label><input type="checkbox" name="group">机构内老人</label>
+                                    <label><input type="checkbox" name="group">老人亲友</label>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" style="width:20%;">确认发送</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" style="margin-top: 2%;" id="remind">
+                    <div class="col-md-6">
+                        <form role="form" name="TemplateForm" novalidate>
+                            <div class="form-group">
+                                <label style="width:110px;">请选择模板：</label>
+                                <select class="form-control" style="display:inline;width:auto;">
+                                    <option value="">来自于自定义提醒模板</option>
+                                    <option value="">标题1</option>
+                                    <option value="">标题2</option>
+                                    <option value="">标题3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style="width:110px;">提醒内容：</label>
+                                <textarea class="form-control" style="display:inline;height:200px;" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label style="width:110px;">链接：</label>
+                                <input type="text" class="form-control" style="display:inline;width:auto;" required placeholder="http://">
+                            </div>
+                            <div class="form-group">
+                                <label style="width:110px;">接收人：</label>
+                                <label style="margin-right:20px;"><input type="radio" name="recipient" ng-model="recipient">定向发送</label>
+                                <label><input type="radio" name="recipient" ng-model="recipient">群发</label>
+                            </div>
+                            <div class="form-group" style="padding-left:110px;">
+                                <div>
+                                    <label><input type="checkbox" name="group">机构内老人</label>
+                                    <label><input type="checkbox" name="group">老人亲友</label>
+                                </div>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" style="width:20%;">确认发送</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--content end-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+	<!-- 定时器配置
+	task:executor/@pool-size：可以指定执行线程池的初始大小、最大大小
+	task:executor/@queue-capacity：等待执行的任务队列的容量
+	task:executor/@rejection-policy：当等待队已满时的策略，分为丢弃、由任务执行器直接运行等方式
+	-->
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:executor id="executor" keep-alive="3600" pool-size="100-200"
+				   queue-capacity="500" rejection-policy="CALLER_RUNS" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+
+	<bean id="scheduledQuarz" class="com.yhl.laoyou.webapp.task.RunTimeTaskForElder" />
+
+	<!--==========================================webapp部分================================================-->
+
+	<bean id="updateWechatInfoQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="updateWechatInfo"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!--&lt;!&ndash;&lt;!&ndash;事件触发时间点&ndash;&gt;&ndash;&gt;-->
+	<bean id="updateWechatInfoQuarzCronTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="updateWechatInfoQuarzTask" />
+		<property name="startDelay" value="0" />
+		<property name="repeatInterval" value="6000000" />
+	</bean>
+
+	<bean id="arrangementSurveyInfoQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="arrangementSurveyInfo"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每分钟检测一次  -->
+	<bean id="arrangementSurveyInfoQuarzCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="arrangementSurveyInfoQuarzTask"/>
+		<property name="cronExpression" value="0 0 1 * * ?"/>
+	</bean>
+
+	<bean id="makeHealthDataQuarzTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="scheduledQuarz"/>
+		<property name="targetMethod" value="makeHealthData"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<!-- 每分钟检测一次  -->
+	<bean id="makeHealthDataQuarzCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="makeHealthDataQuarzTask"/>
+		<property name="cronExpression" value="0 0 2 * * ?"/>
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="updateWechatInfoQuarzCronTrigger"/>
+				<ref bean="arrangementSurveyInfoQuarzCronTrigger"/>-->
+				<!--<ref bean="makeHealthDataQuarzCronTrigger"/>-->
+			</list>
+		</property>
+		<property name="autoStartup" value="true"/>
+	</bean>
+
+</beans>

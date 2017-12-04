@@ -1,0 +1,73 @@
+<ion-view style="background:#f8f8f8;" ng-if="param.type=='live'">
+    <ion-header-bar align-title="center" class="bar-positive">
+        <div class="buttons">
+            <button class="button" ng-click="return()"><</button>
+        </div>
+        <h1 class="title">讲堂直播</h1>
+    </ion-header-bar>
+    <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+        <div class="tabs" style="background-color:#f8f8f8;border-color:#f8f8f8">
+            <a class="tab-item active" style="color:black;border-bottom-color:blue">
+                近期直播
+            </a>
+            <a class="tab-item" style="color:black">
+                历史直播
+            </a>
+        </div>
+    </div>
+    <ion-content style="margin-top: 47px;">
+        <div class="list">
+            <a class="item item-avatar item-text-wrap"
+               ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+                <img src="http://yhlofficial.oss-cn-beijing.aliyuncs.com/temp"
+                     style="max-width:50px;max-height:50px;border-radius:0;margin-left:-5px;">
+                <h2>丰台区社区老年歌舞大赛现场直播</h2>
+                <p>2017/07/17 10:00</p>
+                <span class="item-note"
+                      style="text-align:right;margin-top:-10px">
+                    <p style="text-align: center;background: green;color: white">进行中</p>
+                    <p>102人观看</p>
+                </span>
+                <p>安定门社区中心</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+<ion-view style="background:white;" ng-if="param.type=='vod'">
+    <ion-header-bar align-title="center" class="bar-energized">
+        <div class="buttons">
+            <button class="button" ng-click="return()"><</button>
+        </div>
+        <h1 class="title">在线课堂</h1>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+        <div class="list">
+            <style>
+                .talkOdd {
+                    background-color: white;
+                }
+                .talkEven {
+                    background-color: #f8f8f8;
+                }
+            </style>
+            <a class="item item-avatar item-text-wrap"
+               ng-repeat="item in onlineCourseList"
+               ui-sref="courseDetail({courseId:item.onlineCourseId,courseType:'vod'})"
+               ng-class-odd="'talkOdd'"
+               ng-class-even="'talkEven'">
+                <img ng-src="{{item.onlineCourseLogo}}"
+                     style="max-width:50px;max-height:50px;border-radius:0;margin-left:-5px;">
+                <h2>{{item.onlineCourseName}}</h2>
+                <p>课程提供方：{{item.onlineCourseProvider}}</p>
+                <span class="item-note"
+                      style="text-align:right;margin-top:-10px">
+                    <p>{{item.onlineCourseStudyNum}}人学习</p>
+                </span>
+                <p>授课老师：{{item.onlineCourseTeacherName}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+
+

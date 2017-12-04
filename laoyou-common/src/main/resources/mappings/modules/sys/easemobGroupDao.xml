@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.sys.dao.EasemobGroupDao">
+
+
+	<insert id="insertEasemobGroup">
+		INSERT INTO `easemob_Group` (`groupName`, `easemobGroupID`, `create_date`, `owner`,`elderEasemobID`,`doctorIDArray`) VALUES (#{groupName}, #{easemobGroupID}, now(), #{owner},#{elderEasemobID},#{doctorIDArray})
+	</insert>
+
+	<select id="getEasemobGroupByGroupID" resultType="com.yhl.laoyou.modules.sys.entity.EasemobGroup">
+		SELECT * FROM `easemob_group` where easemobGroupID=#{easemobGroupID}
+	</select>
+
+
+	<select id="getEasemobGroupIDByElderID" resultType="com.yhl.laoyou.modules.sys.entity.EasemobGroup">
+		SELECT * FROM `easemob_group` eg
+		inner join sys_elder_user seu on seu.easemobID=eg.elderEasemobID
+		where seu.id=#{elderEasemobID}
+	</select>
+
+	<select id="getEasemobGroupByDoctorEasemobID" resultType="com.yhl.laoyou.modules.sys.entity.EasemobGroup">
+		select * from easemob_group eg
+		where eg.owner=#{doctorEasemobID} or eg.doctorIDArray like CONCAT('%', #{doctorEasemobID, jdbcType=VARCHAR}, '%')
+	</select>
+
+	<update id="updateEasemobGroup">
+		UPDATE`easemob_group`
+		SET `doctorIDArray`=#{doctorIDArray}
+		<if test="nurse != null and nurse!=''">
+		,`nurse`=#{nurse}
+		</if>
+		<if test="owner != null and owner!=''">
+			,`owner`=#{owner}
+		</if>
+		WHERE  `easemobGroupID`=#{easemobGroupID};
+	</update>
+
+</mapper>

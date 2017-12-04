@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <base href="/laoyouWeb/"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>华录健康养老医院端</title>
+    <link rel="stylesheet" href="styles/hospital/fullcalendar.css?ver=1.1.3" type="text/css"/>
+    <link href="styles/lib/bootstrap.css" rel="stylesheet" />
+    <link href="styles/lib/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="styles/lib/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="styles/lib/font-awesome.css" rel="stylesheet" />
+    <link href="styles/lib/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="styles/lib/custom.css" rel="stylesheet" />
+    <link href="styles/hospital/healthFile.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href="js/libs/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+<div ui-view style="height:100%;"></div>
+</body>
+<script>
+    "use strict";
+    var require = {
+        waitSeconds: 15,
+        urlArgs: "ver=1.0.5",  //防止读取缓存，调试用
+        deps : ['js/mainHospital']
+    };
+    var hospitalVersion = "1.0.4";
+    var picVersion = "1.0.1";
+    var appName = 'mainHospital';
+</script>
+<script type="text/javascript" src="js/libs/require.min.js"></script>
+<script src="js/libs/jquery-2.1.3.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+</html>
+

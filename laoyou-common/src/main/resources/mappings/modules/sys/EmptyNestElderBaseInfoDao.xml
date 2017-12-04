@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhl.laoyou.modules.sys.dao.EmptyNestElderBaseInfoDao">
+
+    <insert id="importEmptyElderBaseInfo" parameterType="com.yhl.laoyou.common.dto.practitioner.healthService.EmptyNestElderBaseInfo" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into
+        EmptyNestElderBaseInfo (
+        inputerName,
+        street,
+        community,
+        name,
+        idCard,
+        age,
+        gender,
+        mobile,
+        phone,
+        nation,
+        origin,
+        political,
+        cultural,
+        marital,
+        identity,
+        householdType,
+        censusStatus,
+        livingConditions,
+        permanentAddress,
+        permanentArea,livingAddress,communityPhone,disability,disabilityCard,relativesName1,relativesRelationship1,
+relativesPhone1,relativesAddress1,relativesArea1,relativesName2,relativesRelationship2,relativesPhone2,relativesAddress2,relativesArea2,villageCadres,villageCadresPhone,
+villageCadresAddress,partyMemberVolunteers,partyMemberVolunteersPhone,partyMemberVolunteersAddress,remark,formHolder,auditor)
+        values (
+        #{inputerName},
+        #{street}, #{community}, #{name}, #{idCard}, #{age}, #{gender}, #{mobile}, #{phone}, #{nation}, #{origin}, #{political}, #{cultural}, #{marital}, #{identity}, #{householdType}, #{censusStatus}, #{
+livingConditions}, #{permanentAddress}, #{permanentArea}, #{livingAddress}, #{communityPhone}, #{disability}, #{disabilityCard}, #{relativesName1}, #{relativesRelationship1}, #{
+relativesPhone1}, #{relativesAddress1},#{relativesArea1}, #{relativesName2}, #{relativesRelationship2}, #{relativesPhone2}, #{relativesAddress2},#{relativesArea2}, #{villageCadres}, #{villageCadresPhone}, #{
+villageCadresAddress}, #{partyMemberVolunteers}, #{partyMemberVolunteersPhone}, #{partyMemberVolunteersAddress}, #{remark}, #{formHolder}, #{auditor})
+    </insert>
+
+    <select id="getAllEmptyElderBaseInfo" resultType="com.yhl.laoyou.common.dto.practitioner.healthService.EmptyNestElderBaseInfo">
+        select * from EmptyNestElderBaseInfo
+    </select>
+</mapper>

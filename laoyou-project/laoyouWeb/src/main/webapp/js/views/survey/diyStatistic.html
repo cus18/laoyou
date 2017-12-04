@@ -1,0 +1,47 @@
+<div id="wrapper">
+    <survey-menu title="diyStatistic"></survey-menu>
+    <survey-loading></survey-loading>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>自定义查询</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div style="margin:10px 0px;padding-left:15px;">设置查询条件</div>
+                <div class="col-md-12" ng-repeat="item in questionList" style="margin-bottom:10px;">
+                    <select class="form-control searchSelect" style="width:40%;float:left;"
+                            ng-model="item.surveyDTO"
+                            ng-options="(questionName.questionId + '、' + questionName.questionName) for questionName in questionNamesAll"
+                            ng-change="conditionChange()"/>
+                    <select ng-if="item.surveyDTO.questionType !='input' || item.surveyDTO.questionName =='性别'" class="form-control" style="width:13%;float:left;margin:0 10px;"
+                            ng-model="item.condition"
+                            ng-options="symbol.value as symbol.name for symbol in symbols"
+                            ng-change="conditionChange()"/>
+                    <select ng-if="item.surveyDTO.questionType =='input' && item.surveyDTO.questionName !='性别' && item.surveyDTO.questionName !='年龄'" class="form-control" style="width:13%;float:left;margin:0 10px;"
+                            ng-model="item.condition"
+                            ng-options="symbol.value as symbol.name for symbol in symbols_inp"
+                            ng-change="conditionChange()"/>
+                    <select ng-if="item.surveyDTO.questionName =='年龄'" class="form-control" style="width:13%;float:left;margin:0 10px;"
+                            ng-model="item.condition"
+                            ng-options="symbol.value as symbol.name for symbol in symbols_age"
+                            ng-change="conditionChange()"/>
+                    <select ng-if="item.surveyDTO.questionType != 'input' || item.surveyDTO.questionName =='性别'" class="form-control" style="width:25%;float:left;"
+                            ng-model="item.statisticValue"
+                            ng-options="questionData.questionItem as questionData.questionItemName for questionData in item.surveyDTO.questionData"
+                            ng-change="conditionChange()"/>
+                    <input ng-if="item.surveyDTO.questionType == 'input' && item.surveyDTO.questionName != '性别'" class="form-control" type="text" ng-model="item.statisticValue" style="width:25%;float:left;">
+                    <span class="operate add" ng-click="addCondition()">+</span>
+                    <span ng-if="!item.isFirst" class="operate reduce" ng-click="reduceCondition($index)">-</span>
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-click="demand()">查询</button>
+            <div class="select_hint">{{selectHint}}</div>
+            <div ng-if="resultNum >= 0" style="margin-top:50px;font-size:16px;">该查询对应的有效问卷数为 {{resultNum}} 份，占总问卷数{{resultNum/totalNum*100 | number:2}} %。</div>
+        </div>
+    </div>
+</div>

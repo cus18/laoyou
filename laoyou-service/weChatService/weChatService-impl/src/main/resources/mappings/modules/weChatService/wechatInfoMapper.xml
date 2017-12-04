@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhl.laoyou.modules.weChatService.dao.WechatInfoDao" >
+
+  <update id="updateWechatParameter">
+    UPDATE  wechat_parameter sw
+    <set>
+      sw.token=#{token},
+      sw.ticket=#{ticket},
+      sw.updateTime = now()
+    </set>
+    where  sw.id=#{id};
+  </update>
+
+    <select id="getWechatParameter" resultType="java.util.HashMap">
+        SELECT sw.token, sw.ticket FROM  wechat_parameter sw WHERE  sw.id = '1'
+    </select>
+</mapper>

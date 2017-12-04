@@ -1,0 +1,1316 @@
+/*common start*/
+header{
+	width:100%;
+	height:1rem;
+	color:#fff;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index:10;
+	font-size:0.3rem;
+	background:#ff8e01;
+}
+header>a{
+	float: left;
+	background:url("/elder/images/Path_8.png") left top no-repeat;
+	background-size:0.23rem 0.4rem;
+	padding-left:0.35rem;
+	color:#fff;
+	position:absolute;
+	top:50%;
+	left:0.2rem;
+	transform:translateY(-50%);
+	-webkit-transform:translateY(-50%);
+	-moz-transform:translateY(-50%);
+	-ms-transform:translateY(-50%);
+}
+header>h1{
+	float:left;
+	font-weight: normal;
+	font-size:0.34rem;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%);
+	color: white;
+}
+header>em{
+	display: none;
+	width:0.36rem;
+	height:0.36rem;
+	background:url("/elder/images/shareIcon_01.png") left top no-repeat;
+	background-size:contain;
+	float:right;
+	margin:0.33rem 0.3rem 0 0;
+}
+header>span,header>button{
+	float:right;
+	margin-right:0.4rem;
+	line-height:1rem;
+}
+header>button{
+	color:#fff;
+	font-size:0.3rem;
+}
+header>i{
+	float:right;
+	margin:0.3rem 0.25rem 0 0;
+}
+.primaryTab {
+	height: 0.88rem;
+	font-size:0.34rem;
+}
+.primaryTab li {
+	width: 33.3%;
+	line-height: 0.88rem;
+	float: left;
+	text-align: center;
+	color:#9b9b9b;
+}
+.primaryTab li.on {
+	border-bottom: 2px solid #ff8e01;
+	color:#ff8e01;
+}
+.secondary {
+	height: 0.96rem;
+	border-top:1px solid white;
+	margin-top:-0.32rem;
+}
+.secondary a{
+	display:inline-block;
+	float:left;
+	width:50%;
+	margin-top:0.17rem;
+}
+.secondary li {
+	width:1.9rem;
+	height:0.6rem;
+	line-height:0.6rem;
+	color:#9b9b9b;
+	border-radius:0.1rem;
+	margin:0 auto;
+}
+.secondary img{
+	width:0.28rem;
+	float:left;
+	margin:0.16rem;
+}
+.secondary li.on {
+	color: #000;
+	background:#ff8e01;
+}
+.secondaryBor{
+	border-bottom:1px solid #f8f8f8;
+	clear:both;
+	margin-top:-0.32rem;
+}
+.secondaryMarB{
+	height:0.32rem;
+}
+.newHealthArea {
+	width:6.86rem;
+	height: 1rem;
+	color: #000;
+	font-size:0.34rem;
+	background:#ff8e01;
+	margin:0 auto;
+	border-radius:0.15rem;
+	position:relative;
+}
+.newHealthArea>span{
+	display:block;
+	height:0.36rem;
+	line-height:0.36rem;
+	background:url("/elder/images/Slice.png") left top no-repeat;
+	background-size:0.36rem;
+	padding-left:0.5rem;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%);
+}
+.healthBtn{
+	line-height:1rem;
+	text-align:center;
+	margin-bottom:0.32rem;
+}
+.ordinaryTit{
+	height:1px;
+	background:#4a4a4a;
+	color:#4a4a4a;
+	margin:0.5rem 0.3rem 0.2rem;
+	position:relative;
+}
+.ordinaryTit>span{
+	display:inline-block;
+	padding:0 0.3rem;
+	background:#ff8e01;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%);
+}
+.contItemTit {
+	line-height: 0.92rem;
+	padding:0 0.3rem;
+	color:black;
+}
+.reportList {
+	padding:0 0.3rem 0.3rem;
+	margin-bottom:0.32rem;
+}
+.reportListTit{
+	line-height:0.9rem;
+	border-bottom:1px solid #ff8e01;
+	color: black;
+}
+.reportListDate{
+	line-height:0.9rem;
+	color: black;
+}
+.reportListDate>span,.reportListTit>span{
+	margin-right:0.36rem;
+}
+.reportImg{
+	margin-bottom:0.2rem;
+}
+.reportImg div{
+	width:1.5rem;
+	height:1.5rem;
+	float:left;
+	margin-right:0.29rem;
+	margin-bottom:0.2rem;
+	overflow:hidden;
+	position:relative;
+}
+.reportImg div:nth-child(4n){
+	margin-right:0;
+}
+.reportImg img{
+	width:1.5rem;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%);
+}
+.reportCont{
+	color:#000;
+	line-height:0.4rem;
+	background:#f8e71d;
+	padding:0.2rem;
+}
+.resultContainer{
+	padding:0 0.3rem 0.32rem;
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+}
+.resultContDate{
+	line-height:0.92rem;
+	margin-left:0.3rem;
+	color: black;
+}
+.resultContainer img{
+	width:6.9rem;
+	margin-top:0.32rem;
+}
+.resultContText{
+	padding:0 0.3rem 0.2rem;
+	color: black;
+}
+.resultContText>div{
+	line-height:0.96rem;
+	color:black;
+}
+.resultContText>p{
+	line-height:0.5rem;
+	color: #000;
+	background: #f8e71d;
+	padding: 0.2rem;
+}
+
+
+.bgf{background:#f8f8f8;color:black;}
+.mb10{margin-bottom:0.32rem;}
+.mt30{margin-top:0.3rem;}
+.fontRed{color:#f00;}
+.fontf90{color:#ff9900;}
+.fontc00{color:#cc0000;}
+.font090{color:#009900;}
+.empty10{height:1rem;}
+.contItemMarB{height:0.32rem;}
+.bgf59{background: #F5F5F9;}
+.Underline{text-decoration:underline;}
+.fl{float:left;}
+.fr{float:right;}
+.overhidden{overflow:hidden;}
+/*common end*/
+
+/*健康服务内容开始*/
+
+.contItem {
+	background: #f8f8f8;
+	padding-left: 0.3rem;
+}
+.contItem>div>b{
+	display:block;
+	width:0.24rem;
+	height:0.36rem;
+	float:right;
+	width:0.24rem;
+	margin-top:0.3rem;
+	background:url("/elder/images/arrows_orange.png") left top no-repeat;
+	background-size:contain;
+}
+.contItem>div {
+	line-height: 0.96rem;
+	overflow: hidden;
+	padding-right: 0.3rem;
+	position: relative;
+}
+.contItem>div:last-child{
+	border-bottom:none;
+}
+.contItem>div>span {
+	float: left;
+	color: black;
+}
+.contItem>div>i {
+	float: right;
+	color: #ff8e01;
+}
+.contItem>div>input{
+	float:right;
+	text-align: right;
+	line-height:0.8rem;
+	margin-top:0.08rem;
+	width:100%;
+	position:absolute;
+	right:0.3rem;
+	top:0;
+	background:transparent;
+}
+.healthReportList{
+	padding:0 0.3rem;
+	overflow: scroll;
+	height: 11rem;
+}
+.healthReportList li {
+	padding:0.2rem 0.32rem;
+	border-radius:0.35rem;
+	background: #f8e71d;
+	margin-bottom: 0.32rem;
+	color: #000;
+	position: relative;
+}
+.healthAssessmentList{
+	background:#f8f8f8;
+	margin-bottom:0.32rem;
+
+}
+.healthAssessmentList>a{
+	padding:0.3rem 0.3rem 0 1.2rem;
+	color:#000;
+	background:url("/elder/images/icon_04.png") 0.3rem 0.3rem no-repeat;
+	background-size:0.64rem;
+	border-bottom:2px solid white;
+}
+.healthReportDate{
+	line-height:0.82rem;
+}
+.healthReportDate>span{
+	margin-right:0.32rem;
+}
+.contractNo{
+	font-size:0.24rem;
+	background: #ff8e01;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-top-left-radius: 0.35rem;
+	border-top-right-radius: 0.35rem;
+	width: 100%;
+	height: 0.92rem;
+	padding-left: 0.2rem;
+	box-sizing: border-box;
+	line-height: 0.92rem;
+	border-bottom: 1px solid #a66d26;
+}
+.contractNo>em{
+	display:inline-block;
+	width:5rem;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+.contractName{
+	font-size:0.34rem;
+	padding:0.2rem 0;
+	margin-top:0.72rem;
+}
+.contractInf{
+	font-size:0.26rem;
+	line-height:0.4rem;
+}
+.contractInf>span{
+	display:inline-block;
+	min-width:2.7rem;
+	margin-right:0.3rem;
+}
+.assessContainer{
+	padding:0 0.3rem 0.3rem;
+	margin-top:0.6rem;
+}
+.assessTit{
+	font-size:0.32rem;
+	line-height:0.96rem;
+	border-bottom:1px solid #4a4a4a;
+}
+.assessCont{
+	color:#000;
+	background:#f8e71d;
+	margin-top:0.32rem;
+	padding:0.2rem;
+}
+.assessCont>p:nth-child(2){
+	margin-top:0.2rem;
+	text-indent:2em;
+}
+.newAssessList{
+	padding-left:0.3rem;
+}
+.newAssessList li{
+	line-height:1rem;
+	border-bottom:1px solid #4a4a4a;
+	margin-right:0.3rem;
+	background: url("/elder/images/arrows_r.png") right center no-repeat;
+	background-size:0.24rem 0.36rem;
+}
+.newAssessList li>img{
+	float:left;
+	width:0.5rem;
+	margin:0.25rem 0.2rem 0 0;
+}
+.newAssessTit{
+	line-height:0.3rem;
+	padding:0.2rem 0.3rem;
+	font-size:0.22rem;
+}
+.serviceTit{
+	padding:0.2rem 0.3rem;
+	font-size:0.34rem;
+}
+.serviceDate{
+	height:0.56rem;
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+	font-size:0.24rem;
+	line-height:0.56rem;
+	padding:0 0.3rem;
+}
+.serviceDate>span:first-child{
+	display:inline-block;
+	width:5rem;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+.serviceContainer p{
+	line-height:0.6rem;
+}
+.serviceItem{
+	padding:0.3rem 0;
+	margin-left:0.3rem;
+	border-bottom:1px solid #4a4a4a;
+}
+.serviceParties{
+	width:0.96rem;
+	height:0.96rem;
+	background:#ff8e01;
+	border-radius:0.1rem;
+	color:#000;
+	font-size:0.3rem;
+	text-align:center;
+	line-height:0.96rem;
+	float:left;
+	margin-right:0.3rem;
+}
+.ef{
+	background:#f8e71d;
+}
+.servicePartiedInf{
+	float:left;
+	width:5rem;
+}
+.servicePartiedInf input{
+	width:3rem;
+	float:right;
+	line-height:0.6rem;
+	text-align:right;
+}
+.servicePartiedInf>p{
+	width:5rem;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+p.clearfix>input{
+	width:4rem;
+}
+.serviceCont{
+	padding:0.4rem 0.3rem 0.3rem;
+	color:#ff8e01;
+	border-bottom:1px solid #4a4a4a;
+}
+.serviceCont>p{
+	line-height:0.6rem;
+}
+.serviceCont>ul{
+	list-style:decimal;
+	margin-left:2em;
+}
+.serviceCont>ul>li{
+	line-height:0.6rem;
+	margin-left:0.3rem;
+}
+.serviceSign{
+	padding-bottom:1rem;
+	padding-top:0.3rem;
+}
+.serviceSign>p{
+	line-height:1rem;
+	margin-left:0.3rem;
+	color:#9b9b9b;
+}
+.serviceSign>img{
+	width:1.75rem;
+	margin:0 auto;
+}
+.signArea{
+	height:1.4rem;
+	margin:0.1rem 0.3rem 0;
+	border:1px dashed #ff8e01;
+	text-align: center;
+	line-height:1.4rem;
+	color:#ff8e01;
+}
+.grayline{
+	border:none;
+	height:1px;
+	background:#4a4a4a;
+	margin:0.5rem 0 0.1rem 0.3rem;
+}
+/*健康服务内容结束*/
+
+/*setting start*/
+.aboutUS{
+	padding:0.6rem;
+}
+.aboutUS p{
+	line-height:0.6rem;
+}
+.opinionTxt{
+	width:7.2rem;
+	height:3rem;
+	margin:0.15rem;
+	padding:0.2rem;
+	box-sizing:border-box;
+}
+/*setting end*/
+
+/*检测与诊疗内容开始*/
+/*血糖血压首页*/
+.tableRecord{
+	width:100%;
+	text-align: center;
+	vertical-align: middle;
+	background:#f8f8f8;
+	font-size:0.22rem;
+	color: black;
+}
+.tableRecord th{
+	background:#ff8e01;
+	color:#000;
+	font-weight: normal;
+	border:1px solid #262626;
+	width:0.76rem;
+}
+.tableRecord tr{
+	line-height: 0.76rem;
+}
+.tableRecord td{
+	border:1px solid #262626;
+}
+.tableSugar tr:first-child th:first-child{
+	width:1.26rem;
+	height:0.48rem;
+}
+.tableSugar tr:first-child,.tableSugar tr:nth-child(2){
+	line-height:0.48rem;
+}
+.tablePressure th{
+	height: 0.98rem;
+}
+.tablePressure tr th:first-child{
+	width:1.26rem;
+}
+.tablePressure tr th:nth-child(2)
+,.tablePressure tr th:nth-child(3){
+	width:1.2rem;
+}
+.tablePressure tr th:nth-child(4){
+	width:0.8rem;
+}
+.monitorTit{
+	background:#ff8e01;
+	color:#000;
+}
+.monitorCurve{
+	padding:0.2rem;
+}
+.footOptionTab{
+	width: 100%;
+	height: 0.92rem;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background: #ff8e01;
+	border-top: 1px solid #f8f8f8;
+}
+.footOptionTab img{
+	float:left;
+	margin:0.2rem 0.35rem;
+	width:0.5rem;
+}
+.footOptionTab>ul{
+	float:left;
+	text-align: center;
+	margin-top:0.24rem;
+	color:black;
+}
+.footOptionTab>ul>li{
+	float: left;
+	width:1.5rem;
+	line-height:0.48rem;
+	border-left:1px solid #4a4a4a;
+}
+.footOptionTab>ul>li.on{
+	color:white;
+}
+/*添加血糖*/
+
+.monitorContainer{
+	margin:1.5rem 0.3rem 0;
+}
+.monitorDataCont{
+	width:4rem;
+	height:0.96rem;
+	line-height:0.96rem;
+	background:#59dbcf;
+	color:black;
+	font-size:0.34rem;
+	margin:0 auto;
+	text-align:center;
+}
+.monitorDataRecored>.monitorDataCont{
+	background:#ff8e01;
+	font-size:0.32rem;
+}
+.bloodSugarUnit{
+	text-align:center;
+	margin:0.6rem 0 1rem 0;
+	font-size:0.34rem;
+	color: black;
+}
+.monitorDataInf{
+	font-size:0.3rem;
+	border-bottom:1px solid #4a4a4a;
+	padding-bottom:0.2rem;
+}
+.monitorDataInf>p{
+	line-height:0.66rem;
+	position:relative;
+	padding-right:0.2rem;
+	color:black;
+}
+.monitorDataInf>p>input{
+	position:absolute;
+	right:0;top:0;
+	width:4rem;
+	height:0.6rem;
+	background:transparent;
+	color:transparent;
+}
+.monitorDataInf>p>span{
+	float:right;
+	margin-right:0.3rem;
+}
+.monitorDataInf a{
+	display:inline;
+}
+.monitorTxt{
+	line-height: 1rem;
+	color:#9b9b9b;
+}
+.remarkcCont{
+	color: #000;
+	line-height: 0.4rem;
+	background: #f8e71d;
+	padding: 0.2rem;
+	min-width:6.2rem;
+	box-sizing:border-box;
+}
+.bloodPressureCont,.pressureItem{
+	width:6.2rem;
+	height:0.96rem;
+	margin:0 auto;
+}
+.pressureItem>p{
+	width:33%;
+	line-height:0.96rem;
+	font-size:0.34rem;
+	text-align:center;
+	float:left;
+	margin-right:0.01rem;
+}
+.pressureItem>p:first-child{
+	background:#fe4600;
+}
+.pressureItem>p:nth-child(2){
+	background:#f8cd1c;
+}
+.pressureItem>p:nth-child(3){
+	background:#7ed320;
+}
+.bloodPressureUnit{
+	width:6.2rem;
+	text-align:center;
+	margin:0.6rem auto 1rem;
+	font-size:0.34rem;
+	color:black;
+
+}
+.bloodPressureUnit>li{
+	width:33.3%;
+	float:left;
+}
+
+
+/*检测与诊疗内容结束*/
+
+/*检验报告内容开始*/
+.monitorUploadImg>img{
+	width:100%;
+}
+.monitorUploadImg>p{
+	position:absolute;
+	left:0.2rem;
+	bottom:0.3rem;
+	font-size:0.22rem;
+}
+.monitorUploadImg>p>span{
+	margin-right:0.6rem;
+}
+.testReportTxt{
+	text-indent: 2em;
+}
+/*检验报告内容结束*/
+
+/*诊疗记录内容开始*/
+.calendar{
+	width:100%;
+	background:#000;
+	margin:0.2rem 0;
+	padding-top:0.3rem;
+	color: black;
+	background-color: #f8f8f8;
+}
+.diagnoseAudioIcon{
+	width:4rem;
+	margin:0.1rem auto 0.32rem;
+}
+.diagnoseAudioCtrl{
+	width:4rem;
+	height:0.96rem;
+	margin:0.32rem auto;
+	background-color:#ff8e01;
+	overflow:hidden;
+}
+.diagnoseAudioCtrl img{
+	width:0.24rem;
+	height:0.28rem;
+	margin:0.34rem 0 0 1.88rem;
+}
+.diagnoseAudioTime{
+	text-align:center;
+	color: black;
+}
+/*诊疗记录内容结束*/
+
+/*群聊页面开始*/
+.InfContainer{
+	width:100%;
+	box-sizing:border-box;
+	padding:0.3rem 0.32rem;
+	background:#f8e71d;
+	color:#000;
+	font-size:0.32rem;
+}
+.InfContainer>h3{
+	padding-bottom:0.2rem;
+	font-weight:normal;
+	border-bottom:1px solid #939393;
+}
+.InfCont{
+	padding:0.2rem 0;
+}
+.InfMore{
+	padding-top:0.2rem;
+	background:url("/elder/images/arrows_black.png") right bottom no-repeat;
+	background-size:0.24rem 0.36rem;
+	border-top:1px solid #939393;
+}
+.InfReportCont{
+	padding-top:0.3rem;
+	position:relative;
+}
+.InfReportCont img{
+	width:100%;
+	height:3.6rem;
+}
+.InfReportCont div{
+	position:absolute;
+	left:0.3rem;
+	bottom:0.3rem;
+	color:#fff;
+}
+.InfReportCont p{
+	line-height:0.5rem;
+}
+.Inftxt{
+	padding:0.15rem 0;
+	width:100%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.InfList{
+	margin-bottom:0.35rem;
+}
+.InfList li{
+	float:left;
+	width:32%;
+	margin-right:1%;
+	text-align: center;
+}
+.InfList b{
+	display: block;
+	height:1rem;
+	line-height:1rem;
+	color:#fff;
+	font-size:0.45rem;
+}
+.InfList li:first-child b{
+	background:#fe4600;
+}
+.InfList li:nth-child(2) b{
+	background:#f8cd1c;
+}
+.InfList li:nth-child(3) b{
+	background:#7ed320;
+}
+.InfList p{
+	margin-bottom:0.3rem;
+}
+.InfBloodSugar{
+	width:100%;
+	height:0.96rem;
+	line-height:0.96rem;
+	text-align:center;
+	color:#fff;
+	background:#ff8e01;
+	margin:0.1rem 0 0.3rem;
+	font-size:0.45rem;
+}
+.InfMedicine{
+	width:100%;
+	height:0.96rem;
+	line-height:0.96rem;
+	background:url("/elder/images/icon_clock_01.png") 40% center no-repeat #fd9c35;
+	background-size:0.65rem;
+	color:#fff;
+	font-size:0.4rem;
+	box-sizing:border-box;
+	padding-left:47%;
+	margin-top:0.3rem;
+}
+
+/*群聊页面结束*/
+
+/*登录开始*/
+.loginHead{
+	width:100%;
+	height:4rem;
+	background:url("/elder/images/group_13@2x.png") left top no-repeat;
+	background-size:cover;
+	position:absolute;
+}
+.logoImg{
+	width:1.6rem;
+	height:1.6rem;
+	transform:translateY(0.4rem);
+	-webkit-transform:translateY(0.4rem);
+	-moz-transform:translateY(0.4rem);
+	-ms-transform:translateY(0.4rem);
+}
+.loginForm{
+	margin-top:4.32rem;
+}
+.inputItem{
+	width:6.22rem;
+	height:0.96rem;
+	margin:0 auto 0.32rem;
+	position:relative;
+}
+div.inputItem>input{
+	width:100%;
+	height:0.96rem;
+	border:1px solid #fff;
+	background:#f8e71d;
+	border-radius:0.1rem;
+	font-size:0.32rem;
+	padding-left:0.3rem;
+	box-sizing:border-box;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:2;
+}
+.inputCodeItem>input{
+	width:4.14rem;
+	border-top-right-radius:0;
+	border-bottom-right-radius:0;
+}
+.inputCodeItem>input[disabled]{
+	background:#2b2b2b;
+}
+.inputItem input:focus{
+	border:1px solid #fff;
+}
+.getCodeBtn{
+	width:2.08rem;
+	height:0.96rem;
+	text-align: center;
+	line-height:0.96rem;
+	font-size:0.24rem;
+	box-sizing:border-box;
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:2;
+	background:#ff8e01;
+	border:1px solid #fff;
+	border-left:none;
+	border-top-right-radius:0.1rem;
+	border-bottom-right-radius:0.1rem;
+	color:#000;
+}
+.getCodeBtn.null{
+	color:#000;
+	background:#9b9b9b;
+}
+.loginBtn{
+	display:block;
+	width:6.22rem;
+	text-align: center;
+	background:#4a4a4a;
+	font-size:0.36rem;
+	color:#fff;
+	border-radius:0.48rem;
+	margin:25% auto 0;
+	padding:0.2rem 0;
+}
+.loginBtn.suc{
+	background:#ff8e01;
+	color:#000;
+}
+.errorHint{
+	line-height:0.6rem;
+	font-size:0.24rem;
+	padding-left:0.2rem;
+}
+/*登录结束*/
+
+/*干预与指导开始*/
+.medicinePlanContainer{
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+	padding-left:0.3rem;
+	background:#f8e71d;
+}
+.medicinePlanItem{
+	border-bottom:1px solid #4a4a4a;
+	padding:0.13rem 0 0.12rem 0;
+	color:black;
+
+}
+.medicinePlanContainer>.medicinePlanItem:last-child{
+	border-bottom:none;
+}
+.medicinePlanDrugName{
+	background:url("/elder/images/icon_clock.png") left center no-repeat;
+	background-size:0.64rem;
+	padding:0 0 0.25rem 0.84rem;
+	font-size:0.3rem;
+	margin-top:0.1rem;
+	color: black;
+}
+.medicinePlanItem>p{
+	margin:0 0 0.2rem 0.84rem;
+	color: black;
+}
+.medicinePlanItem>p>span{
+	display: inline-block;
+	padding:0.02rem 0.04rem;
+	margin-right:0.17rem;
+	font-size:0.22rem;
+	border-radius:5px;
+	background:#ff8e01;
+	color:#f8e71d;
+}
+.completedPlan{
+	background:#f8f8f8;
+}
+.completedPlan>a{
+	color:#9b9b9b;
+}
+.completedPlan .medicinePlanDrugName{
+	background:none;
+	padding-left:0;
+	color: black;
+}
+.completedPlan>a>p{
+	margin-left:0;
+}
+.medicationRecord{
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+	padding:0 0.3rem 0.3rem;
+	margin-bottom:0.1rem;
+}
+.medicationRecord>h3{
+	line-height:0.96rem;
+	border-bottom:1px solid #4a4a4a;
+	font-weight:normal;
+	font-size:0.3rem;
+}
+.medicationRecord>p{
+	font-size:0.26rem;
+	line-height:0.8rem;
+	color:black;
+}
+.medicationRecordDrug span{
+	display:inline-block;
+	padding:0.04rem 0;
+	color:black;
+}
+.medicationRecordDrug i{
+	display:inline-block;
+	background:#7ed320;
+	padding:0.02rem 0.3rem;
+	border-radius:0.1rem;
+	float:right;
+	color:#000;
+}
+.medicationRecordDrug .none{
+	background:#fe4600;
+}
+.sportTit{
+	line-height:1rem;
+	text-align:center;
+	font-weight:normal;
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+	margin-top:-0.32rem;
+}
+.sportCont{
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+	margin:0.32rem 0 0.4rem;
+	padding:0.5rem 0.7rem;
+	font-size:0.32rem;
+	background:#f8e71d;
+	color:#000;
+}
+.sportCont li{
+	width:2rem;
+	text-align:center;
+	float:left;
+	line-height:0.5rem;
+}
+.sportCont span{
+	display:block;
+}
+.sportCurve{
+	padding-top:0.3rem;
+}
+
+
+/*添加服药计划*/
+.addMidicineInf{
+	padding:0 0.65rem;
+}
+.addMidicineInf>div{
+	padding:0.18rem 0;
+	position:relative;
+}
+.addMidicineInf span{
+	color:#9d9d9d;
+}
+.addMidicineInf>div>input,
+.customItem>input{
+	width:100%;
+	line-height:0.7rem;
+	text-align:right;
+	position:absolute;
+	left:0;
+	top:0;
+	background:transparent;
+	box-sizing:border-box;
+	color:#ff8e01;
+}
+.addMidicineInf>div>input:nth-child(2),
+.customItem>input:nth-child(2){
+	background:url("/elder/images/arrows_r.png") right center no-repeat;
+	background-size:0.24rem 0.36rem;
+}
+.medicineTimeShow{
+	padding-left:4rem;
+}
+.medicineTimeShow>li{
+	background:url("/elder/images/icon_clock1.png") left center no-repeat;
+	background-size:0.5rem 0.32rem;
+	padding-left:0.7rem;
+	margin:0.25rem 0;
+	float:right;
+	color:#ff8e01;
+}
+.delTimeImg{
+	float:right;
+	width:0.4rem;
+	height:0.4rem;
+	margin-top:-0.03rem;
+}
+.addMidicineOption{
+	font-size:0.26rem;
+	margin:0.4rem 0 0 0.5rem;
+}
+.MidicineOptionItem{
+	float:left;
+	height:0.6rem;
+	margin-bottom:0.2rem;
+}
+.MidicineOptionItem>label{
+	padding:0.1rem 0.26rem;
+	border:1px solid #e4e4e4;
+	text-align:center;
+	margin:0 0.4rem 0.2rem 0;
+	border-radius:8px;
+}
+.MidicineOptionItem:nth-child(4n)>label{
+	margin-right:0;
+}
+.MidicineOptionItem>input{
+	display: none;
+}
+.MidicineOptionItem>input:checked~label{
+	background:#ff8e01;
+	color:#000;
+	border:1px solid #ff8e01;
+}
+.customContainer{
+	border-bottom:1px solid #4a4a4a;
+	padding-bottom:0.2rem;
+}
+.customItem{
+	position:relative;
+	padding:0.18rem 0 0.18rem 0.5rem;
+}
+.addDrugName{
+	width:6.2rem;
+	height:0.96rem;
+	background:#59dbcf;
+	color:#fff;
+	font-size:0.36rem;
+	line-height:0.96rem;
+	text-align:center;
+	margin:0.6rem auto 1.2rem;
+	position:relative;
+}
+.addDrugName>input{
+	width:100%;
+	height:100%;
+	background:#ff8e01;
+	position:absolute;
+	left:0;top:0;
+	color:#000;
+	font-size:0.36rem;
+	text-align:center;
+}
+.footDelSure{
+	width:100%;
+	height:100%;
+	position:fixed;
+	left:0;top:0;
+	background:rgba(0,0,0,.4);
+	z-index:11;
+}
+.footDelSure>p{
+	width:100%;
+	line-height:0.96rem;
+	background:#fff;
+	text-align:center;
+	position:absolute;
+	bottom:0;left:0;
+	font-size:0.3rem;
+}
+.footDelSure>p:first-child{
+	color:#59dbcf;
+	bottom:1.05rem;
+}
+/*服药提醒*/
+.remindContainer{
+	margin-top:0.45rem;
+	overflow:hidden;
+	padding-bottom:0.6rem;
+	color:#000;
+}
+.remindIcon{
+	width:3.6rem;
+	margin:1rem auto;
+}
+.remindTxt{
+	width:6.9rem;
+	margin:0 auto 1.6rem;
+	text-align: center;
+	padding:0.4rem 0;
+	background:#f8e71d;
+}
+.remindTxt p:nth-child(2){
+	font-size:0.32rem;
+	margin-top:0.2rem;
+}
+.remindBtn{
+	width:6.9rem;
+	line-height:0.8rem;
+	text-align:center;
+	background:#fe4600;
+	border-radius:0.4rem;
+	margin:0 auto 0.2rem;
+}
+.remindSucBtn{
+	background:#7ed320;
+}
+/*干预与指导结束*/
+
+/*会员详情*/
+.elderContaine{
+	padding:0.2rem 0.3rem;
+	border-top:1px solid #4a4a4a;
+	border-bottom:1px solid #4a4a4a;
+	margin:0.32rem 0;
+}
+.elderPic{
+	width:1.12rem;
+	height:1.12rem;
+	float:left;
+	border-radius:5px;
+	margin-right:0.33rem;
+}
+.elderInf>h2{
+	line-height:0.6rem;
+	font-size:0.32rem;
+}
+.elderInf>p{
+	line-height:0.45rem;
+	color:#9b9b9b;
+}
+.elderInf>p>span{
+	margin-right:0.17rem;
+}
+
+.healthFileItem{
+	overflow: scroll;
+	height: 10rem;
+}
+.healthFileReport{
+	line-height:0.96rem;
+	text-align: center;
+}
+.AssessCont{
+	padding:0.3rem 0.4rem 0.5rem;
+	font-size:0.26rem;
+}
+.AssessCont p{
+	line-height:0.6rem;
+	text-indent: 2em;
+}
+.AssessCont>p>span{
+	color:#4CA1F6;
+}
+.AssessCont>p:first-child{
+	text-indent: 0em;
+}
+
+::-webkit-scrollbar {
+	width:1px;
+}
+/*community*/
+.community{
+	background:#f5f5f5;
+}
+.community .loginHead{
+	background:none;
+	background-size:cover;
+    height:2.4rem;
+}
+.community .loginHead .logoImg{
+    transform:translateY(1.1rem);
+    -webkit-transform:translateY(1.1rem);
+    -moz-transform:translateY(1.1rem);
+    -ms-transform:translateY(1.1rem);
+}
+.community .inputItem>input{
+    background:#fff;
+    border:1px solid #9b9b9b;
+}
+.community .inputItem>input:focus{
+    border:1px solid #ff8e01;
+}
+.community .getCodeBtn{
+    border:1px solid #ff8e01;
+    color:#fff;
+}
+.community .getCodeBtn.null{
+    color: #666;
+    background: #ccc;
+    border:1px solid #ccc;
+}
+.community .errorHint{
+    display:none;
+    padding-top:1rem;
+}
+.community .loginBtn{
+    background:#ff8e01;
+}

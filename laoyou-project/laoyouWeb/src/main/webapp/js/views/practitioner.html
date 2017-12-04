@@ -1,0 +1,162 @@
+<div id="wrapper">
+    <hospital-menu title="practitioner"></hospital-menu>
+    <div class="fixHeight"></div>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>医护管理</h2>
+                    </div>
+                </div>
+                <hr>
+                <a class="btn btn-primary" ng-click="newPractitioner()">新的医护人员</a>
+                <div class="row"  style="margin-top: 2%;">
+                    <div class="col-md-12">
+                        <!-- 医护人员信息列表 Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                医护人员信息列表
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="dataTables_wrapper form-inline">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_length">
+                                                    <label>
+                                                        每页显示
+                                                        <select ng-model="pageSize"
+                                                                ng-options="page for page in pageSizes"
+                                                                ng-change="displayPageList()"/>
+                                                        条记录
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="dataTables_filter">
+                                                    <label>
+                                                        <input type="text" class="form-control input-sm" ng-model="param.searchValue" />
+                                                        <button class="btn btn-default" ng-click="searchPageList()">点击搜索</button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped table-bordered table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">姓名</th>
+                                                    <th class="text-center">医师职称</th>
+                                                    <th class="text-center">所在科室</th>
+                                                    <th class="text-center">会员数量</th>
+                                                    <th class="text-center">服务套餐数量</th>
+                                                    <th class="text-center">联系电话</th>
+                                                    <th class="text-center">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in response.list">
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.title}}</td>
+                                                    <td>{{item.department}}</td>
+                                                    <td>{{item.memberNum}}</td>
+                                                    <td>{{item.serviceNum}}</td>
+                                                    <td>{{item.phone}}</td>
+                                                    <td>
+                                                        <a ng-click="editPractitioner(item.id)">编辑</a>
+                                                        <a ng-click="delete(item.id)">删除</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div page-tool></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End 医护人员信息列表 Tables -->
+                    </div>
+                    <div class="alertContainer" ng-if="addPractitioner">
+                        <button type="button" class="close" ng-click="newPractitioner()">x</button>
+                        <div class="alertTit">新增医护人员</div>
+                        <div class="alertBtn">
+                            <div ng-click="singleAddPractitioner()">点击单个录入医护人员信息</div>
+                            <div ng-click="multiAddPractitioner()">点击批量上传医护人员信息</div>
+                        </div>
+                    </div>
+                </div>
+                <!--添加修改医护人员 start-->
+                <div ng-if="singlePractitioner" class="row shadeContainer">
+                    <div class="col-md-4" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{title}}
+                                <button type="button" class="close" ng-click="singleAddPractitioner()">x</button>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" name="practitionerForm" ng-submit="subPractitionerForm(practitionerForm.$valid)" novalidate style="margin-left:20px;">
+                                    <div class="form-group">
+                                        <label style="width:100px;">姓名</label>
+                                        <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="practitionerInf.name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">性别</label>
+                                        <select class="form-control" style="display:inline;width:auto;" ng-model="practitionerInf.gender" required>
+                                            <option>男</option>
+                                            <option>女</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">地区</label>
+                                        <input type="text" class="form-control" style="display:inline;width:auto;" ng-model="practitionerInf.area" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">类别</label>
+                                        <select class="form-control" style="display:inline;width:auto;" ng-model="practitionerInf.type" required>
+                                            <option>医生</option>
+                                            <option>护士</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">医师职称</label>
+                                        <select ng-if="practitionerInf.type == '医生'" class="form-control" style="display:inline;width:auto;" ng-model="practitionerInf.title">
+                                            <option>主任医师</option>
+                                            <option>副主任医师</option>
+                                            <option>主治医师</option>
+                                            <option>医师</option>
+                                            <option>助理医师</option>
+                                        </select>
+                                        <select ng-if="practitionerInf.type == '护士'" class="form-control" style="display:inline;width:auto;" ng-model="practitionerInf.title">
+                                            <option>主任护师</option>
+                                            <option>副主任护师</option>
+                                            <option>主管护师</option>
+                                            <option>护师</option>
+                                            <option>护士</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">所在科室</label>
+                                        <input type="text" class="form-control" style="display:inline;width:auto;" required ng-model="practitionerInf.department">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width:100px;">手机</label>
+                                        <input type="text" class="form-control" style="display:inline;width:auto;" ng-model="practitionerInf.phone" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" style="width:20%;">确定</button>
+                                        <button type="button" class="btn btn-default" style="width:20%;" ng-click="singleAddPractitioner()">取消</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <del-tool info="确认要删除该医护人员？"></del-tool>
+            </div>
+        </div>
+
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
